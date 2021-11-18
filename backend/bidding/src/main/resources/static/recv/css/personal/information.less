@@ -1,0 +1,213 @@
+
+// 主體內容
+#content {
+  background: #12222E url(../../imgs/particulars/contentBG.png) no-repeat top center / contain;
+  padding-top: 24px;
+  >.main {
+    background: rgba(13, 28, 42, 0.2);
+    box-sizing: border-box;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+  }
+  // 左側導航
+  .sideBar {
+    background-color: #D3DFE7;
+    width: 240px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  // 頭像
+  .side_portrait {
+    margin-top: 55px;
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    background-color: #EEF4F7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .porImg {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: url(../../imgs/personal/portrait.png) no-repeat center / cover;
+    }
+  }
+  // 所屬部門
+  .side_department {
+    margin-top: 18px;
+    font-size: 18px;
+    color: #212F3A;
+    display: flex;
+    align-items: center;
+    >.depIcon {
+      display: inline-block;
+      width: 14px;
+      height: 23px;
+      background: url(../../imgs/personal/depIcon.png) no-repeat;
+      margin-right: 6px;
+    }
+  }
+  // 導航條目
+  .side_navigate {
+    margin-top: 26px;
+    width: 100%;
+    >a {
+      display: block;
+      width: 100%;
+      height: 60px;
+      border-top: 1px solid #C0C8CF;
+      // background-color: #2E6E9E;
+      &.active,
+      &:hover {
+        background-color: #2E6E9E;
+        >div {
+          color: #fff;
+        }
+      }
+    }
+    div {
+      width: 60%;
+      height: 60px;
+      margin: 0 auto;
+      line-height: 60px;
+      font-size: 16px;
+      color: #12222E;
+      >span {
+        color: #E51313;
+      }
+    }
+  }
+  // 主體部分
+  .mainPart {
+    width: 910px;
+    background-color: #D3DFE7;
+    box-sizing: border-box;
+    padding: 30px;
+  }
+  .main_title {
+    color: #12222E;
+    font-size: 18px;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #AFC2CF;
+  }
+  /deep/ .el-form-item {
+    display: flex;
+    align-items: center;
+
+    // 賬號屬性欄修改
+    &.properties {
+      span {
+        color: #0092FF;
+      }
+    }
+    // 頭像欄修改
+    &.portrait {
+      .el-form-item__content {
+        display: flex;
+        align-items: center;
+      }
+      .el-image {
+        border-radius: 50%;
+        margin-right: 20px;
+      }
+      span {
+        display: inline-block;
+        margin: 0 auto;
+        color: #0092FF;
+        cursor: pointer;
+      }
+    }
+    // 所屬單位修改
+    &.department {
+      .el-input {
+        input {
+          width: 100px;
+        }
+      }
+    }
+    // 費用代碼修改
+    // 加工範圍修改
+    // 銀行賬號修改
+    &.costCode,
+    &.processRange,
+    &.bankAccount {
+      .operation {
+        color: #0092FF;
+        margin-left: 10px;
+        cursor: pointer;
+      }
+    }
+    // 聯繫電話
+    &.tel {
+      .el-form-item__content {
+        display: flex;
+        align-items: center;
+      }
+      .el-checkbox {
+        margin-left: 20px;
+      }
+      .el-checkbox__inner {
+        background-color: #D3DFE7;
+        border: 1px dashed #AFC2CF;
+        &:after {
+          border-color: #0092FF;
+        }
+      }
+      .el-checkbox__label {
+        font-size: 16px;
+        color: #212F3A;
+      }
+    }
+    // email
+    &.email {
+      .el-input {
+        input {
+          width: 320px;
+        }
+      }
+    }
+    // 簡介
+    &.intro {
+      .el-textarea {
+        textarea {
+          width: 700px;
+          background-color: #D3DFE7;
+          border-color: #AFC2CF;
+          text-indent: 2rem;
+          border-radius: 0px;
+          &:focus {
+            border-color: #0092FF;
+          }
+        }
+      }
+    }
+  }
+  // label全局效果修改
+  /deep/ .el-form-item__label {
+    width: 100px !important;
+    text-align: left;
+    font-size: 16px;
+    color: #212F3A;
+  }
+  // content全局效果修改
+  /deep/ .el-form-item__content {
+    font-size: 16px;
+    color: #212F3A;
+    margin-left: 10px !important;
+    .el-input {
+      input {
+        background-color: #D3DFE7;
+        border: 1px solid #AFC2CF;
+        border-radius: 0px;
+        width: 320px;
+        &:focus {
+          border-color: #0092FF;
+        }
+      }
+    }
+  }
+}

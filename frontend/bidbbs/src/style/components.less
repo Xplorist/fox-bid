@@ -1,0 +1,34 @@
+@import "./variable.less";
+
+// 輸入框
+.el-textarea .el-textarea__inner:focus,
+.el-input .el-input__inner:focus {
+  border-color: @mainColor;
+}
+
+// 按鈕
+.el-button--default {
+  &:hover,
+  &:focus {
+    color: @mainColor;
+    border-color: @mainBorderColor;
+    background-color: rgba(@mainBorderColor, 0.1);
+  }
+}
+
+.el-button--primary {
+  background-color: @mainColor;
+  border-color: @mainBorderColor;
+  &:hover,
+  &:focus {
+    background-color: rgba(@mainColor, 0.8);
+    border-color: rgba(@mainBorderColor, 0.8);
+  }
+}
+
+// 下拉
+.el-dropdown-menu__item:focus,
+.el-dropdown-menu__item:not(.is-disabled):hover {
+  color: @mainColor;
+  background-color: rgba(@mainBorderColor, 0.1);
+}

@@ -1,0 +1,31 @@
+數據庫表詞典：
+
+CMPY: company （公司）
+SEND: send (發單)
+RECV: receive (接單)
+DEPT: department （單位）
+ACUNT: account (賬戶)
+PEMT: permit （許可）
+BUSIS: business (經營)
+LCNS: license (執照)
+MNUFC: manufact (生產)
+CONDI: condition (條件)
+MNGR: manager (經理)
+SECN: second (次級)
+FCTRY: factory (工廠)
+ENTRPS: enterprise (企業，事業)
+PD: product (產品)
+CK: check (檢查)
+REFER: reference(參考)
+REQU: request (請求，要求)
+RESP: response (響應)
+F: flag (標誌)
+REL： relation (關係，關聯)
+AMUNT: amount （數量）
+DESCP: description (描述)
+MSTR: master (主)
+SLAV: slave (從)
+QUAL: quality (質量)
+SVC: service (服務)
+ATITU: attitude (態度)
+ANOMUS: anonymous (匿名)

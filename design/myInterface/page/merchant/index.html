@@ -1,0 +1,179 @@
+<!-- <!DOCTYPE html> -->
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" 
+"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Index</title>
+  <link rel="stylesheet" href="../../lib/normalize.css">
+  <link rel="stylesheet" href="../../css/common.css">
+  <!-- 引入样式 -->
+  <link rel="stylesheet" href="../../lib/element/index.css">
+  <!-- 適配不支持H5的瀏覽器 -->
+  <script src="../../lib/html5shiv.min.js"></script>
+  <link rel="stylesheet" href="../../css/merchant/index.css">
+</head>
+
+<body>
+  <div id="app" class="container">
+    <section class="top">
+      <div class="type-area top-nav">
+        <ul>
+          <li>
+            <a href="#">
+              歡迎您：Mac(I)製造處
+            </a>
+          </li>
+          <li>
+            <a href="../personal/index.html">
+              個人中心
+            </a>
+          </li>
+          <li>
+            <a href="./enter.html">
+              商家入駐
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              規則中心
+            </a>
+          </li>
+        </ul>
+      </div>
+    </section>
+    <section class="logo">
+      <div class="type-area logo-content">
+        <a href="../../index.html"></a>
+        <div class="search-box">
+          <input type="text" class="search-text" placeholder="請輸入信息">
+          <input type="submit" class="search-btn" value="搜索">
+        </div>
+      </div>
+    </section>
+    <section class="content">
+      <!-- 主體內容 -->
+      <div class="main type-area">
+        <div class="warpper">
+          <div class="principal">
+            <div class="information">
+              <!-- 基本信息 -->
+              <div class="logo"></div>
+              <div class="name">
+                <span class="icon"></span>
+                <span>智網平台開發</span>
+              </div>
+              <div class="infoOne">
+                <span>
+                  廠區：成都 》次集团：C次 》事業群：SHZBG 》處：製造處 》單位：智網平台開發
+                </span>
+              </div>
+              <div class="infoTwo">
+                <span class="range">加工範圍：模具、治具、檢具加工設計。</span>
+                <span class="tel">联系电话：5073-66811</span>
+              </div>
+              <!-- 客戶評價 -->
+              <div class="cusEvaluation">
+                <div class="title">客戶評價</div>
+                <div class="list">
+                  <!-- 單獨評語 -->
+                  <div class="single" v-for="(item, index) in comments">
+                    <div class="commentsBox">
+                      <div class="comments">{{item.text}}</div>
+                      <div class="date">{{item.date}}</div>
+                    </div>
+                    <div class="belong">{{item.belong}}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="introduction">
+              <div class="grade">
+                <table>
+                  <tr>
+                    <th>入駐時間:</th>
+                    <th>2年</th>
+                  </tr>
+                  <tr>
+                    <td>客戶評分:</td>
+                    <td>4.9</td>
+                  </tr>
+                  <tr>
+                    <td>出貨時效:</td>
+                    <td>3.2</td>
+                  </tr>
+                  <tr>
+                    <td>出貨質量:</td>
+                    <td>3.2</td>
+                  </tr>
+                  <tr>
+                    <td>服務態度:</td>
+                    <td>4.5</td>
+                  </tr>
+                </table>
+              </div>
+              <div class="text">
+                <div class="title">客戶簡介</div>
+                <p>富士康科技集团是专业从事计算机、通讯、消费性电子等3C产品研发制造，广泛涉足数位内容、汽车零组件、通路、云运算服务及新能源、新材料开发应用的高新科技企业。</p>
+                <p>凭借前瞻决策、扎根科技和专业制造，自1974年在台湾肇基，1988年投资中国大陆以来，富士康迅速发展壮大，拥有百余万员工及全球顶尖客户群，是全球最大的电子产业科技制造服务商。2002年起位居中国内地企业出口200强榜首（2018年进出口总额占大陆进出口总额的4.1%）,2005年起跻身《财富》全球企业500强（2019年跃居第23位）。</p>
+              </div>
+            </div>
+          </div>
+          <div class="more">
+            <p>查看更多</p>
+            <span class="moreIcon"></span>
+          </div>
+        </div>
+      </div>
+  </div>
+  </section>
+  <section class="footer">
+    <div class="foo-content type-area">
+      <div class="foo-warpper">
+        <div class="technical">
+          <div class="m-logo"></div>
+          <div class="text">技術服務: 只能雲網絡開發成都分部</div>
+        </div>
+        <div class="customer">
+          客戶服務: 5073-66811
+        </div>
+        <div class="blogroll">
+          <div>友情鏈接: </div>
+          <div>
+            <a href="">
+              MAC(I)智能雲網平台
+            </a>
+          </div>
+          <div class="line"></div>
+          <div>
+            <a href="">
+              MAC(I)人事點名系統
+            </a>
+          </div>
+          <div class="line"></div>
+          <div>
+            <a href="">
+              MAC(I)金流系統
+            </a>
+          </div>
+          <div class="line"></div>
+          <div>
+            <a href="">
+              智能刀具管理
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  </div>
+  <!-- 先引入 Vue -->
+  <script src="../../lib/vue.js"></script>
+  <!-- 引入组件库 -->
+  <script src="../../lib/element/index.js"></script>
+  <script src="../../js/merchant/index.js"></script>
+</body>
+
+</html>

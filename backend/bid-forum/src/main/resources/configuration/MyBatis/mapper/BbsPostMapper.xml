@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xplorist.bidforum.mapper.BbsPostMapper">
+    <!-- bbsPost【01】分页查询所有帖子list -->
+    <select id="listBbsPostByPage" parameterType="com.xplorist.bidforum.model.dto.BbsPostDTO" resultType="com.xplorist.bidforum.model.dto.BbsPostDTO">
+        select t2.* from(select t1.*,rownum rowNo from(
+                        select t.*, count(*) over() rowTotal
+                        from BBS_POST t
+                        where t.DELETE_FLAG = 0
+                        order by t.CREATE_TIME desc
+                    ) t1) t2
+        where t2.rowNo between (#{pageIndex} - 1) * #{pageSize} + 1
+                  and #{pageIndex} * #{pageSize}
+    </select>
+
+    <!-- 模板 -->
+</mapper>

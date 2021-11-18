@@ -1,0 +1,201 @@
+// 主體內容
+#content {
+  background: #12222E url(../../imgs/particulars/contentBG.png) no-repeat top center / contain;
+  padding-top: 24px;
+  // 邊界效果
+  > .main {
+    background: rgba(13, 28, 42, 0.2);
+    box-sizing: border-box;
+    padding: 20px;
+    position: relative;
+  }
+
+  // 基本信息
+  .general {
+    height: 260px;
+    padding: 20px 30px;
+    background-color: #0096FF;
+  }
+
+  // 頂部信息
+  .gen_title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #fff;
+
+    span:nth-child(1) {
+    }
+
+    span:nth-child(2) {
+      color: #9DCCFF;
+      font-size: 12px;
+    }
+  }
+
+  // 總額
+  .gen_amount {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #fff;
+
+    > span {
+      color: #D9E9F3;
+      font-size: 14px;
+    }
+  }
+
+  // 具體數值
+  .gen_am_number {
+    margin-top: 8px;
+
+    span:nth-child(1),
+    span:nth-child(3) {
+      font-size: 14px;
+    }
+
+    span:nth-child(2) {
+      font-size: 48px;
+    }
+  }
+
+  // 其餘總額相關信息
+  .gen_am_info {
+    margin-top: 36px;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    color: #D9E9F3;
+    font-size: 20px;
+  }
+
+  // 標語
+  .slogan {
+    width: 422px;
+    height: 45px;
+    background: url(../../imgs/merchant/sloganBG.png) no-repeat;
+    position: absolute;
+    top: 297px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #D3DFE7;
+    font-size: 20px;
+    text-align: center;
+    line-height: 45px;
+  }
+
+  // 選擇框
+  .choose {
+    padding-top: 130px;
+    background-color: #D3DFE7;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  // 頂部信息
+  .cho_title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    span:nth-child(1) {
+      color: #12222E;
+      font-size: 24px;
+    }
+
+    span:nth-child(2) {
+      color: #0096FF;
+      margin-top: 12px;
+    }
+  }
+
+  // 類別
+  .cho_category {
+    margin-top: 58px;
+    width: 90%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  // 具體的類別框
+  .cho_cate_recipients,
+  .cho_cate_demanders {
+    box-sizing: border-box;
+    border: 1px solid;
+    border-color: #C6D4DE;
+    width: 400px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #C6D4DE;
+    cursor: pointer;
+
+    span:nth-child(1) {
+      margin-top: 30px;
+      font-size: 20px;
+      color: #12222E;
+    }
+
+    span:nth-child(2) {
+      color: #50616F;
+      margin-top: 10px;
+      font-size: 14px;
+    }
+
+    span:nth-child(3) {
+      margin-top: 20px;
+      display: block;
+      width: 75px;
+      height: 75px;
+      background-repeat: no-repeat;
+    }
+
+    &.active {
+      background-color: #D3DFE7;
+      border-color: #0096FF;
+
+      span:nth-child(1) {
+        color: #0096FF;
+        margin-top: 30px;
+        font-size: 20px;
+      }
+
+      span:nth-child(2) {
+        color: #0096FF;
+        margin-top: 10px;
+        font-size: 14px;
+      }
+
+      span:nth-child(3) {
+        margin-top: 20px;
+        display: block;
+        width: 75px;
+        height: 75px;
+        background-repeat: no-repeat;
+        // background-image: url();
+      }
+    }
+  }
+
+  // 按鈕
+  .cho_nextBtn {
+    margin-top: 120px;
+    margin-bottom: 146px;
+    position: relative;
+    cursor: pointer;
+
+    span {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 20px;
+      color: #fff;
+    }
+  }
+}

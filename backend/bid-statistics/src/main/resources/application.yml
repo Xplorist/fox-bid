@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: bid-statistics
+eureka:
+  instance:
+    prefer-ip-address: true
+    ip-address: 10.244.231.103
+    instance-id: ${eureka.instance.ip-address}:${spring.application.name}:${server.port}
+  client:
+    service-url:
+      defaultZone: http://10.244.231.103:7000/eureka/ # 指定 Eureka 注册中心的地址
+server:
+  port: 8089

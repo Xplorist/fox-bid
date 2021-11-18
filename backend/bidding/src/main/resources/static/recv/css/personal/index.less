@@ -1,0 +1,510 @@
+// 版心
+.type-area {
+  width: 1200px;
+  margin: 0 auto;
+}
+
+.container {
+  height: 100%;
+  position: relative;
+}
+// 頂部
+#top {
+  height: 30px;
+  width: 100%;
+  background: #AAC0CF; // rgba(170,192,207,1)
+  color: #333;
+  .top-nav {
+    height: 30px;
+    display: flex;
+    justify-content: flex-end;
+  }
+  ul {
+    li {
+      height: 30px;
+      line-height: 30px;
+      float: left;
+      margin-left: 30px;
+      font-size: 14px;
+      color: #333333;
+    }
+    a {
+      text-decoration: none;
+      color: #333;
+    }
+  }
+}
+// logo和搜索框
+#logo {
+  height: 80px;
+  background-color: #D7EFFF; //rgba(215,239,255,1)
+  display: flex;
+  align-items: : center;
+  .logo-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    a {
+      display: block;
+      width: 127px;
+      height: 50px;
+      background: url(../../imgs/index/logo.png) no-repeat;
+    }
+  }
+  .search-box {
+    height: 36px;
+    font-size: 0;
+    display: flex;
+    align-items: center;
+  }
+  .search-text {
+    font-size: 16px;
+    width: 250px;
+    height: 34px;
+    border: 1px solid rgba(145, 173, 192, 1);
+    padding: 0;
+    // 首行縮進
+    text-indent: 10px;
+    // 藍色高亮
+    outline: none;
+    font-size: 14px;
+  }
+  .search-btn {
+    width: 70px;
+    height: 36px;
+    background-color: #0096FF;
+    font-size: 16px;
+    color: #C9E1F1;
+    border: 1px solid #0096FF;
+    border-radius: 0px 2px 2px 0px;
+    cursor: pointer;
+  }
+}
+
+#content {
+  // background: [background-color] [background-image] [background-repeat] [background-attachment] [background-position] / [ background-size] [background-origin] [background-clip];
+  background: #12222E url(../../imgs/particulars/contentBG.png) no-repeat top center / contain;
+  padding-top: 24px;
+  >.main {
+    background: rgba(13, 28, 42, 0.2);
+    box-sizing: border-box;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+  }
+  // 左側導航
+  .sideBar {
+    background-color: #D3DFE7;
+    width: 240px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  // 頭像
+  .side_portrait {
+    margin-top: 55px;
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    background-color: #EEF4F7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .porImg {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: url(../../imgs/personal/portrait.png) no-repeat center / cover;
+    }
+  }
+  // 所屬部門
+  .side_department {
+    margin-top: 18px;
+    font-size: 18px;
+    color: #212F3A;
+    display: flex;
+    align-items: center;
+    >.depIcon {
+      display: inline-block;
+      width: 14px;
+      height: 23px;
+      background: url(../../imgs/personal/depIcon.png) no-repeat;
+      margin-right: 6px;
+    }
+  }
+  // 導航條目
+  .side_navigate {
+    margin-top: 26px;
+    width: 100%;
+    >a {
+      display: block;
+      width: 100%;
+      height: 60px;
+      border-top: 1px solid #C0C8CF;
+      // background-color: #2E6E9E;
+      &.active,
+      &:hover {
+        background-color: #2E6E9E;
+        >div {
+          color: #fff;
+        }
+      }
+    }
+    div {
+      width: 60%;
+      height: 60px;
+      margin: 0 auto;
+      line-height: 60px;
+      font-size: 16px;
+      color: #12222E;
+      >span {
+        color: #E51313;
+      }
+    }
+  }
+  // 主體部分
+  .mainPart {
+    width: 910px;
+    background-color: #D3DFE7;
+    box-sizing: border-box;
+    // padding: 30px;
+  }
+  // 我的收入
+  .main_income {
+    margin: 30px;
+  }
+  // 標題
+  .main_in_title {
+    color: #12222E;
+    font-size: 18px;
+  }
+  // 詳細
+  .main_in_details {
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .singleTit {
+    font-size: 14px;
+  }
+  .singleCon {
+    margin-top: 12px;
+    font-size: 30px;
+    color: #0096FF;
+    >span {
+      font-size: 16px;
+    }
+  }
+  // 環形表
+  /deep/ .el-progress-circle svg path:nth-child(1) {
+    stroke: #AAC0CF;
+  }
+  /deep/ .el-progress__text {
+    color: #12222E;
+    font-size: 30px !important;
+    &:before {
+      display: block;
+      content: '中標率';
+      font-size: 14px;
+      margin-bottom: 6px;
+    }
+  }
+  // 分割線
+  .main_splitLine {
+    width: 100%;
+    height: 4px;
+    background-color: #273846;
+  }
+  // 接單管理
+  .main_manage {
+    margin: 30px;
+  }
+  // 總標題
+  .main_ma_title {
+    color: #12222E;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+  }
+  .ma_tit_icon {
+    width: 25px;
+    height: 25px;
+    background: url(../../imgs/personal/manageIcon.png) no-repeat;
+    margin-right: 8px;
+  }
+  // 分類
+  .main_ma_classify {
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px 0;
+    background-color: #C0C8CF;
+    >div {
+      font-size: 14px;
+      color: #12222E;
+      text-align: center;
+      line-height: 40px;
+      flex: 1;
+      cursor: pointer;
+      &.active,
+      &:hover {
+        background-color: #2E6E9E;
+        color: #fff;
+      }
+    }
+    >.line {
+      display: inline-block;
+      width: 1px;
+      height: 30px;
+      background-color: #D3DFE7;
+    }
+  }
+  // 訂單列表
+  .main_ma_list {
+  }
+  // 列表框
+  .ma_list_single {
+    padding: 15px 0px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #C0C8CF;
+    transition-duration: 0.3s;
+    position: relative;
+    &:hover {
+      background-color: #E1E9EF;
+    }
+    &.winBidding:after {
+      display: block;
+      content: '';
+      width: 86px;
+      height: 66px;
+      background: url(../../imgs/personal/winBidding.png) no-repeat;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    &.failBidding {}
+  }
+  // 列表左側
+  .list_sin_left {
+    display: flex;
+  }
+  // 訂單所屬類別
+  .sin_left_scope {
+    width: 70px;
+    height: 70px;
+    background: url(../../imgs/personal/listScopeBG.png) no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  // 基本信息
+  .sin_left_info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .left_info_item {
+    display: flex;
+    align-items: center;
+  }
+  // 訂單編號
+  .formNum {
+    color: #212F3A;
+    font-size: 16px;
+    margin-right: 8px;
+  }
+  // 狀態
+  .state {
+    display: flex;
+    div {
+      width: 70px;
+      height: 26px;
+      line-height: 26px;
+      text-align: center;
+      margin-right: 15px;
+      color: #fff;
+      font-size: 14px;
+      background-color: #9AB0C3;
+    }
+  }
+  // 價格
+  .price {
+    color: #0093ff;
+    font-size: 30px;
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+    .kind {
+      align-self: flex-end;
+      font-size: 18px;
+    }
+    .num {}
+  }
+  // 參與單位數
+  .unitNum {
+    color: #202E39;
+    font-size: 16px;
+  }
+  // 列表右側
+  .list_sin_right {
+    display: flex;
+    align-items: center;
+  }
+  .sin_right_left {
+    .current {
+      color: #0096FF;
+      font-size: 16px;
+      &.fail {
+        color: #626F7F;
+      }
+    }
+  }
+  .sin_right_right {
+    margin-left: 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    &.progress {
+      >.status {}
+      >.btn {}
+    }
+    &.win {
+      >.status {
+        color: #E51313;
+      }
+      >.btn {
+        background-color: #E51313;
+      }
+    }
+    &.production {
+      >.status {
+        color: #0096FF;
+      }
+      >.btn {
+        background-color: #0096FF;
+      }
+    }
+    &.payment {
+      >.status {
+        color: #12222E;
+      }
+      >.btn {}
+    }
+    &.evaluation {
+      >.status {
+        color: #12222E;
+      }
+      >.btn {}
+    }
+    &.finished {
+      >.status {
+        color: #626F7F;
+      }
+      >.btn {}
+    }
+    >.status {
+      color: #212F3A;
+      font-size: 16px;
+    }
+    >.btn {
+      margin-top: 14px;
+      color: #fff;
+      background-color: #2E6E9E;
+      width: 80px;
+      height: 30px;
+      font-size: 14px;
+      border-radius: 2px;
+      text-align: center;
+      line-height: 30px;
+      cursor: pointer;
+    }
+  }
+  // 分頁
+  .ma_list_page {
+    padding: 62px 0 10px 0;
+    text-align: center;
+    height: 50px;
+    background-color: #D3DFE7;
+    // 對element-ui分頁的樣式進行修改
+    /deep/ .number {
+      width: 30px;
+      height: 30px;
+      line-height: 30px;
+      background: url(../../imgs/index/pageIndBG.png);
+      color: #12222E;
+      font-size: 14px;
+      &.active {
+        // 485463
+        color: #fff;
+        background: url(../../imgs/index/pageindBG-ac.png);
+      }
+      &:hover {
+        color: #fff;
+      }
+    }
+    /deep/ .el-icon {
+      color: #12222E;
+      background: #D3DFE7;
+    }
+    /deep/ .btn-next,
+    .btn-prev {
+      // background: #D3DFE7;
+      width: 70px;
+      height: 30px;
+      background: url(../../imgs/index/pageBG.png) no-repeat center / contain;
+    }
+  }
+}
+
+// 底部
+#footer {
+  height: 160px;
+  background-color: #12222E;
+  color: #2D3B49;
+  font-size: 14px;
+  .foo-warpper {
+    height: 100%;
+    padding: 0 20px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .technical {
+    display: flex;
+    align-items: center;
+    .m-logo {
+      width: 35px;
+      height: 21px;
+      background-image: url(../../imgs/index/m-logo.png);
+      margin-right: 10px;
+    }
+  }
+  .customer {}
+  .blogroll {
+    display: flex;
+    align-items: center;
+    div:nth-child(1) {
+      margin-right: 8px;
+    }
+    a {
+      text-decoration: none;
+      out-line: none;
+      color: #2D3B49;
+      &:hover {
+        color: #D3DFE7;
+      }
+    }
+    .line {
+      width: 1px;
+      height: 15px;
+      margin: 0 8px;
+      background-color: #2D3B49;
+    }
+  }
+}

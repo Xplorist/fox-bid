@@ -1,0 +1,24 @@
+.el-textarea .el-textarea__inner:focus,
+.el-input .el-input__inner:focus {
+  border-color: #67c23a;
+}
+.el-button--default:hover,
+.el-button--default:focus {
+  color: #67c23a;
+  border-color: #67c23a;
+  background-color: rgba(103, 194, 58, 0.1);
+}
+.el-button--primary {
+  background-color: #67c23a;
+  border-color: #67c23a;
+}
+.el-button--primary:hover,
+.el-button--primary:focus {
+  background-color: rgba(103, 194, 58, 0.8);
+  border-color: rgba(103, 194, 58, 0.8);
+}
+.el-dropdown-menu__item:focus,
+.el-dropdown-menu__item:not(.is-disabled):hover {
+  color: #67c23a;
+  background-color: rgba(103, 194, 58, 0.1);
+}

@@ -1,0 +1,95 @@
+@import "./variable.less";
+
+body {
+  padding-top: @headerHeight !important;
+  min-height: calc(100% - @headerHeight);
+}
+
+#app {
+  height: 100%;
+}
+
+#app .clearFixed:after {
+  content: "";
+  display: block;
+  width: 0;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+
+@media (min-width: 768px) {
+  .container {
+    width: 750px;
+  }
+}
+
+@media (min-width: 992px) {
+  .container {
+    width: 970px;
+  }
+}
+
+.container {
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+a {
+  &:hover {
+    color: @mainColor !important;
+  }
+}
+
+// flex 佈局
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-start {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.flex-end {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.flex-1 {
+  flex: 1;
+}
+// 禁用
+.no-select {
+  user-select: none;
+}
+
+.not-allowed {
+  cursor: not-allowed !important;
+}
+
+// 常用樣式
+.mt-10 {
+  margin-top: 10px;
+}
+.mt-20 {
+  margin-top: 20px;
+}

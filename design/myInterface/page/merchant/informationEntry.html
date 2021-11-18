@@ -1,0 +1,240 @@
+<!-- <!DOCTYPE html> -->
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" 
+"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>InformationEntry</title>
+  <link rel="stylesheet" href="../../lib/normalize.css">
+  <link rel="stylesheet" href="../../css/common.css">
+  <!-- 引入样式 -->
+  <link rel="stylesheet" href="../../lib/element/index.css">
+  <!-- 適配不支持H5的瀏覽器 -->
+  <script src="../../lib/html5shiv.min.js"></script>
+  <link rel="stylesheet" href="../../css/merchant/informationEntry.css">
+</head>
+
+<body>
+  <div id="app" class="container">
+    <section class="top">
+      <div class="type-area top-nav">
+        <ul>
+          <li>
+            <a href="#">
+              歡迎您：Mac(I)製造處
+            </a>
+          </li>
+          <li>
+            <a href="../personal/index.html">
+              個人中心
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              商家入駐
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              規則中心
+            </a>
+          </li>
+        </ul>
+      </div>
+    </section>
+    <section class="logo">
+      <div class="type-area logo-content">
+        <a href="../../index.html"></a>
+        <div class="search-box">
+          <input type="text" class="search-text" placeholder="請輸入信息">
+          <input type="submit" class="search-btn" value="搜索">
+        </div>
+      </div>
+    </section>
+    <section class="content">
+      <!-- 主體內容 -->
+      <div class="main type-area">
+        <div class="warpper">
+          <div class="general">
+            <!-- 頂部 -->
+            <div class="title">
+              <span>模治檢具订单信息服務平台【厂商入駐】</span>
+              <span>数据截至到2019-08-31 24:00:00</span>
+            </div>
+            <!-- 交易總額 -->
+            <div class="amount">
+              <span>平台交易總額</span>
+              <div class="number">
+                <span>￥</span>
+                <span>95,371,863</span>
+                <span>元</span>
+              </div>
+              <div class="info">
+                <span>需求總量: 13,537個</span>
+                <span>加工廠商: 159個</span>
+                <span>需求廠商: 159個</span>
+              </div>
+            </div>
+          </div>
+          <!-- 標語 -->
+          <div class="slogan">
+            加入我们,让您遇见更好的伙伴
+          </div>
+          <!-- 信息框 -->
+          <div class="formBox">
+            <div class="title">
+              <span>填寫資料</span>
+              <div>
+                <span>我是接單方</span>
+                <span>承接模治檢具加工、設計。</span>
+              </div>
+            </div>
+            <div class="info">
+              <!-- 左表單 -->
+              <div class="formLeft">
+                <!-- form表單 -->
+                <el-form ref="form" :model="form" label-width="80px">
+                  <!-- LOGO -->
+                  <el-form-item label="LOGO:" class="logo">
+                    <el-image style="width: 40px; height: 40px" :src="form.logoUrl" fit="cover"></el-image>
+                    <span>上傳</span>
+                    <span>200px*200px以上，不超過1M</span>
+                  </el-form-item>
+                  <!-- 賬號名稱 -->
+                  <el-form-item label="賬號名稱:" class="name">
+                    <el-input v-model="form.name"></el-input>
+                  </el-form-item>
+                  <!-- 所屬廠區 -->
+                  <el-form-item label="所屬廠區:" class="factory">
+                    <el-select v-model="form.factory">
+                      <el-option label="成都" value="成都"></el-option>
+                      <el-option label="深圳" value="深圳"></el-option>
+                      <el-option label="鄭州" value="鄭州"></el-option>
+                    </el-select>
+                  </el-form-item>
+                  <!-- 次集團 -->
+                  <el-form-item label="次集團:" class="group">
+                    <el-select v-model="form.group">
+                      <el-option label="A" value="A"></el-option>
+                      <el-option label="B" value="B"></el-option>
+                      <el-option label="C" value="C"></el-option>
+                    </el-select>
+                  </el-form-item>
+                  <!-- 事業群 -->
+                  <el-form-item label="事業群:" class="bussiness">
+                    <el-select v-model="form.bussiness">
+                      <el-option label="SHZGB" value="SHZGB"></el-option>
+                      <el-option label="CCPBG" value="CCPBG"></el-option>
+                      <el-option label="CNSBG" value="CNSBG"></el-option>
+                    </el-select>
+                  </el-form-item>
+                  <!-- 處 -->
+                  <el-form-item label="次集團:" class="bureau">
+                    <el-select v-model="form.bureau">
+                      <el-option label="處" value="處"></el-option>
+                    </el-select>
+                  </el-form-item>
+                  <!-- 單位 -->
+                  <el-form-item label="單位:" class="departName">
+                    <el-input v-model="form.departName"></el-input>
+                  </el-form-item>
+                  <!-- 交易法人 -->
+                  <el-form-item label="交易法人:" class="corporate">
+                    <el-input v-model="form.corporate"></el-input>
+                  </el-form-item>
+                </el-form>
+              </div>
+              <!-- 右表單 -->
+              <div class="formRight">
+                <el-form ref="form" :model="form" label-width="80px">
+                  <!-- 費用代碼 -->
+                  <el-form-item label="費用代碼:" class="costCode">
+                    <el-input v-model="form.costCode"></el-input>
+                  </el-form-item>
+                  <!-- 加工範圍 -->
+                  <el-form-item label="加工範圍:" class="processRange">
+                    <el-input v-model="form.processRange"></el-input>
+                  </el-form-item>
+                  <!-- 業務經理 -->
+                  <el-form-item label="業務經理:" class="manager">
+                    <el-input v-model="form.manager"></el-input>
+                  </el-form-item>
+                  <!-- 聯繫電話 -->
+                  <el-form-item label="聯繫電話:" class="tel">
+                    <el-input v-model="form.tel"></el-input>
+                  </el-form-item>
+                  <!-- Email -->
+                  <el-form-item label="Email:" class="email">
+                    <el-input v-model="form.email"></el-input>
+                  </el-form-item>
+                  <!-- 簡介 -->
+                  <el-form-item label="簡介:" class="intro">
+                    <el-input type="textarea" v-model="form.intro"></el-input>
+                  </el-form-item>
+                </el-form>
+              </div>
+            </div>
+            <!-- 按鈕 -->
+            <div class="chooseBtn">
+              <a href="#"> <svg width="265px" height="65px" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                  <polygon points="0,5 5,0 260,0 265,5 265,60 260,65 5,65 0,60 0,5" style="fill:none;stroke:#0096FF;stroke-width:1"></polygon>
+                  <rect x="2" y="2" width="261" height="61" style="fill:#0096FF;"></rect>
+                  <polyline points="10,13 10,6 6,6 6,10 13,10 13,6 252,6 252,10 259,10 259,6 255,6 255,13 259,13 259,52 255,52 255,59 259,59 259,55 252,55 252,59 13,59 13,55 6,55 6,59 10,59 10,52 6,52 6,14 11,14" style="fill:none;stroke:#3FB0FF;stroke-width:2;"></polyline>
+                </svg>
+                <span>提交審核</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="footer">
+      <div class="foo-content type-area">
+        <div class="foo-warpper">
+          <div class="technical">
+            <div class="m-logo"></div>
+            <div class="text">技術服務: 只能雲網絡開發成都分部</div>
+          </div>
+          <div class="customer">
+            客戶服務: 5073-66811
+          </div>
+          <div class="blogroll">
+            <div>友情鏈接: </div>
+            <div>
+              <a href="">
+                MAC(I)智能雲網平台
+              </a>
+            </div>
+            <div class="line"></div>
+            <div>
+              <a href="">
+                MAC(I)人事點名系統
+              </a>
+            </div>
+            <div class="line"></div>
+            <div>
+              <a href="">
+                MAC(I)金流系統
+              </a>
+            </div>
+            <div class="line"></div>
+            <div>
+              <a href="">
+                智能刀具管理
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  <!-- 先引入 Vue -->
+  <script src="../../lib/vue.js"></script>
+  <!-- 引入组件库 -->
+  <script src="../../lib/element/index.js"></script>
+  <script src="../../js/merchant/informationEntry.js"></script>
+</body>
+
+</html>

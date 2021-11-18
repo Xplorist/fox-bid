@@ -1,0 +1,150 @@
+.el-header {
+    background-color: #B3C0D1;
+    color: #333;
+    text-align: center;
+    line-height: 60px;
+  }
+  
+  .el-aside {
+    background-color: #D3DCE6;
+    color: #333;
+    text-align: center;
+    line-height: 200px;
+  }
+  
+  .el-main {
+    background-color: #E9EEF3;
+    text-align: left;
+  }
+  .ht_logobox{
+    height:80px;
+    background: rgba(0, 146, 255, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center
+  }
+  .left_box{
+      height: 60px;
+      border-bottom: rgba(11, 24, 33, 1) 1px solid;
+      border-top: rgba(11, 24, 33, 1) 1px solid;
+      color: rgba(156, 175, 189, 1);
+      font-size: 16px;
+      text-align: center;
+      line-height: 60px;
+      margin-top: -1px
+  }
+.left_pattern{   /* 左菜单点击之后要添加的class */
+      color: rgba(0, 146, 255, 1);
+      background: rgba(15, 30, 41, 1);
+  }
+.search_box{
+  position: relative;
+  width:350px;
+  height:36px;
+  display: flex;
+  align-items: center;
+  justify-content: center
+}
+.search_box input{
+    height:34px;
+    width:100%;
+    border:1px solid rgba(145,173,192,1);
+    background: transparent;
+    border-radius: 100px;
+    outline: none;
+    padding: 0 20px;
+  }
+  .search_box div{
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 70px;
+    background: rgba(145, 173, 192, 1);
+    border-radius:0 100px 100px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    color: white;
+    cursor: pointer;
+  }
+  .el-header{
+    background: rgba(215, 239, 255, 1);
+    height: 80px !important;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between
+  }
+  .content_top{
+    height:100px;
+    background:rgba(239,249,255,1);
+    padding: 0 20px
+  }
+  .content_bottom{
+    padding: 0 20px;
+    background: rgba(239,249,255,1);
+    margin-top: 10px;
+    height:calc(100% - 110px)
+  }
+  .el-radio-button{
+    width: 14.1%;
+    border-right: 1px solid white
+  }
+  .el-radio-button__inner{
+    width: 100%;
+    border-radius:0 !important;
+    background: rgba(211, 223, 231, 1) !important;
+    color: rgba(18, 34, 46, 1) !important;
+    font-size: 14px !important
+  }
+  .el-radio-button__orig-radio:checked+.el-radio-button__inner{
+    background-color:rgba(46, 110, 158, 1) !important;
+    color: white !important
+  }
+  .content_table{
+    height:100px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-bottom: rgba(211, 223, 231, 1) solid 1px;
+    align-items: center
+  }
+  .operation_tab{
+    width:80px;
+    height:30px;
+    background:rgba(46,110,158,1);
+    border-radius:2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top:15px;
+    position: relative;
+    cursor: pointer;
+  }
+  .click_Pulldown{
+    width: 78px;
+    position: absolute;
+    top: 29px;
+    background: rgb(211, 223, 231);
+    border: rgb(46, 110, 158) 1px solid;
+    z-index: 10;
+  }
+  .click_Pulldown div{
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    font-size: 14px;
+    color:rgb(55, 68, 79)
+  }
+  .change_bagea{
+    background: rgba(46,110,158,1);
+    color: white !important
+  }
+  .fy_paging{
+    display:flex;
+    width: 100%;
+    justify-content: center;
+    padding: 30px 0
+  }

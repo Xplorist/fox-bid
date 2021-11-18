@@ -1,0 +1,207 @@
+
+#content {
+  background: #12222E url(../../imgs/particulars/contentBG.png) no-repeat top center / contain;
+  padding-top: 24px;
+  // 邊界效果
+  >.main {
+    background: rgba(13, 28, 42, 0.2);
+    box-sizing: border-box;
+    padding: 20px;
+      position: relative;
+  }
+  // 基本信息
+  .general {
+    height: 260px;
+    padding: 20px 30px;
+    background-color: #0096FF;
+  }
+  // 頂部信息
+  .gen_title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #fff;
+    span:nth-child(1) {}
+    span:nth-child(2) {
+      color: #9DCCFF;
+      font-size: 12px;
+    }
+  }
+  // 總額
+  .gen_amount {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #fff;
+    >span {
+      color: #D9E9F3;
+      font-size: 14px;
+    }
+  }
+  // 具體數值
+  .gen_am_number {
+    margin-top: 8px;
+    span:nth-child(1),
+    span:nth-child(3) {
+      font-size: 14px;
+    }
+    span:nth-child(2) {
+      font-size: 48px;
+    }
+  }
+  // 其餘總額相關信息
+  .gen_am_info {
+    margin-top: 36px;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    color: #D9E9F3;
+    font-size: 20px;
+  }
+  // 標語
+  .slogan {
+    width: 422px;
+    height: 45px;
+    background: url(../../imgs/merchant/sloganBG.png) no-repeat;
+    position: absolute;
+    top: 297px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #D3DFE7;
+    font-size: 20px;
+    text-align: center;
+    line-height: 45px;
+  }
+  // 信息填寫框
+  .formBox {
+    background-color: #D3DFE7;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  // 信息框頂部
+  .form_title {
+    margin-top: 60px;
+    text-align: center;
+    >span {
+      color: #0096FF;
+      font-size: 18px;
+    }
+  }
+  // 描述
+  .tit_describe {
+    margin-top: 26px;
+    background: #C6D4DE;
+    text-align: center;
+    width: 960px;
+    height: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    span:nth-child(1) {
+      color: #12222E;
+      font-size: 20px;
+    }
+    span:nth-child(2) {
+      color: #50616F;
+      font-size: 14px;
+    }
+  }
+  // 信息框主體
+  .form_info {
+    width: 960px;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 40px;
+    .formLeft,
+    .formRight {
+      width: 50%;
+    }
+  }
+  // 修改 element 表格樣式
+  // 單獨列
+  /deep/ .el-form-item {
+    display: flex;
+    align-items: center;
+    // logo
+  }
+  /deep/ .el-form-item.logo {
+    .el-form-item__content {
+      width: 326px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    span:nth-child(2) {
+      color: #2E6E9E;
+      font-size: 16px;
+      border: 1px solid #AFC2CF;
+      display: inline-block;
+      width: 58px;
+      height: 24px;
+      text-align: center;
+      line-height: 24px;
+      border-radius: 13px;
+    }
+    span:nth-child(3) {
+      color: #7D919F;
+      font-size: 14px;
+    }
+  }
+  // label全局效果修改
+  /deep/ .el-form-item__label {
+    width: 100px !important;
+    text-align: right;
+    font-size: 16px;
+    color: #212F3A;
+    padding: 0;
+  }
+  // content全局效果修改
+  /deep/ .el-form-item__content {
+    font-size: 16px;
+    color: #212F3A;
+    margin-left: 10px !important;
+  }
+  /deep/ .el-input {
+    input {
+      background-color: #D3DFE7;
+      border: 1px solid #AFC2CF;
+      border-radius: 0px;
+      width: 326px;
+      &:focus {
+        border-color: #0092FF;
+      }
+    }
+  }
+  /deep/ .el-textarea {
+    textarea {
+      background-color: #D3DFE7;
+      border: 1px solid #AFC2CF;
+      border-radius: 0px;
+      width: 326px;
+      height: 164px;
+      &:focus {
+        border-color: #0092FF;
+      }
+    }
+  }
+  // 信息框提交按鈕
+  .form_chooseBtn {
+    margin-top: 70px;
+    margin-bottom: 40px;
+    position: relative;
+    cursor: pointer;
+    >a {
+      span {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 20px;
+        color: #fff;
+      }
+    }
+  }
+}

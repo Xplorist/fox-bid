@@ -1,0 +1,221 @@
+<!-- <!DOCTYPE html> -->
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" 
+"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>PostEva</title>
+  <link rel="stylesheet" href="../../lib/normalize.css">
+  <link rel="stylesheet" href="../../css/common.css">
+  <!-- 引入样式 -->
+  <link rel="stylesheet" href="../../lib/element/index.css">
+  <!-- 適配不支持H5的瀏覽器 -->
+  <script src="../../lib/html5shiv.min.js"></script>
+  <link rel="stylesheet" href="../../css/personal/postEvaluation.css">
+</head>
+
+<body>
+  <div id="app" class="container">
+    <section class="top">
+      <div class="type-area top-nav">
+        <ul>
+          <li>
+            <a href="#">
+              歡迎您：Mac(I)製造處
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              個人中心
+            </a>
+          </li>
+          <li>
+            <a href="../merchant/enter.html">
+              商家入駐
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              規則中心
+            </a>
+          </li>
+        </ul>
+      </div>
+    </section>
+    <section class="logo">
+      <div class="type-area logo-content">
+        <a href="../../index.html"></a>
+        <div class="search-box">
+          <input type="text" class="search-text" placeholder="請輸入信息">
+          <input type="submit" class="search-btn" value="搜索">
+        </div>
+      </div>
+    </section>
+    <section class="content">
+      <!-- 主體內容 -->
+      <div class="main type-area">
+        <div class="warpper">
+          <div class="sideBar">
+            <div class="portrait">
+              <div class="porImg"></div>
+            </div>
+            <div class="department">
+              <span class="depIcon"></span>
+              <span>Mac(I)製造一處</span>
+            </div>
+            <div class="navigate">
+              <a href="#" class="active">
+                <div>
+                  訂單管理
+                </div>
+              </a>
+              <a href="./information.html">
+                <div>
+                  個人資料
+                </div>
+              </a>
+              <a href="./evaluation.html">
+                <div>
+                  評價管理
+                </div>
+              </a>
+              <a href="#">
+                <div>
+                  消息
+                  <span>(2)</span>
+                </div>
+              </a>
+              <a href="#">
+                <div>
+                  收藏
+                </div>
+              </a>
+              <a href="#">
+                <div>
+                  設置
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="mainPart">
+            <div class="panel">
+              <!-- 頂部 -->
+              <div class="headline">
+                <div class="back">
+                  <div class="backBtn">
+                    <a href="./index.html">
+                      <span></span>
+                      返回
+                    </a>
+                  </div>
+                  <div class="status">評價</div>
+                </div>
+                <div class="title">
+                  <div class="titleText">【模具】需求單號A3000028</div>
+                  <div class="deliveryTime">交貨時間: 2019-09-30</div>
+                </div>
+              </div>
+              <!-- evaluationBox -->
+              <div class="evaluationBox">
+                <!-- 綜合評分 -->
+                <div class="rate-comprehensive rate">
+                  <div class="single">
+                    <span>綜合評價: </span>
+                    <el-rate v-model="rate.comprehensive" :texts="rateData.texts" :colors="rateData.color" text-color="#212F3A" show-text class="stars">
+                    </el-rate>
+                  </div>
+                </div>
+                <!-- 評語框 -->
+                <div class="commentsBox">
+                  <el-input type="textarea" placeholder="请输入您對商家的評價" v-model="comments">
+                  </el-input>
+                  <!-- 匿名 -->
+                  <div class="anonymity">
+                    <el-checkbox label="匿名評價" name="type" :checked="anonymityFlag"></el-checkbox>
+                    <div>匿名評價不會再個人主頁中展示昵称</div>
+                  </div>
+                </div>
+                <!-- 付款時效 -->
+                <div class="rate-payment rate">
+                  <div class="single">
+                    <span>綜合評價: </span>
+                    <el-rate v-model="rate.payment" :texts="rateData.texts" :colors="rateData.color" text-color="#212F3A" show-text class="stars">
+                    </el-rate>
+                  </div>
+                </div>
+                <!-- 服務態度 -->
+                <div class="rate-attitude rate">
+                  <div class="single">
+                    <span>綜合評價: </span>
+                    <el-rate v-model="rate.attitude" :texts="rateData.texts" :colors="rateData.color" text-color="#212F3A" show-text class="stars">
+                    </el-rate>
+                  </div>
+                </div>
+              </div>
+              <!-- 提交 -->
+              <div class="confirm">
+                <svg width="265px" height="65px" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                  <polygon points="0,5 5,0 260,0 265,5 265,60 260,65 5,65 0,60 0,5" style="fill:none;stroke:#0096FF;stroke-width:1"></polygon>
+                  <rect x="2" y="2" width="261" height="61" style="fill:#0096FF;"></rect>
+                  <polyline points="10,13 10,6 6,6 6,10 13,10 13,6 252,6 252,10 259,10 259,6 255,6 255,13 259,13 259,52 255,52 255,59 259,59 259,55 252,55 252,59 13,59 13,55 6,55 6,59 10,59 10,52 6,52 6,14 11,14" style="fill:none;stroke:#3FB0FF;stroke-width:2;"></polyline>
+                </svg>
+                <!-- old -->
+                <span>
+                  提交
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="footer">
+      <div class="foo-content type-area">
+        <div class="foo-warpper">
+          <div class="technical">
+            <div class="m-logo"></div>
+            <div class="text">技術服務: 只能雲網絡開發成都分部</div>
+          </div>
+          <div class="customer">
+            客戶服務: 5073-66811
+          </div>
+          <div class="blogroll">
+            <div>友情鏈接: </div>
+            <div>
+              <a href="">
+                MAC(I)智能雲網平台
+              </a>
+            </div>
+            <div class="line"></div>
+            <div>
+              <a href="">
+                MAC(I)人事點名系統
+              </a>
+            </div>
+            <div class="line"></div>
+            <div>
+              <a href="">
+                MAC(I)金流系統
+              </a>
+            </div>
+            <div class="line"></div>
+            <div>
+              <a href="">
+                智能刀具管理
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  <!-- 先引入 Vue -->
+  <script src="../../lib/vue.js"></script>
+  <!-- 引入组件库 -->
+  <script src="../../lib/element/index.js"></script>
+  <script src="../../js/personal/postEvaluation.js"></script>
+</body>
+
+</html>

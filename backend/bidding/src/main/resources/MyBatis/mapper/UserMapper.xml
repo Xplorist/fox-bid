@@ -1,0 +1,465 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.foxconn.bidding.mapper.UserMapper">
+    <!-- 註冊提交前判斷用戶是否存在 -->
+    <select id="query_user_is_exist" parameterType="String" resultType="Integer">
+        select count(*) from USER_INFO t where t.username = #{username} and t.f_valid = 'Y'
+    </select>
+
+    <!-- 新增臨時用戶信息 -->
+    <insert id="add_USER_TEMP" parameterType="com.foxconn.bidding.model.USER_INFO_bean">
+        insert into USER_TEMP
+          (username,
+           password,
+           in_out_type,
+           send_recv_type,
+           fctry_zone,
+           secn_cmpy,
+           entrps_group,
+           pd_office,
+           dept_name,
+           legal_person,
+           cost_code,
+           recv_mnufc_range_rel_id,
+           bank_name,
+           bank_acunt,
+           busis_mngr,
+           tel,
+           email,
+           summary,
+           phone,
+           dept_code,
+           user_pic_file_pkid)
+        values
+          (#{username},
+           #{password},
+           #{in_out_type},
+           #{send_recv_type},
+           #{fctry_zone},
+           #{secn_cmpy},
+           #{entrps_group},
+           #{pd_office},
+           #{dept_name},
+           #{legal_person},
+           #{cost_code},
+           #{recv_mnufc_range_rel_id},
+           #{bank_name},
+           #{bank_acunt},
+           #{busis_mngr},
+           #{tel},
+           #{email},
+           #{summary},
+           #{phone},
+           #{dept_code},
+           #{user_pic_file_pkid})
+    </insert>
+
+    <!-- 修改臨時用戶表狀態 -->
+    <update id="update_user_temp_au_status" parameterType="com.foxconn.bidding.model.USER_INFO_bean">
+        update USER_TEMP set au_status = #{au_status}, rej_msg = #{rej_msg} where pkid = #{pkid}
+    </update>
+
+    <!-- 根據pkid查詢臨時用戶 -->
+    <select id="query_user_temp_by_pkid" parameterType="String" resultType="com.foxconn.bidding.model.USER_INFO_bean">
+        select t.* from USER_TEMP t where t.pkid = #{pkid}
+    </select>
+
+    <!-- 新增用戶信息 -->
+    <insert id="add_user_info" parameterType="com.foxconn.bidding.model.USER_INFO_bean">
+        insert into USER_INFO
+        (username,
+         password,
+         in_out_type,
+         send_recv_type,
+         fctry_zone,
+         secn_cmpy,
+         entrps_group,
+         pd_office,
+         dept_name,
+         legal_person,
+         cost_code,
+         recv_mnufc_range_rel_id,
+         bank_name,
+         bank_acunt,
+         busis_mngr,
+         tel,
+         email,
+         summary,
+         phone,
+         dept_code,
+         user_pic_file_pkid)
+        values
+        (#{username},
+         #{password},
+         #{in_out_type},
+         #{send_recv_type},
+         #{fctry_zone},
+         #{secn_cmpy},
+         #{entrps_group},
+         #{pd_office},
+         #{dept_name},
+         #{legal_person},
+         #{cost_code},
+         #{recv_mnufc_range_rel_id},
+         #{bank_name},
+         #{bank_acunt},
+         #{busis_mngr},
+         #{tel},
+         #{email},
+         #{summary},
+         #{phone},
+         #{dept_code},
+         #{user_pic_file_pkid})
+    </insert>
+
+    <!-- 新增用戶頭像文件信息 -->
+    <insert id="add_USER_PIC_FILE" parameterType="com.foxconn.bidding.model.USER_PIC_FILE_bean">
+        insert into USER_PIC_FILE
+          (pkid, file_origin_name, file_save_name, file_save_path)
+        values
+          (#{pkid}, #{file_origin_name}, #{file_save_name}, #{file_save_path})
+    </insert>
+
+    <!-- 新增接單方加工範圍 -->
+    <insert id="add_recv_mnufc_range" parameterType="com.foxconn.bidding.model.RECV_MNUFC_RANGE_bean">
+        insert into RECV_MNUFC_RANGE
+            (name, recv_mnufc_range_rel_id, list_order)
+        values
+            (#{name}, #{recv_mnufc_range_rel_id}, #{list_order})
+    </insert>
+
+    <!-- 通過用戶名查詢用戶 -->
+    <select id="query_user_by_username" parameterType="String" resultType="com.foxconn.bidding.model.USER_INFO_bean">
+        select t.* from USER_INFO t where t.username = #{username} and t.f_valid = 'Y'
+    </select>
+
+    <!-- 通過用戶名模糊查詢用戶list -->
+    <select id="listUserByUsernameFuzzy" parameterType="String" resultType="com.foxconn.bidding.model.USER_INFO_bean">
+        <bind name="b_username" value="'%' + username + '%'"/>
+        select t.*
+        from USER_INFO t
+        where t.f_valid = 'Y'
+          and t.username like #{b_username}
+        order by t.username asc
+    </select>
+
+    <!-- 通過id查找用戶 -->
+    <select id="findUserById" parameterType="String" resultType="com.foxconn.bidding.model.USER_INFO_bean">
+        select t.* from USER_INFO t where t.pkid = #{pkid}
+    </select>
+
+    <!-- 查詢用戶頭像文件 -->
+    <select id="query_user_pic_file" parameterType="String" resultType="com.foxconn.bidding.model.USER_PIC_FILE_bean">
+        select t.* from USER_PIC_FILE t where t.pkid = #{user_pic_file_pkid}
+    </select>
+
+    <!-- 刪除用戶頭像文件信息 -->
+    <delete id="delete_user_pic_file" parameterType="String">
+        delete from USER_PIC_FILE where pkid = #{user_pic_file_pkid}
+    </delete>
+
+    <!-- 更新用戶主表信息 -->
+    <update id="update_user_info" parameterType="com.foxconn.bidding.model.USER_INFO_bean">
+        update USER_INFO
+        set username         = #{username},
+            fctry_zone       = #{fctry_zone},
+            secn_cmpy        = #{secn_cmpy},
+            entrps_group     = #{entrps_group},
+            pd_office        = #{pd_office},
+            dept_name        = #{dept_name},
+            dept_code        = #{dept_code},
+            <if test='legal_person != null and legal_person != ""'>
+                legal_person     = #{legal_person},
+            </if>
+            cost_code        = #{cost_code},
+            busis_mngr       = #{busis_mngr},
+            tel              = #{tel},
+            email            = #{email},
+            summary          = #{summary},
+            user_pic_file_pkid = #{user_pic_file_pkid}
+        where pkid = #{pkid}
+    </update>
+
+    <!-- 查詢接單方加工範圍 -->
+    <select id="query_recv_range_list" parameterType="String" resultType="com.foxconn.bidding.model.RECV_MNUFC_RANGE_bean">
+        select t.*
+        from RECV_MNUFC_RANGE t
+        where t.recv_mnufc_range_rel_id = #{recv_mnufc_range_rel_id}
+        order by t.list_order asc
+    </select>
+
+    <!-- 刪除接單方加工範圍list -->
+    <delete id="delete_recv_range_list" parameterType="String">
+        delete from RECV_MNUFC_RANGE
+        where recv_mnufc_range_rel_id = #{recv_mnufc_range_rel_id}
+    </delete>
+
+    <!-- 根據訂單信息查詢相應的接單方郵箱地址 -->
+    <select id="query_email_by_bill_info" parameterType="com.foxconn.bidding.model.BILL_bean" resultType="String">
+        select t.email
+        from USER_INFO t, RECV_MNUFC_RANGE r
+        where t.recv_mnufc_range_rel_id = r.recv_mnufc_range_rel_id
+          and r.name = #{pd_type}
+          and t.f_valid = 'Y'
+          <if test='bid_range == "次集團"'>
+          and t.secn_cmpy = #{bid_range_value}
+          </if>
+          <if test='bid_range == "廠區"'>
+          and t.fctry_zone = #{bid_range_value}
+          </if>
+          <if test='bid_range == "事業群"'>
+          and t.entrps_group = #{bid_range_value}
+          </if>
+          <if test='bid_range == "產品處"'>
+          and t.pd_office = #{bid_range_value}
+          </if>
+        group by t.email
+        order by t.email
+    </select>
+
+    <!-- 將此賬號的驗證碼狀態更新為非最新狀態 -->
+    <update id="update_user_verification_code_not_newest" parameterType="String">
+        update VERIFICATION_CODE set f_newest = 'N' where user_pkid = #{user_pkid}
+    </update>
+
+    <!-- 新增驗證碼和用戶pkid到驗證碼表中 -->
+    <insert id="add_verification_code" parameterType="com.foxconn.bidding.model.VERIFICATION_CODE_bean">
+        insert into VERIFICATION_CODE (user_pkid, code) values (#{user_pkid}, #{code})
+    </insert>
+
+    <!-- 根據用戶id查詢最新的驗證碼 -->
+    <select id="query_newest_code_by_user_pkid" parameterType="String" resultType="String">
+        select t.code from VERIFICATION_CODE t where t.user_pkid = #{user_pkid} and t.f_newest = 'Y'
+    </select>
+
+    <!-- 更新此驗證碼不為最新 -->
+    <update id="update_code_not_newest" parameterType="com.foxconn.bidding.model.VERIFICATION_CODE_bean">
+        update VERIFICATION_CODE set f_newest = 'N' where user_pkid = #{user_pkid} and code = #{code}
+    </update>
+
+    <!-- 更新用戶密碼 -->
+    <update id="update_password" parameterType="com.foxconn.bidding.model.VERIFICATION_CODE_bean">
+        update USER_INFO set password = #{password} where username = #{username} and f_valid = 'Y'
+    </update>
+
+    <!-- 條件分頁查詢用戶list -->
+    <select id="queryUserList" parameterType="com.foxconn.bidding.model.USER_INFO_bean" resultType="com.foxconn.bidding.model.USER_INFO_bean">
+        select t2.* from(select t1.*,rownum row_num from(
+                                    select t.*, count(*) over() row_total
+                                    from USER_INFO t
+                                    where t.f_valid = 'Y'
+                                    <if test='send_recv_type != null and send_recv_type != "" and send_recv_type != "全部"'>
+                                        <bind name="b_send_recv_type" value="'%' + send_recv_type + '%'"/>
+                                          and t.send_recv_type like #{b_send_recv_type}
+                                    </if>
+                                    <if test='fctry_zone != null and fctry_zone != "" and fctry_zone != "全部"'>
+                                        <bind name="b_fctry_zone" value="'%' + fctry_zone + '%'"/>
+                                        and t.fctry_zone like #{b_fctry_zone}
+                                    </if>
+                                    <if test='secn_cmpy != null and secn_cmpy != "" and secn_cmpy != "全部"'>
+                                        <bind name="b_secn_cmpy" value="'%' + secn_cmpy + '%'"/>
+                                        and t.secn_cmpy like #{b_secn_cmpy}
+                                    </if>
+                                    <if test='entrps_group != null and entrps_group != "" and entrps_group != "全部"'>
+                                        <bind name="b_entrps_group" value="'%' + entrps_group + '%'"/>
+                                        and t.entrps_group like #{b_entrps_group}
+                                    </if>
+                                    <if test='pd_office != null and pd_office != "" and pd_office != "全部"'>
+                                        <bind name="b_pd_office" value="'%' + pd_office + '%'"/>
+                                        and t.pd_office like #{b_pd_office}
+                                    </if>
+                                    and t.send_recv_type &lt;&gt; 'system'
+                                    order by t.create_date desc
+                                                        ) t1) t2
+        where t2.row_num between (#{pageIndex} - 1) * #{pageSize} + 1
+                  and #{pageIndex} * #{pageSize}
+    </select>
+
+    <!-- 更新賬號最近登錄時間 -->
+    <update id="updateUserLatestLoginTime" parameterType="String">
+        update USER_INFO t
+        set t.latest_login_time = sysdate
+        where t.pkid = #{user_pkid}
+    </update>
+
+    <!-- 統計發單方發單量和發單總金額 -->
+    <select id="queryUserSendBillAmountAndMoney" parameterType="String" resultType="com.foxconn.bidding.model.SendUserStatistics">
+        select count(*) send_amount, sum(t.total_price) send_money
+        from BILL t
+        where t.send_user_pkid = #{send_user_pkid}
+    </select>
+
+    <!-- 統計發單方選標金額 -->
+    <select id="queryUserPickMoney" parameterType="String" resultType="Long">
+        select sum(g.total_price) pick_money
+        from BILL t, GIVE_PRICE_MSTR g
+        where t.pkid = g.bill_pkid
+          and t.send_user_pkid = #{send_user_pkid}
+          and g.f_win_bid = 'Y'
+    </select>
+
+    <!-- 統計發單方棄標量 -->
+    <select id="queryUserAbandonBidAmount" parameterType="String" resultType="Integer">
+        select count(*) count_abandon
+        from BILL t
+        where t.send_user_pkid = #{send_user_pkid}
+          and t.bill_status = '-2'
+    </select>
+
+    <!-- 統計發單方流標量 -->
+    <select id="queryUserFlowBidAmount" parameterType="String" resultType="Integer">
+        select count(*) count_flow
+        from BILL t
+        where t.send_user_pkid = #{send_user_pkid}
+          and t.bill_status = '-1'
+    </select>
+
+    <!-- 統計發單方選標量 -->
+    <select id="queryUserPickBidAmount" parameterType="String" resultType="Integer">
+        select count(*) count_pick
+        from BILL t
+        where t.send_user_pkid = #{send_user_pkid}
+          and t.bill_status &gt; 1
+    </select>
+
+    <!-- 統計發單方的客戶評分 -->
+    <select id="querySendUserGetScore" parameterType="String" resultType="Float">
+        select round(avg(t.summary_score), 2) user_score
+        from RECV_EVAL t
+        where t.send_user_pkid = #{send_user_pkid}
+    </select>
+
+    <!-- 查詢發單方最近發單時間 -->
+    <select id="querySendUserLatestSendBillTime" parameterType="String" resultType="String">
+        select create_date latest_send_bill_time
+        from (select t.*
+              from BILL t
+              where t.send_user_pkid = #{send_user_pkid}
+              order by t.create_date desc)
+        where rownum = 1
+    </select>
+
+    <!-- 接單方統計接單量和報價金額 -->
+    <select id="queryRecvUserOfferAmountAndMoney" parameterType="String" resultType="com.foxconn.bidding.model.RecvUserStatistics">
+        select count(*) recv_amount, sum(t.total_price) offer_money
+        from GIVE_PRICE_MSTR t
+        where t.recv_user_pkid = #{recv_user_pkid}
+    </select>
+
+    <!-- 統計接單方中標金額 -->
+    <select id="queryRecvUserWinBidMoney" parameterType="String" resultType="Long">
+        select sum(t.total_price) win_bid_money
+        from GIVE_PRICE_MSTR t
+        where t.recv_user_pkid = #{recv_user_pkid}
+          and t.f_win_bid = 'Y'
+    </select>
+
+    <!-- 統計接單方競標成功量 -->
+    <select id="queryRecvUserWinBidAmount" parameterType="String" resultType="Integer">
+        select count(*) count_win
+        from GIVE_PRICE_MSTR t
+        where t.recv_user_pkid = #{recv_user_pkid}
+          and t.f_win_bid = 'Y'
+    </select>
+
+    <!-- 統計接單方的客戶評分 -->
+    <select id="queryRecvUserGetScore" parameterType="String" resultType="Float">
+        select round(avg(t.summary_score), 2) user_score
+        from SEND_EVAL t
+        where t.recv_user_pkid = #{recv_user_pkid}
+    </select>
+
+    <!-- 查詢接單方最近接單時間 -->
+    <select id="queryRecvUserLatestOfferTime" parameterType="String" resultType="String">
+        select create_date latest_recv_bill_time
+        from (select t.*
+              from GIVE_PRICE_MSTR t
+              where t.recv_user_pkid = #{recv_user_pkid}
+              order by t.create_date desc)
+        where rownum = 1
+    </select>
+
+    <!-- 邏輯刪除用戶賬號 -->
+    <update id="updateUserInvalid" parameterType="String">
+        update USER_INFO t set t.f_valid = 'N' where t.pkid = #{user_pkid}
+    </update>
+
+    <!-- 統計註冊賬號總數 -->
+    <select id="queryUserTotalNum" resultType="Integer">
+        select count(*)
+        from USER_INFO t
+        where t.f_valid = 'Y'
+        and t.send_recv_type &lt;&gt; 'system'
+        and t.username &lt;&gt; 'send'
+        and t.username &lt;&gt; 'recv'
+    </select>
+
+    <!-- 統計發單方賬號總數 -->
+    <select id="querySendUserNum" resultType="Integer">
+        select count(*)
+        from USER_INFO t
+        where t.f_valid = 'Y'
+        and t.send_recv_type = 'send'
+        and t.username &lt;&gt; 'send'
+        and t.username &lt;&gt; 'recv'
+    </select>
+
+    <!-- 統計發單方賬號總數 -->
+    <select id="queryRecvUserNum" resultType="Integer">
+        select count(*)
+        from USER_INFO t
+        where t.f_valid = 'Y'
+        and t.send_recv_type = 'recv'
+        and t.username &lt;&gt; 'send'
+        and t.username &lt;&gt; 'recv'
+    </select>
+
+    <!-- 統計活躍發單方賬號個數 -->
+    <select id="queryActiveSendUserNum" resultType="Integer">
+        select count(*)
+        from USER_INFO t
+        where t.pkid in (select u.pkid
+        from BILL b, USER_INFO u
+        where b.send_user_pkid = u.pkid
+        and u.f_valid = 'Y'
+        and b.create_date &gt; (sysdate - 90)
+        group by u.pkid)
+    </select>
+
+    <!-- 統計活躍的接單方用戶個數 -->
+    <select id="queryActiveRecvUserNum" resultType="Integer">
+        select count(*)
+        from USER_INFO t
+        where t.pkid in (select u.pkid
+        from GIVE_PRICE_MSTR g, USER_INFO u
+        where g.recv_user_pkid = u.pkid
+        and u.f_valid = 'Y'
+        and g.create_date &gt; (sysdate - 90)
+        group by u.pkid)
+    </select>
+
+    <!-- 統計待審核賬號總數 -->
+    <select id="queryWaitAuUserNum" resultType="Integer">
+        select count(*) from USER_TEMP t where t.au_status = '0'
+    </select>
+
+    <!-- 判斷發單用戶是否活躍(count > 0 代表活躍) -->
+    <select id="querySendUserIsActive" parameterType="String" resultType="Integer">
+        select count(*)
+        from BILL t
+        where t.send_user_pkid = #{user_pkid}
+          and t.create_date > (sysdate - 90)
+    </select>
+
+    <!-- 判斷接單用戶是否活躍(count > 0 代表活躍) -->
+    <select id="queryRecvUserIsActive" parameterType="String" resultType="Integer">
+        select count(*)
+        from GIVE_PRICE_MSTR t
+        where t.recv_user_pkid = #{user_pkid}
+          and t.create_date > (sysdate - 90)
+    </select>
+
+    <!-- 注釋模板，放在最後一行 -->
+</mapper>

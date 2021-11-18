@@ -1,0 +1,350 @@
+<template>
+  <div class="payment">
+    <Top></Top>
+    <Logo></Logo>
+    <section id="content">
+      <!-- 主體內容 -->
+      <div class="main type-area">
+        <SilderBar :choose-item="silderBarItem"></SilderBar>
+        <div class="mainPart">
+          <!-- 頂部信息 -->
+          <div class="main_headline">
+            <div class="main_head_back">
+              <div class="head_back_backBtn">
+                <router-link to="/personal">
+                  <!-- 圖標 -->
+                  <span></span>
+                  返回
+                </router-link>
+              </div>
+              <div class="head_back_status">收款</div>
+            </div>
+            <div class="main_head_title">
+              <div class="head_tit_text">【模具】需求單號A3000028</div>
+              <div class="head_tit_time">貨款金額: 50000元</div>
+            </div>
+          </div>
+          <!-- 基本信息 -->
+          <div class="main_baseInfo">
+            <div class="main_base_title">基本信息</div>
+            <div class="main_base_content">
+              <!-- table1 -->
+              <table>
+                <tr>
+                  <td>需求單位</td>
+                  <td>:</td>
+                  <td>鴻富錦成都</td>
+                </tr>
+                <tr>
+                  <td>交易法人名稱</td>
+                  <td>:</td>
+                  <td>富泰華成都</td>
+                </tr>
+                <tr>
+                  <td>交貨地點</td>
+                  <td>:</td>
+                  <td>成都D23</td>
+                </tr>
+                <tr>
+                  <td>需求單位</td>
+                  <td>:</td>
+                  <td>Mac(I)</td>
+                </tr>
+                <tr>
+                  <td>交易法人代碼</td>
+                  <td>:</td>
+                  <td>ASJSHA3255ASD</td>
+                </tr>
+              </table>
+              <!-- table2 -->
+              <table>
+                <tr>
+                  <td>接受總價</td>
+                  <td>:</td>
+                  <td>50000元</td>
+                </tr>
+                <tr>
+                  <td>幣別</td>
+                  <td>:</td>
+                  <td>RMB</td>
+                </tr>
+                <tr>
+                  <td>競標範圍</td>
+                  <td>:</td>
+                  <td>Mac(I)成都</td>
+                </tr>
+                <tr>
+                  <td>競價開始時間</td>
+                  <td>:</td>
+                  <td>2019-10-07 02:00:00</td>
+                </tr>
+                <tr>
+                  <td>競價結束時間</td>
+                  <td>:</td>
+                  <td>2019-10-07 02:00:00</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+          <!-- 時間 -->
+          <div class="main_payInfo">
+            <div class="title">付款信息</div>
+            <div class="stauts">已收款</div>
+            <div style="paddingLeft: 160px;">
+              <div class="price">
+                50000
+                <span>元</span>
+              </div>
+              <table>
+                <tr>
+                  <td>付款單位：</td>
+                  <td>成都製一處</td>
+                </tr>
+                <tr>
+                  <td>付款賬戶：</td>
+                  <td>
+                    5421**********7515
+                    <span class="showAccount">顯示賬戶</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td>付款方式：</td>
+                  <td>費用轉嫁/銀行匯總</td>
+                </tr>
+                <tr>
+                  <td>付款時間：</td>
+                  <td>2019-10-12 09:36:23</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+          <!-- 確認交貨按鈕 -->
+          <div class="main_confirm">
+            <p>请先确认自己账户是否已收到对方汇款</p>
+            <div class="main_con_conBtn">
+              <svg width="265px" height="65px" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                <polygon
+                  points="0,5 5,0 260,0 265,5 265,60 260,65 5,65 0,60 0,5"
+                  style="fill:none;stroke:e51313;stroke-width:1"
+                />
+                <rect x="2" y="2" width="261" height="61" style="fill:e51313;" />
+                <polyline
+                  points="10,13 10,6 6,6 6,10 13,10 13,6 252,6 252,10 259,10 259,6 255,6 255,13 259,13 259,52 255,52 255,59 259,59 259,55 252,55 252,59 13,59 13,55 6,55 6,59 10,59 10,52 6,52 6,14 11,14"
+                  style="fill:none;stroke:#ea4242;stroke-width:2;"
+                />
+              </svg>
+              <span>確認收款</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <Footer></Footer>
+  </div>
+</template>
+
+<script>
+import Top from "../../components/Top";
+import Logo from "../../components/Logo";
+import Footer from "../../components/Footer";
+import SilderBar from "../../components/personal/SilderBar";
+
+export default {
+  data: function() {
+    return {
+      // 选中的侧边栏条目
+      silderBarItem: "order"
+    };
+  },
+  created() {},
+  components: {
+    Top,
+    Logo,
+    Footer,
+    SilderBar
+  }
+};
+</script>
+
+<style lang="less" scoped>
+// 主體內容
+#content {
+  background: #12222e url(../../assets/imgs/particulars/contentBG.png) no-repeat
+    top center / contain;
+  padding-top: 24px;
+  > .main {
+    background: rgba(13, 28, 42, 0.2);
+    box-sizing: border-box;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+  }
+}
+// 右側主體
+.mainPart {
+  width: 910px;
+  background-color: #d3dfe7;
+  padding: 30px;
+  box-sizing: border-box;
+}
+// <!-- 頂部信息 -->
+.main_headline {
+}
+// 返回區域
+.main_head_back {
+  display: flex;
+  align-items: center;
+}
+// 返回按鈕
+.head_back_backBtn {
+  > a {
+    color: #626f7f;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+  }
+  // 返回圖標
+  span {
+    display: block;
+    width: 17px;
+    height: 12px;
+    background: url(../../assets/imgs/personal/back.png) no-repeat;
+    margin-right: 6px;
+  }
+}
+// 當前狀態
+.head_back_status {
+  color: #0096ff;
+  font-size: 18px;
+  margin-left: 28px;
+}
+// 主內容標題
+.main_head_title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.head_tit_text {
+  color: #212f3a;
+  font-size: 18px;
+}
+.head_tit_time {
+  color: #0096ff;
+  font-size: 16px;
+  margin-top: 15px;
+}
+// <!-- 基本信息 -->
+.main_baseInfo {
+}
+.main_base_title {
+  color: #485463;
+  font-size: 16px;
+  border-bottom: 1px solid #c0c8cf;
+  margin-top: 20px;
+  padding: 10px 0;
+}
+.main_base_content {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+  width: 80%;
+  td {
+    height: 24px;
+    color: #212f3a;
+    font-size: 16px;
+    &:nth-child(1) {
+      color: #626f7f;
+      // 文本居中
+      // text-align:center;
+      text-align: justify;
+      // text-justify:distribute-all-lines;
+      text-align-last: justify;
+    }
+    &:nth-child(2) {
+      width: 20px;
+      color: #626f7f;
+    }
+    &:nth-child(3) {
+    }
+  }
+}
+// 付款信息
+.main_payInfo {
+  margin-top: 100px;
+  background-color: #384752;
+  color: #748089;
+  font-size: 16px;
+  padding: 10px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .title {
+    align-self: flex-start;
+    color: #d3dfe7;
+  }
+  .stauts {
+    margin-top: 35px;
+    width: 80px;
+    height: 26px;
+    line-height: 26px;
+    text-align: center;
+    background-color: #3de516;
+    color: #fff;
+    border-radius: 2px;
+  }
+  .price {
+    color: #d3dfe7;
+    font-size: 48px;
+    span {
+      font-size: 16px;
+    }
+  }
+  table {
+    margin-top: 32px;
+    margin-bottom: 20px;
+    tr {
+      height: 28px;
+    }
+    td {
+    }
+    .showAccount {
+      display: inline-block;
+      width: 70px;
+      height: 26px;
+      line-height: 26px;
+      text-align: center;
+      background: rgba(41, 57, 68, 1);
+      border-radius: 2px;
+      font-size: 14px;
+      color: #485762;
+      cursor: pointer;
+      user-select: none;
+    }
+  }
+}
+
+// <!-- 確認交貨按鈕 -->
+.main_confirm {
+  text-align: center;
+  margin: 80px 0;
+  > p {
+    color: rgba(33, 47, 58, 1);
+  }
+}
+.main_con_conBtn {
+  color: #fff;
+  font-size: 18px;
+  position: relative;
+  > svg {
+    cursor: pointer;
+  }
+  > span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+  }
+}
+</style>

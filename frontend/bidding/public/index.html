@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <link rel="icon" href="<%= BASE_URL %>cogwheel.ico">
+  <title>模治检具订单信息服务平台</title>
+</head>
+
+<body>
+  <div id="app"></div>
+  <script>
+    window.onload = function () {
+      if (window.navigator.userAgent.indexOf("Chrome") < 0) {
+        if (confirm("推荐使用谷歌瀏覽器访问，是否前往下載？"))
+          toHref()
+      } else {
+        var str = window.navigator.userAgent;
+        var arr = str.split("Chrome");
+        var version = arr[1].slice(1).split(".")[0];
+        if (version < 49 && confirm("您當前的瀏覽器版本過低，是否前往升级？")) {
+          toHref()
+        }
+      }
+
+      function toHref() {
+        window.location.href =
+          "/bid/api/bidding/pic_show/load?file_save_path=browser&file_save_name=GoogleChromePortable_49.0.2.zip&file_origin_name=GoogleChromePortable_49.0.2.zip";
+        return
+      }
+    }
+  </script>
+</body>
+
+</html>

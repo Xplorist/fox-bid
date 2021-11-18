@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>模治檢具訂單管理平台</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!-- css lib -->
+    <link rel="stylesheet" href="home/css_lib/bootstrap.min.css">
+    <link rel="stylesheet" href="home/css_lib/font-awesome.min.css">
+    <!-- custom css -->
+    <link rel="stylesheet" href="home/css_code/register.css">
+</head>
+<body>
+<div id="app" class="container" style="height: 100vh;">
+    <div class="row" style="height: 100vh;">
+        <div class="col-lg-10 col-xl-9 mx-auto"  style="margin-top: auto !important; margin-bottom: auto !important;">
+            <div class="card card-signin flex-row my-5">
+                <div class="card-img-left d-none d-md-flex">
+                    <!-- Background image for card set in CSS! -->
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title text-center">模治檢具訂單管理平台</h5>
+                    <div class="form-label-group">
+                        <input type="text" id="inputUserame" v-model="username"
+                               class="form-control" placeholder="Username" required autofocus>
+                        <label for="inputUserame">用戶名</label>
+                    </div>
+
+                    <div class="form-label-group">
+                        <input type="email" id="inputEmail" v-model="email"
+                               class="form-control" placeholder="Email address" required>
+                        <label for="inputEmail">郵箱地址</label>
+                    </div>
+
+                    <hr>
+
+                    <div class="form-label-group">
+                        <input type="password" id="inputPassword" v-model="password"
+                               class="form-control" placeholder="Password" required>
+                        <label for="inputPassword">密碼</label>
+                    </div>
+
+                    <div class="form-label-group">
+                        <input type="password" id="inputConfirmPassword" v-model="confirmPSW"
+                               class="form-control" placeholder="Password" required>
+                        <label for="inputConfirmPassword">確認密碼</label>
+                    </div>
+
+                    <button class="btn btn-lg btn-primary btn-block text-uppercase" @click="register">註冊</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<!-- JS library -->
+<script type="text/javascript" src="home/js_lib/jquery.min.js"></script>
+<script type="text/javascript" src="home/js_lib/vue.mini.js"></script>
+<script type="text/javascript" src="home/js_lib/bootstrap.bundle.js"></script>
+<script type="text/javascript" src="home/js_lib/axios.min.js"></script>
+<script type="text/javascript" src="home/js_lib/md5.min.js"></script>
+<!-- custom JS -->
+<script type="text/javascript" src="home/js_code/register.js"></script>
+</html>

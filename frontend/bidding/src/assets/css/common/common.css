@@ -1,0 +1,114 @@
+html,
+body {
+	margin: 0;
+	padding: 0;
+	cursor: default;
+	min-width: 1200px;
+	height: 100%;
+}
+
+ul {
+	list-style: none;
+	margin: 0;
+}
+
+a {
+	text-decoration: none;
+	color: #fff;
+}
+
+.dis_none {
+	display: none;
+}
+
+/*版心*/
+.type-area {
+	width: 1200px;
+	margin: 0 auto;
+}
+
+/*主體*/
+.container {
+	height: 100%;
+	position: relative;
+}
+
+/* 佈局 */
+.z-flex{
+	display: flex;
+	/* align-items: center;	 */
+}
+.z-align-items-center{
+	align-items: center;	
+}
+.z-justify-content-between{
+	justify-content: space-between;
+}
+.z-justify-content-center{
+	justify-content: center;
+}
+.z-justify-content-around{
+	justify-content: space-around;
+}
+.z-border-box{
+	box-sizing: border-box;
+}
+.z-flex1{
+	flex: 1;
+}
+
+/* 位置 */
+.z-text-center{
+	text-align: center;
+}
+
+/* 样式 */
+.z-btn{
+	box-sizing: border-box;
+	text-align: center;
+	border: 0;
+	padding: 0.25rem 0.75rem;
+	margin: 0 0.375rem;
+	color:#12222E;
+	cursor: pointer;
+	user-select: none;
+}
+.z-btn:focus{
+	outline: none;
+}
+.z-btn-deepBlue{
+	color:#fff;
+	background-color: #2E6E9E;
+}
+.z-btn-gray{
+	background-color: #D3DFE7;
+}
+
+/* 背景顏色 */
+.z-bgc-gray{
+	background-color: #D3DFE7;
+}
+.z-bgc-deepBlue{
+	background-color: #2E6E9E;
+}
+
+/* 字體色 */
+.z-cMain{
+	color:#12222E;
+}
+.z-cWhite{
+	color: #fff;
+}
+.z-cBlue{
+	color: #0092FF;
+}
+/* 結構 */
+.z-wid100{
+	width: 100%;
+}
+.z-inline{
+	display: inline;
+}
+.z-inline-block{
+	display: inline-block;
+}

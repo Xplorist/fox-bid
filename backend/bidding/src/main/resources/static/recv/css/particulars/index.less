@@ -1,0 +1,561 @@
+
+#content {
+  background: #12222E url(../../imgs/particulars/contentBG.png) no-repeat top center / contain;
+  // 小標籤
+  .con-tag {
+    display: flex;
+    justify-content: flex-end;
+    color: #627887;
+    font-size: 14px;
+    padding-top: 10px;
+    li {
+      float: left;
+      margin-left: 28px;
+      display: flex;
+      align-items: center;
+    }
+  }
+  .tag_icon {
+    margin-right: 8px;
+  }
+  .tag_collect {
+    cursor: pointer;
+    width: 18px;
+    height: 18px;
+    background: url(../../imgs/particulars/collect.png) no-repeat;
+  }
+  .tag_browse {
+    width: 18px;
+    height: 12px;
+    background: url(../../imgs/particulars/browse.png) no-repeat;
+  }
+  // 標題內容
+  .con-title {
+    text-align: center;
+    margin-top: 24px;
+  }
+  // 標題名
+  .tit-text {
+    font-size: 30px;
+    color: #212F3A;
+  }
+  // 其餘相關信息
+  .tit-info {
+    display: flex;
+    justify-content: center;
+    margin-top: 24px;
+
+    .info-single {
+      margin: 0 20px;
+      font-size: 14px;
+      color: #212F3A;
+    }
+  }
+  // 主體內容
+  .con-main {
+    width: 100%;
+    background: rgba(13, 28, 42, 0.2);
+    margin-top: 24px;
+    box-sizing: border-box;
+    padding: 20px;
+  }
+  // 主體-進度
+  .panel_progress {
+    margin: 48px 60px 0 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .pan_pro_name {
+    color: #12222E;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    &.pro_finished {
+      color: #D7EFFF;
+    }
+    .text {
+      font-size: 18px;
+    }
+    .time {
+      margin-top: 12px;
+      font-size: 12px;
+      color: #AAC0CF;
+    }
+  }
+  .pan_pro_bar {
+    width: 127px;
+    height: 34px;
+    background-repeat: no-repeat;
+    background-position: top center;
+    &.bar_finished {
+      background-image: url(../../imgs/particulars/bar-finished.png);
+    }
+    &.bar_inprogress {
+      background-image: url(../../imgs/particulars/bar-inprogress.png);
+      position: relative;
+      &:after {
+        content: '進行中';
+        display: block;
+        position: absolute;
+        top: -32px;
+        left: 32px;
+        width: 60px;
+        height: 29px;
+        background: url(../../imgs/particulars/processTag.png) no-repeat;
+        text-align: center;
+        color: #fff;
+        line-height: 24px;
+      }
+    }
+    &.bar_unfinished {
+      background-image: url(../../imgs/particulars/bar-unfinished.png);
+    }
+  }
+
+  // info公共樣式
+  .ba_title,
+  .ac_title,
+  .req_title,
+  .bid_title,
+  .eva_title {
+    position: relative;
+    width: 100px;
+    height: 35px;
+    background: url(../../imgs/particulars/infoTitleBG.png) no-repeat;
+    span {
+      color: #fff;
+      font-size: 16px;
+      position: absolute;
+      left: 14%;
+      top: 32%;
+    }
+  }
+  // info公共樣式結束
+
+  // 主體-信息
+  .panel_info {
+    margin-top: 24px;
+    padding: 32px 50px;
+    background: #D3DFE7;
+  }
+  .pan_info_Top {
+    display: flex;
+    justify-content: space-between;
+  }
+  // 【基本信息】
+  .baseInfo {
+    table {
+      margin-top: 18px;
+      td {
+        height: 24px;
+        &:nth-child(1) {
+          font-size: 16px;
+          color: #626F7F;
+          // 文本居中
+          // text-align:center;
+          text-align: justify;
+          // text-justify:distribute-all-lines;
+          text-align-last: justify
+        }
+        &:nth-child(2) {
+          width: 20px;
+          color: #626F7F;
+        }
+        &:nth-child(3) {
+          &.blueTd {
+            color: #0096FF;
+            span {
+              display: inline-block;
+              width: 16px;
+              height: 15px;
+              background: url(../../imgs/particulars/plane.png) no-repeat;
+            }
+          }
+        }
+      }
+    }
+  }
+  // 【圖檔附件】
+  .accessory {
+    position: relative;
+  }
+  .ac_title {}
+  .ac_content {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    width: 680px;
+    margin-top: 22px;
+  }
+  // 單獨的元素包裹框
+  .ac_con_item {
+    width: 25%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    height: 34px;
+    cursor: pointer;
+    box-sizing: border-box;
+    transition-duration: 0.1s;
+    &:hover {
+      border: 1px solid #0092FF;
+      background-color: #AEDFFF;
+      .itemCheck {
+        opacity: 1;
+      }
+    }
+    .item-wrapper {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 140px;
+      margin: 0 auto;
+    }
+    .itemIcon {
+      width: 32px;
+      height: 27px;
+      background: url(../../imgs/particulars/Excel.png) no-repeat;
+    }
+
+    .itemName {}
+
+    .itemCheck {
+      width: 16px;
+      height: 16px;
+      background: url(../../imgs/particulars/check.png) no-repeat;
+      opacity: 0;
+      transition-duration: 0.2s;
+    }
+  }
+
+  // 全部下載按鈕
+  .ac_allDownload {
+    width: 120px;
+    height: 44px;
+    position: absolute;
+    right: 36px;
+    margin-top: 36px;
+    background-color: #2E6E9E;
+    color: #fff;
+    font-size: 18px;
+    text-align: center;
+    line-height: 44px;
+    cursor: pointer;
+  }
+
+  // 清單下載鏈接
+  .ac_xlsDownload {
+    position: absolute;
+    bottom: 0;
+    padding-bottom: 12px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    border-bottom: 1px solid #BACAD6;
+    .dow_link {
+      display: flex;
+      align-items: center;
+      color: #0096FF;
+      cursor: pointer;
+      margin-right: 20px;
+    }
+    .dow_link_icon {
+      // 21 19
+      width: 21px;
+      height: 19px;
+      margin-right: 14px;
+      background: url(../../imgs/particulars/link-icon.png) no-repeat;
+    }
+    .dow_link_name {}
+    .dow_text {
+      cursor: pointer;
+    }
+  }
+
+  // 【製作要求】
+  .pan_info_req {
+    margin-top: 60px;
+    .req_content {
+      margin-top: 22px;
+    }
+    p {
+      color: #212F3A;
+      font-size: 16px;
+      height: 28px;
+    }
+  }
+
+  // 參與按鈕
+  .pan_info_join {
+    margin: 72px auto 30px;
+    width: 265px;
+    height: 65px;
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+    position: relative;
+    >svg {}
+    >span {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  // 主體-信息二
+  .panel_info_sec {
+    margin-top: 10px;
+    padding: 32px 50px;
+    background: #D3DFE7;
+  }
+  // 【競標單位】
+  .biddingUnits {}
+  .bid_content {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 22px;
+  }
+  .bid_con_item {
+    width: 25%;
+    height: 46px;
+    box-sizing: border-box;
+    color: #626F7F;
+    font-size: 16px;
+
+    >.item-wrapper {
+      display: flex;
+      align-items: center;
+
+      &.active {
+        >span {
+          opacity: 1;
+        }
+
+        >a {
+          color: #FF0004;
+        }
+      }
+
+      >span {
+        display: block;
+        width: 16px;
+        height: 21px;
+        background: url(../../imgs/particulars/winIcon.png) no-repeat;
+        opacity: 0;
+        margin-right: 6px;
+      }
+      >a {
+        color: #626F7F;
+      }
+    }
+  }
+  // 【項目評價】
+  .evaluate {}
+  .eva_content {
+    margin-top: 22px;
+    >p {
+      font-size: 16px;
+      color: #626F7F;
+    }
+  }
+
+}
+
+// 彈框
+#alertBox {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+
+  .content {
+    position: fixed;
+    width: 1200px;
+    // height: 800px;
+    top: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #D3DFE7;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  // 頂部信息
+  .con_top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .boxName {
+      font-size: 18px;
+      color: #12222E;
+    }
+    .closeBox {
+      width: 24px;
+      height: 24px;
+      background: url(../../imgs/particulars/closeAlertBox.png) no-repeat;
+    }
+  }
+  // 表單信息
+  .con_form {
+    width: 85%;
+    margin: 0 auto;
+  }
+  .con_form_title {
+    text-align: center;
+    .tit_text {
+      font-size: 30px;
+      color: #0092FF;
+    }
+    .tit_info {
+      display: flex;
+      justify-content: center;
+      margin-top: 18px;
+    }
+    .tit_info_single {
+      margin: 0 20px;
+      font-size: 14px;
+      color: #0092FF;
+    }
+  }
+  // 表格一
+  .con_form_listOne {
+    margin-top: 60px;
+  }
+  .listOne_info {
+    font-size: 14px;
+    color: #212F3A;
+  }
+  .listOne_table {
+    margin-top: 15px;
+    width: 100%;
+    border-collapse: collapse;
+    // border: 1px solid #C0C8CF;
+    th {
+      background-color: #C8D4DE;
+    }
+    td,
+    th {
+      font-size: 16px;
+      color: #212F3A;
+      border: 1px solid #C0C8CF;
+      text-align: center;
+      height: 50px;
+      font-weight: 400;
+    }
+  }
+  // 表格二
+  .con_form_listSec {
+    margin-top: 60px;
+  }
+  .listSec_info {
+    font-size: 16px;
+    color: #212F3A;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    >div:nth-child(1) {
+      color: #0096FF;
+    }
+    >div:nth-child(2) {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .up-icon {
+      width: 21px;
+      height: 19px;
+      background: url(../../imgs/particulars/link-icon.png) no-repeat;
+      cursor: pointer;
+    }
+    .up-text {
+      color: #0F1E29;
+      margin-right: 20px;
+      cursor: pointer;
+    }
+    .dow-text {
+      color: #0096FF;
+      cursor: pointer;
+    }
+  }
+  .listSec_table {
+    margin-top: 15px;
+      width: 100%;
+      border-collapse: collapse;
+      // border: 1px solid #C0C8CF;
+        th {
+          background-color: #C8D4DE;
+        }
+        td,
+        th {
+          font-size: 16px;
+          color: #212F3A;
+          border: 1px solid #C0C8CF;
+          text-align: center;
+          height: 40px;
+          font-weight: 400;
+        }
+  }
+  .listSec_add {
+    width: 120px;
+    height: 36px;
+    margin-top: 20px;
+    background-color: #9AB0C3;
+    color: #fff;
+    font-size: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    >.addIcon {
+      width: 15px;
+      height: 15px;
+      background: url(../../imgs/particulars/add.png) no-repeat;
+      margin-right: 14px;
+    }
+  }
+  // 底部
+  .con_form_footer {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  // 同意協議
+  .foo_agreement {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    color: #212F3A;
+    label {
+      display: flex;
+      align-items: center;
+    }
+    input {
+      width: 16px;
+      height: 16px;
+      margin-right: 5px;
+    }
+  }
+  // 開始競價按鈕
+  .foo_startBtn {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    width: 265px;
+    height: 65px;
+    line-height: 64px;
+    color: #fff;
+    font-size: 20px;
+    position: relative;
+    >span {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+}

@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: eureka-producer
+server:
+  port: 8000
+eureka:
+  instance:
+    prefer-ip-address: true
+    ip-address: 10.244.186.86
+    instance-id: ${eureka.instance.ip-address}:${spring.application.name}:${server.port}
+  client:
+    service-url:
+      defaultZone: http://10.244.231.103:7000/eureka/

@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Information</title>
+  <link rel="stylesheet" href="../../lib/normalize.css">
+  <link rel="stylesheet" href="../../css/common.css">
+  <!-- 引入样式 -->
+  <link rel="stylesheet" href="../../lib/element/index.css">
+  <!-- 適配不支持H5的瀏覽器 -->
+  <script src="../../lib/html5shiv.min.js"></script>
+  <link rel="stylesheet" href="../../css/personal/information.css">
+</head>
+
+<body>
+  <div id="app" class="container">
+    <section class="top">
+      <div class="type-area top-nav">
+        <ul>
+          <li>
+            <a href="#">
+              歡迎您：Mac(I)製造處
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              個人中心
+            </a>
+          </li>
+          <li>
+            <a href="../merchant/enter.html">
+              商家入駐
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              規則中心
+            </a>
+          </li>
+        </ul>
+      </div>
+    </section>
+    <section class="logo">
+      <div class="type-area logo-content">
+        <a href="../../index.html"></a>
+        <div class="search-box">
+          <input type="text" class="search-text" placeholder="請輸入信息">
+          <input type="submit" class="search-btn" value="搜索">
+        </div>
+      </div>
+    </section>
+    <section class="content">
+        <!-- 主體內容 -->
+        <div class="main type-area">
+          <div class="warpper">
+            <div class="sideBar">
+              <div class="portrait">
+                <div class="porImg"></div>
+              </div>
+              <div class="department">
+                <span class="depIcon"></span>
+                <span>Mac(I)製造一處</span>
+              </div>
+              <div class="navigate">
+                <a href="./index.html" class="">
+                  <div>
+                    訂單管理
+                  </div>
+                </a>
+                <a href="./information.html" class="active">
+                  <div >
+                    個人資料
+                  </div>
+                </a>
+                <a href="./evaluation.html">
+                  <div>
+                    評價管理
+                  </div>
+                </a>
+                <a href="#">
+                  <div>
+                    消息
+                    <span>(2)</span>
+                  </div>
+                </a>
+                <a href="#">
+                  <div>
+                    收藏
+                  </div>
+                </a>
+                <a href="#">
+                  <div>
+                    設置
+                  </div>
+                </a>
+              </div>
+            </div>
+            <div class="mainPart">
+              <div class="panel">
+                <!-- title -->
+                <div class="title">
+                  個人資料
+                </div>
+                <!-- form表單 -->
+                <el-form 
+                ref="form" 
+                :model="form" 
+                label-width="80px"
+                >
+                  <!-- 賬號屬性 -->
+                  <el-form-item label="賬號屬性:" class="properties">
+                    <span>{{form.properties}}</span>
+                  </el-form-item>
+                  <!-- 頭像 -->
+                  <el-form-item label="LOGO頭像:" class="portrait">
+                    <el-image
+                    style="width: 60px; height: 60px"
+                    :src="form.portraitUrl"
+                    fit="cover"></el-image>
+                    <span>更換</span>
+                  </el-form-item>
+                  <!-- 賬號名稱 -->
+                  <el-form-item label="賬號名稱:">
+                    <el-input v-model="form.name"></el-input>
+                  </el-form-item>
+                  <!-- 所屬單位 -->
+                  <el-form-item label="所屬單位:" class="department">
+                    
+                    <el-select v-model="form.department.partOne" :key="">
+                      <el-option v-for="item in form.departmentList.partOne" :label="item" :value="item"></el-option>
+                    </el-select>
+
+                    <el-select v-model="form.department.partTwo" :key="">
+                      <el-option v-for="item in form.departmentList.partTwo" :label="item" :value="item"></el-option>
+                    </el-select>
+
+                    <el-select v-model="form.department.partThree" :key="">
+                      <el-option v-for="item in form.departmentList.partThree" :label="item" :value="item"></el-option>
+                    </el-select>
+
+                    <el-select v-model="form.department.partFour" :key="">
+                      <el-option v-for="item in form.departmentList.partFour" :label="item" :value="item"></el-option>
+                    </el-select>
+                  </el-form-item>
+                  <!-- 單位名稱 -->
+                  <el-form-item label="單位名稱:">
+                    <el-input v-model="form.departName"></el-input>
+                  </el-form-item>
+                  <!-- 交易法人 -->
+                  <el-form-item label="交易法人:">
+                    <span>{{form.corporate}}</span>
+                  </el-form-item>
+                  <!-- 費用代碼 -->
+                  <el-form-item label="費用代碼:" class="costCode">
+                    <span>{{form.costCode}}</span>
+                    <span class="operation">變更</span>
+                  </el-form-item>
+                  <!-- 加工範圍 -->
+                  <el-form-item label="加工範圍:" class="processRange">
+                    <span>{{form.processRange }}</span>
+                    <span class="operation">修改</span>
+                  </el-form-item>
+                  <!-- 銀行賬號 -->
+                  <el-form-item label="銀行賬號:" class="bankAccount">
+                    <span>{{form.bankAccount[0]}}&nbsp&nbsp&nbsp&nbsp{{form.bankAccount[1]}}</span>
+                    <span class="operation">變更賬號</span>
+                  </el-form-item>
+                  <!-- 業務經理 -->
+                  <el-form-item label="業務經理:">
+                    <el-input v-model="form.manager"></el-input>
+                  </el-form-item>
+                  <!-- 聯繫電話 -->
+                  <el-form-item label="聯繫電話:" class="tel">
+                    <el-input v-model="form.tel.num"></el-input>
+                    <el-checkbox label="在主頁中顯示" :checked='form.tel.check' name="type"></el-checkbox>
+                  </el-form-item>
+                  <!-- Email -->
+                  <el-form-item label="Email:" class="email">
+                    <el-input v-model="form.email"></el-input>
+                  </el-form-item>
+                  <!-- 簡介 -->
+                  <el-form-item label="簡介:" class="intro">
+                    <el-input type="textarea" v-model="form.intro" autosize ></el-input>
+                  </el-form-item>
+                  <!-- 按鈕 -->
+                  <el-form-item label=" ">
+                    <el-button type="primary" @click="save">保存</el-button>
+                  </el-form-item>
+                </el-form>
+              </div>
+            </div>
+          </div>
+        </div>
+    </section>
+    <section class="footer">
+      <div class="foo-content type-area">
+        <div class="foo-warpper">
+          <div class="technical">
+            <div class="m-logo"></div>
+            <div class="text">技術服務: 只能雲網絡開發成都分部</div>
+          </div>
+          <div class="customer">
+            客戶服務: 5073-66811
+          </div>
+          <div class="blogroll">
+            <div>友情鏈接: </div>
+            <div>
+              <a href="">
+                MAC(I)智能雲網平台
+              </a>
+            </div>
+            <div class="line"></div>
+            <div>
+              <a href="">
+                MAC(I)人事點名系統
+              </a>
+            </div>
+            <div class="line"></div>
+            <div>
+              <a href="">
+                MAC(I)金流系統
+              </a>
+            </div>
+            <div class="line"></div>
+            <div>
+              <a href="">
+                智能刀具管理
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  <!-- 先引入 Vue -->
+  <script src="../../lib/vue.js"></script>
+  <!-- 引入组件库 -->
+  <script src="../../lib/element/index.js"></script>
+  <script src="../../js/personal/information.js"></script>
+</body>
+
+</html>

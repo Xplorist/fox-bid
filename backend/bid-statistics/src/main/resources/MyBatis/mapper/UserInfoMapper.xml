@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.foxconn.bidstatistics.dao.UserInfoDAO">
+
+    <!-- 根據用戶類型查詢用戶個數 -->
+    <select id="queryNumByUserType" parameterType="String" resultType="Integer">
+        select count(*)
+        from USER_INFO t
+        where t.f_valid = 'Y'
+          and t.send_recv_type = #{userType}
+    </select>
+
+    <!-- 根據廠區查詢用戶數量 -->
+    <select id="queryNumByFactory" parameterType="String" resultType="Integer">
+        select count(*)
+        from USER_INFO t
+        where t.f_valid = 'Y'
+        <if test="factory == '成都'">
+            and t.fctry_zone = '成都'
+        </if>
+        <if test="factory == '深圳'">
+            and (t.fctry_zone = '深圳' or t.fctry_zone = '龍華')
+        </if>
+    </select>
+
+    <!-- 根據用戶id查詢用戶名和單位 -->
+    <select id="queryUsernameAndDeptById" parameterType="String" resultType="com.foxconn.bidstatistics.model.dto.SendUserRankDTO">
+        select t.username, t.dept_name from USER_INFO t where t.pkid = #{userId}
+    </select>
+
+    <!-- 查詢發單用戶收到的相關評分 -->
+    <select id="querySendUserGetEval" parameterType="String" resultType="com.foxconn.bidstatistics.model.dto.SendUserRankDTO">
+        select sum(t.summary_score) score,
+               sum(t.pay_rate_score) payment,
+               sum(t.svc_atitu_score) service
+        from RECV_EVAL t
+        where t.send_user_pkid = #{userId}
+    </select>
+
+    <!-- 查詢接單用戶收到的相關評分 -->
+    <select id="queryReceiveUserGetEval" parameterType="String" resultType="com.foxconn.bidstatistics.model.dto.ReceiveUserRankDTO">
+        select sum(t.summary_score) score,
+               sum(t.out_rate_score) out_rate,
+               sum(t.out_qual_score) out_quality,
+               sum(t.svc_atitu_score) service
+        from SEND_EVAL t
+        where t.recv_user_pkid = #{userId}
+    </select>
+
+    <!-- 注釋模板，放在最後一行 -->
+</mapper>

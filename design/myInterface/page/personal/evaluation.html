@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Evaluation</title>
+  <link rel="stylesheet" href="../../lib/normalize.css">
+  <link rel="stylesheet" href="../../css/common.css">
+  <!-- 引入样式 -->
+  <link rel="stylesheet" href="../../lib/element/index.css">
+  <!-- 適配不支持H5的瀏覽器 -->
+  <script src="../../lib/html5shiv.min.js"></script>
+  <link rel="stylesheet" href="../../css/personal/evaluation.css">
+</head>
+
+<body>
+  <div id="app" class="container">
+    <section class="top">
+      <div class="type-area top-nav">
+        <ul>
+          <li>
+            <a href="#">
+              歡迎您：Mac(I)製造處
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              個人中心
+            </a>
+          </li>
+          <li>
+            <a href="../merchant/enter.html">
+              商家入駐
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              規則中心
+            </a>
+          </li>
+        </ul>
+      </div>
+    </section>
+    <section class="logo">
+      <div class="type-area logo-content">
+        <a href="../../index.html"></a>
+        <div class="search-box">
+          <input type="text" class="search-text" placeholder="請輸入信息">
+          <input type="submit" class="search-btn" value="搜索">
+        </div>
+      </div>
+    </section>
+    <section class="content">
+      <!-- 主體內容 -->
+      <div class="main type-area">
+        <div class="warpper">
+          <div class="sideBar">
+            <div class="portrait">
+              <div class="porImg"></div>
+            </div>
+            <div class="department">
+              <span class="depIcon"></span>
+              <span>Mac(I)製造一處</span>
+            </div>
+            <div class="navigate">
+              <a href="./index.html" class="">
+                <div>
+                  訂單管理
+                </div>
+              </a>
+              <a href="./information.html" class="">
+                <div>
+                  個人資料
+                </div>
+              </a>
+              <a href="#" class="active">
+                <div>
+                  評價管理
+                </div>
+              </a>
+              <a href="#">
+                <div>
+                  消息
+                  <span>(2)</span>
+                </div>
+              </a>
+              <a href="#">
+                <div>
+                  收藏
+                </div>
+              </a>
+              <a href="#">
+                <div>
+                  設置
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="mainPart">
+            <div class="panel">
+              <!-- title -->
+              <div class="title">
+                評價管理
+              </div>
+              <!-- 分類 -->
+              <div class="classify">
+                <div class="active">收到的評價(59)</div>
+                <div class="">做出的評價(63)</div>
+              </div>
+              <!-- 評分 -->
+              <div class="rate">
+                <div class="single" v-for="(item, index) in rate.list">
+                  <span>{{item.name}}:</span>
+                  <el-rate v-model="item.value" disabled show-score :colors="rate.color" text-color="#0096FF" score-template="{value}" class="stars">
+                  </el-rate>
+                  <span>({{item.num}}個商家打分)</span>
+                </div>
+              </div>
+              <!-- 評價 -->
+              <div class="evaluationBox">
+                <!-- 單獨評語 -->
+                <div class="single" v-for="(item, index) in comments">
+                  <div class="commentsBox">
+                    <div class="comments">{{item.text}}</div>
+                    <div class="date">{{item.date}}</div>
+                  </div>
+                  <div class="belong">{{item.belong}}</div>
+                </div>
+              </div>
+              <!-- 分頁 -->
+              <div class="panel-page">
+                <el-pagination background layout="prev, pager, next" :total="100" prev-text="上一頁" next-text="下一頁">
+                </el-pagination>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="footer">
+      <div class="foo-content type-area">
+        <div class="foo-warpper">
+          <div class="technical">
+            <div class="m-logo"></div>
+            <div class="text">技術服務: 只能雲網絡開發成都分部</div>
+          </div>
+          <div class="customer">
+            客戶服務: 5073-66811
+          </div>
+          <div class="blogroll">
+            <div>友情鏈接: </div>
+            <div>
+              <a href="">
+                MAC(I)智能雲網平台
+              </a>
+            </div>
+            <div class="line"></div>
+            <div>
+              <a href="">
+                MAC(I)人事點名系統
+              </a>
+            </div>
+            <div class="line"></div>
+            <div>
+              <a href="">
+                MAC(I)金流系統
+              </a>
+            </div>
+            <div class="line"></div>
+            <div>
+              <a href="">
+                智能刀具管理
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  <!-- 先引入 Vue -->
+  <script src="../../lib/vue.js"></script>
+  <!-- 引入组件库 -->
+  <script src="../../lib/element/index.js"></script>
+  <script src="../../js/personal/evaluation.js"></script>
+</body>
+
+</html>

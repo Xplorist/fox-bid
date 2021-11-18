@@ -1,0 +1,221 @@
+
+#content {
+  background: #12222E url(../../imgs/particulars/contentBG.png) no-repeat top center / contain;
+  padding-top: 24px;
+
+  > .main {
+    background: rgba(13, 28, 42, 0.2);
+    box-sizing: border-box;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  // 左側導航
+  .sideBar {
+    // height: 50px;
+    background-color: #D3DFE7;
+    width: 240px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  // 頭像
+  .side_portrait {
+    margin-top: 55px;
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    background-color: #EEF4F7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .porImg {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: url(../../imgs/personal/portrait.png) no-repeat center / cover;
+    }
+  }
+
+  // 所屬部門
+  .side_department {
+    margin-top: 18px;
+    font-size: 18px;
+    color: #212F3A;
+    display: flex;
+    align-items: center;
+
+    > .depIcon {
+      display: inline-block;
+      width: 14px;
+      height: 23px;
+      background: url(../../imgs/personal/depIcon.png) no-repeat;
+      margin-right: 6px;
+    }
+  }
+
+  // 導航條目
+  .side_navigate {
+    margin-top: 26px;
+    width: 100%;
+
+    > a {
+      display: block;
+      width: 100%;
+      height: 60px;
+      border-top: 1px solid #C0C8CF;
+      // background-color: #2E6E9E;
+      &.active,
+      &:hover {
+        background-color: #2E6E9E;
+
+        > div {
+          color: #fff;
+        }
+      }
+    }
+
+    div {
+      width: 60%;
+      height: 60px;
+      margin: 0 auto;
+      line-height: 60px;
+      font-size: 16px;
+      color: #12222E;
+
+      > span {
+        color: #E51313;
+      }
+    }
+  }
+
+  // 主體部分
+  .mainPart {
+    width: 910px;
+    background-color: #D3DFE7;
+    box-sizing: border-box;
+    padding: 30px;
+  }
+
+  // 主體標題
+  .main_title {
+    color: #12222E;
+    font-size: 18px;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #AFC2CF;
+  }
+
+  // 分類
+  .main_classify {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+
+    div {
+      width: 200px;
+      height: 36px;
+      line-height: 36px;
+      text-align: center;
+      background-color: #C8D4DE;
+      color: #212F3A;
+
+      &.active,
+      &:hover {
+        background-color: #2E6E9E;
+        color: #D3DFE7;
+      }
+
+    }
+  }
+
+  // 評分
+  .main_rate {
+    margin-top: 16px;
+
+    > .single {
+      display: flex;
+      align-items: center;
+    }
+
+    .stars {
+      margin: 5px;
+      width: 140px;
+    }
+  }
+
+  // 評價
+  .main_evaluationBox {
+    margin-top: 20px;
+
+    > .single {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid #AFC2CF;
+      padding: 20px 0;
+      position: relative;
+    }
+
+    .comments {
+      color: #212F3A;
+    }
+
+    .date {
+      color: #626F7F;
+      font-size: 14px;
+      margin-top: 15px;
+    }
+
+    .belong {
+      color: #626F7F;
+      font-size: 14px;
+      position: absolute;
+      right: 0;
+      bottom: 20px;
+    }
+  }
+
+  // 分頁
+  .main_paging {
+    padding-top: 28px;
+    text-align: center;
+    height: 50px;
+    background-color: #D3DFE7;
+    // 對element-ui分頁的樣式進行修改
+    /deep/ .number {
+      width: 30px;
+      height: 30px;
+      line-height: 30px;
+      background: url(../../imgs/index/pageIndBG.png);
+      color: #12222E;
+      font-size: 14px;
+
+      &.active {
+        // 485463
+        color: #fff;
+        background: url(../../imgs/index/pageindBG-ac.png);
+      }
+
+      &:hover {
+        color: #fff;
+      }
+    }
+
+    /deep/ .el-icon {
+      color: #12222E;
+      background: #D3DFE7;
+    }
+
+    /deep/ .btn-next,
+    .btn-prev {
+      // background: #D3DFE7;
+      width: 70px;
+      height: 30px;
+      background: url(../../imgs/index/pageBG.png) no-repeat center / contain;
+    }
+  }
+}

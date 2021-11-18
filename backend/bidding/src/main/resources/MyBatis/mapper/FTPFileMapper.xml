@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.foxconn.bidding.mapper.FTPFileMapper">
+
+    <!-- 新增文件下載記錄 -->
+    <insert id="addFileDownloadRecord" parameterType="com.foxconn.bidding.model.PART_DOC_FILE_bean">
+        insert into FILE_DOWNLOAD_RECORD
+            (file_origin_name, file_save_name, file_save_path, create_user_pkid, create_user_ip)
+        values
+        (#{file_origin_name},
+         #{file_save_name},
+         #{file_save_path},
+         #{create_user_pkid},
+         #{create_user_ip})
+    </insert>
+
+    <!-- 注釋模板，放在最後一行 -->
+</mapper>

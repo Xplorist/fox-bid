@@ -1,0 +1,354 @@
+
+#content {
+  background: #12222E url(../imgs/index/contentBG.png) no-repeat top center / contain;
+  padding-top: 10px;
+  // 頂部小標籤信息
+  .con-tag {
+    display: flex;
+    justify-content: flex-start;
+    color: #D7EFFF;
+    font-size: 14px;
+    li {
+      float: left;
+      margin-right: 28px;
+    }
+  }
+  .con-req {
+    // width: 100%;
+    background: rgba(13, 28, 42, 0.4);
+    margin-top: 22%;
+    border: 1px solid rgba(0, 0, 0, 0);
+    box-sizing: border-box;
+    padding: 20px;
+  }
+  // 標題
+  .panel-title {
+    // margin-top: 27px;
+    display: flex;
+    justify-content: space-between;
+    // 左右線條
+    .left-line,
+    .right-line {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .theLine {
+      width: 460px;
+      height: 1px;
+      background: #96AABB; //rgba(150,170,187,1);
+    }
+    .theBlock {
+      width: 10px;
+      height: 10px;
+      border: 1px solid #96AABB; //rgba(150,170,187,1);
+      transform: rotate(45deg);
+    }
+    // 中間文本
+    .center-text {
+      font-size: 24px;
+      color: #fff;
+    }
+  }
+  // 篩選器
+  .panel-filter {
+    display: flex;
+    color: #D7EFFF;
+    font-size: 14px;
+    margin-top: 30px;
+    .fil-scope,
+    .fil-state,
+    .fil-site,
+    .fil-time,
+    .fil-purpse {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-right: 50px;
+      select {
+        width: 80px;
+        margin-left: 6px;
+        border: 0;
+        background-color: rgb(13, 28, 42);
+        color: #D7EFFF;
+        vertical-align: middle;
+        appearance: none;
+        &:focus {
+          outline: none;
+        }
+      }
+    }
+  }
+  // 列表
+  .panel-list {
+    margin-top: 16px;
+    background: #D3DFE7;
+    .list-single {
+      padding: 25px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #C0C8CF;
+      transition-duration: 0.3s;
+      &:hover {
+        background-color: #E1E9EF;
+      }
+    }
+    // list 左側
+    .single-left {
+      display: flex;
+    }
+    // 分類的背景效果
+    .sin_l_scope {
+      width: 68px;
+      height: 68px;
+      background: #D7EFFF; //rgba(215,239,255,1);
+      border: 1px solid #89A1B6; //rgba(137,161,182,1);
+      border-radius: 20px;
+      transform: rotate(45deg);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-right: 15px;
+      div {
+        transform: rotate(-45deg);
+      }
+    }
+    // 具體信息
+    .sin_l_info {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      .info-top {
+        display: flex;
+        align-items: center;
+      }
+      .info-bottom {
+        display: flex;
+        align-items: flex-end;
+      }
+    }
+    // 編號
+    .formNum {
+      color: #212F3A;
+      font-size: 16px;
+      margin-right: 8px;
+    }
+    // 狀態
+    .state {
+      display: flex;
+      div {
+        width: 70px;
+        height: 26px;
+        line-height: 26px;
+        text-align: center;
+        margin-right: 15px;
+        color: #fff;
+        font-size: 14px;
+        background-color: #9AB0C3;
+        &.bidding {
+          background-color: #2E6E9E;
+        }
+      }
+    }
+    // 價格
+    .price {
+      color: #0093ff;
+      font-size: 30px;
+      display: flex;
+      align-items: center;
+      margin-right: 10px;
+      .kind {
+        align-self: flex-end;
+        font-size: 18px;
+      }
+      .num {}
+    }
+    // 需求量
+    .demand {
+      display: flex;
+      color: #212F3A;
+      font-size: 14px;
+      margin-right: 35px;
+      .num {
+        color: #0093FF;
+        font-size: 16px;
+        margin-left: 8px;
+      }
+    }
+    // 參與單位量
+    .unitNum {
+      color: #47515B;
+      font-size: 16px;
+    }
+    // list 右側
+    .single-right {
+      display: flex;
+      align-items: center;
+    }
+    // list 右側元素的居左元素
+    .sin_r_left {}
+    .sin_r_l_purpose {
+      display: flex;
+      align-items: center;
+      .icon {
+        width: 16px;
+        height: 15px;
+        background: url(..//imgs/index/plane.png) no-repeat;
+      }
+      .text {
+        color: #0096FF;
+        font-size: 14px;
+      }
+    }
+    .sin_r_l_time {
+      display: flex;
+      color: #212F3A;
+      font-size: 16px;
+      margin-top: 18px;
+      .num {
+        margin-left: 5px;
+        color: #2E6E9E;
+        font-size: 14px;
+      }
+    }
+    // list 右側元素的居右元素
+    .sin_r_right {
+      margin-left: 120px;
+      div {
+        color: #fff;
+        background-color: #2E6E9E;
+        width: 80px;
+        height: 30px;
+        font-size: 14px;
+        border-radius: 2px;
+        text-align: center;
+        line-height: 30px;
+        cursor: pointer;
+      }
+    }
+  }
+  // 分頁
+  .panel-page {
+    padding: 28px;
+    text-align: center;
+    height: 50px;
+    background-color: #D3DFE7;
+    // 對element-ui分頁的樣式進行修改
+    /deep/ .number {
+      width: 30px;
+      height: 30px;
+      line-height: 30px;
+      background: url(../imgs/index/pageIndBG.png);
+      color: #12222E;
+      font-size: 14px;
+      &.active {
+        // 485463
+        color: #fff;
+        background: url(../imgs/index/pageindBG-ac.png);
+      }
+      &:hover {
+        color: #fff;
+      }
+    }
+    /deep/ .el-icon {
+      color: #12222E;
+      background: #D3DFE7;
+    }
+    /deep/ .btn-next,
+    .btn-prev {
+      // background: #D3DFE7;
+      width: 70px;
+      height: 30px;
+      background: url(../imgs/index/pageBG.png) no-repeat center / contain;
+    }
+  }
+}
+
+// 右側固定
+#fixBox {
+  position: fixed;
+  top: 360px;
+  right: 2%;
+  height: 360px;
+  width: 100px;
+  text-align: center;
+  .portrait {
+    width: 100px;
+    height: 100px;
+    background-color: pink;
+    background-image: url(../imgs/index/portrait.png);
+  }
+  .liFunc {
+    height: 210px;
+    font-size: 14px;
+    color: #D3DFE7;
+    // background-color: #2E6E9E;
+    background-image: url(../imgs/index/fixBoxBG.png);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  // 公共樣式
+  .singleFunc {
+    height: 100%;
+    width: 92px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    &:hover {
+      background-color: #0096FF;
+      color: #FFFFFF;
+    }
+    .funcIcon {
+      width: 16px;
+      height: 16px;
+      background-size: contain;
+      background-repeat: no-repeat;
+      margin-right: 10px;
+    }
+  }
+  // 收藏
+  .collect {
+    .funcIcon {
+      background-image: url(../imgs/index/collect.png);
+    }
+  }
+  // 消息
+  .news {
+    .funcIcon {
+      background-image: url(../imgs/index/news.png);
+    }
+  }
+  // 足迹
+  .history {
+    .funcIcon {
+      background-image: url(../imgs/index/history.png);
+    }
+  }
+  // 訂單
+  .order {
+    .funcIcon {
+      background-image: url(../imgs/index/order.png);
+    }
+  }
+  // 返回頂部
+  .backTop {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #D3DFE7;
+    a {
+      color: #D3DFE7;
+      text-decoration: none;
+    }
+    .backTop-icon {
+      background-repeat: no-repeat;
+      background-image: url(../imgs/index/backTop.png);
+      width: 26px;
+      height: 9px;
+      margin: 0 auto 6px;
+    }
+    .backTop-text {}
+  }
+}

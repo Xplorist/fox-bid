@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Personal</title>
+  <!-- 引入公共样式 -->
+  <link rel="stylesheet" href="../../lib/normalize.css">
+  <link rel="stylesheet" href="../../lib/element/index.css">
+  <link rel="stylesheet" href="../../css/common.css">
+  <link rel="stylesheet" href="../../css/module/top.css">
+  <link rel="stylesheet" href="../../css/module/logo.css">
+  <link rel="stylesheet" href="../../css/module/footer.css">
+
+  <link rel="stylesheet" href="../../css/personal/index.css">
+  
+  <!-- 適配不支持H5的瀏覽器 -->
+  <script src="../../lib/html5shiv.min.js"></script>
+</head>
+
+<body>
+  <div id="app" class="container">
+    <section id="top">
+      <div class="type-area top-nav">
+        <ul>
+          <li>
+            <a href="#">
+              歡迎您：Mac(I)製造處
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              個人中心
+            </a>
+          </li>
+          <li>
+            <a href="../merchant/enter.html">
+              商家入駐
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              規則中心
+            </a>
+          </li>
+        </ul>
+      </div>
+    </section>
+    <section id="logo">
+      <div class="type-area logo-content">
+        <a href="../../index.html">
+        </a>
+        <div class="search-box">
+          <input type="text" class="search-text" placeholder="請輸入信息">
+          <input type="submit" class="search-btn" value="搜索">
+        </div>
+      </div>
+    </section>
+    <section id="content">
+      <!-- 主體內容 -->
+      <div class="main type-area">
+        <div class="sideBar">
+          <div class="side_portrait">
+            <div class="porImg"></div>
+          </div>
+          <div class="side_department">
+            <span class="depIcon"></span>
+            <span>Mac(I)製造一處</span>
+          </div>
+          <div class="side_navigate">
+            <a href="#" class="active">
+              <div>
+                訂單管理
+              </div>
+            </a>
+            <a href="./information.html">
+              <div>
+                個人資料
+              </div>
+            </a>
+            <a href="./evaluation.html">
+              <div>
+                評價管理
+              </div>
+            </a>
+            <a href="#">
+              <div>
+                消息
+                <span>(2)</span>
+              </div>
+            </a>
+            <a href="#">
+              <div>
+                收藏
+              </div>
+            </a>
+            <a href="#">
+              <div>
+                設置
+              </div>
+            </a>
+          </div>
+        </div>
+        <div class="mainPart">
+          <!-- 我的收入 -->
+          <div class="main_income">
+            <div class="main_in_title">我的收入</div>
+            <div class="main_in_details">
+              <div class="single">
+                <div class="singleTit">累計收益</div>
+                <div class="singleCon">5,264,800</div>
+              </div>
+              <div class="single">
+                <div class="singleTit">製作中資產(元)</div>
+                <div class="singleCon">193,500</div>
+              </div>
+              <div class="single">
+                <div class="singleTit">參與項目</div>
+                <div class="singleCon">185<span>個</span></div>
+              </div>
+              <div class="single">
+                <div class="singleTit">累計收益</div>
+                <div class="singleCon">27<span>個</span></div>
+              </div>
+              <div class="single">
+                <el-progress type="circle" :percentage="18" :stroke-width="progress.strokeWidth" :width="progress.width" :color="progress.color"></el-progress>
+              </div>
+            </div>
+          </div>
+          <!-- 分割線 -->
+          <div class="main_splitLine"></div>
+          <!-- 接單管理 -->
+          <div class="main_manage">
+            <div class="main_ma_title">
+              <div class="ma_tit_icon"></div>
+              <div>接單管理</div>
+            </div>
+            <div class="main_ma_classify">
+              <div :class="{active:orderStatus == 'all'}" @click="orderStatus = 'all'">全部({{statusNum.all}})</div>
+              <span class="line"></span>
+              <div :class="{active:orderStatus == 'progress'}" @click="orderStatus = 'progress'">進行中({{statusNum.progress}})</div>
+              <span class="line"></span>
+              <div :class="{active:orderStatus == 'win'}" @click="orderStatus = 'win'">中標({{statusNum.win}})</div>
+              <span class="line"></span>
+              <div :class="{active:orderStatus == 'payment'}" @click="orderStatus = 'payment'">待收款({{statusNum.payment}})</div>
+              <span class="line"></span>
+              <div :class="{active:orderStatus == 'evaluation'}" @click="orderStatus = 'evaluation'">待評價({{statusNum.evaluation}})</div>
+              <span class="line"></span>
+              <div :class="{active:orderStatus == 'finished'}" @click="orderStatus = 'finished'">已結束({{statusNum.finished}})</div>
+            </div>
+            <div class="main_ma_list">
+              <!-- listStar -->
+              <div class="ma_list_single" :class="{winBidding: item.winBidding}" v-for="(item, index) in orderList">
+                <div class="list_sin_left">
+                  <div class="sin_left_scope">
+                    {{item.scope}}
+                  </div>
+                  <div class="sin_left_info">
+                    <div class="left_info_item">
+                      <div class="formNum">{{item.formNum}}</div>
+                      <div class="state">
+                        <div v-for="(itemS, index) in item.state">{{itemS}}</div>
+                      </div>
+                    </div>
+                    <div class="left_info_item">
+                      <div class="price">
+                        <div class="kind">{{item.price[0]}}</div>
+                        <div class="num">{{item.price[1]}}</div>
+                      </div>
+                      <div class="unitNum">{{item.unitNum}}個單位已參與</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="list_sin_right">
+                  <div class="sin_right_left">
+                    <div :class="{fail: item.current.status == false }" class="current">
+                      <div>{{item.current.text}}{{item.current.remainDate | formatDate}}</div>
+                    </div>
+                  </div>
+                  <div class="sin_right_right" :class="item.status.en">
+                    <div class="status">
+                      {{item.status.ch}}
+                    </div>
+                    <div class="btn">
+                      <a :href="item.href">
+                        {{item.status.btnText}}
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- listEnd -->
+              <!-- 分頁 -->
+              <div class="ma_list_page">
+                <el-pagination background layout="prev, pager, next" :total="100" prev-text="上一頁" next-text="下一頁">
+                </el-pagination>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="footer">
+      <div class="foo-warpper type-area">
+        <div class="technical">
+          <div class="m-logo"></div>
+          <div class="text">技術服務: 只能雲網絡開發成都分部</div>
+        </div>
+        <div class="customer">
+          客戶服務: 5073-66811
+        </div>
+        <div class="blogroll">
+          <div>友情鏈接: </div>
+          <div>
+            <a href="">
+              MAC(I)智能雲網平台
+            </a>
+          </div>
+          <div class="line"></div>
+          <div>
+            <a href="">
+              MAC(I)人事點名系統
+            </a>
+          </div>
+          <div class="line"></div>
+          <div>
+            <a href="">
+              MAC(I)金流系統
+            </a>
+          </div>
+          <div class="line"></div>
+          <div>
+            <a href="">
+              智能刀具管理
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  <!-- 先引入 Vue -->
+  <script src="../../lib/vue.js"></script>
+  <!-- 引入组件库 -->
+  <script src="../../lib/element/index.js"></script>
+  <script src="../../js/personal/index.js"></script>
+</body>
+
+</html>

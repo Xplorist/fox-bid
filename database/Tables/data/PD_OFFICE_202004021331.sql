@@ -1,0 +1,16 @@
+INSERT INTO BIDDING.PD_OFFICE (PKID,NAME,ENTRPS_GROUP_PKID,ORDER_IN_GROUP) VALUES 
+('MacI','MacI產品處','McEBG',1)
+,('MacIII','MacIII產品處','McEBG',3)
+,('A_EG_1_PO_1','A_EG_1_PO_1產品處','A_EG_1',1)
+,('A_EG_2_PO_1','A_EG_2_PO_1產品處','A_EG_2',1)
+,('A_EG_3_PO_1','A_EG_3_PO_1產品處','A_EG_3',1)
+,('B_EG_1_PO_1','B_EG_1_PO_1產品處','B_EG_1',1)
+,('B_EG_2_PO_1','B_EG_2_PO_1產品處','B_EG_2',1)
+,('B_EG_3_PO_1','B_EG_3_PO_1產品處','B_EG_3',1)
+,('C_EG_1_PO_1','C_EG_1_PO_1產品處','C_EG_1',1)
+,('C_EG_2_PO_1','C_EG_2_PO_1產品處','C_EG_2',1)
+;
+INSERT INTO BIDDING.PD_OFFICE (PKID,NAME,ENTRPS_GROUP_PKID,ORDER_IN_GROUP) VALUES 
+('C_EG_3_PO_1','C_EG_3_PO_1產品處','C_EG_3',1)
+,('MacII','MacII產品處','McEBG',2)
+;

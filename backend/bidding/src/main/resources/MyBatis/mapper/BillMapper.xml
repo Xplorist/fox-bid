@@ -1,0 +1,833 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.foxconn.bidding.mapper.BillMapper">
+
+    <!-- 保存零件圖檔文件信息 -->
+    <insert id="save_PART_DOC_FILE" parameterType="com.foxconn.bidding.model.PART_DOC_FILE_bean">
+        insert into PART_DOC_FILE
+          (part_doc_file_rel_id,
+           file_origin_name,
+           file_save_name,
+           file_save_path,
+           part_amunt,
+           list_order,
+           create_user_pkid,
+           create_user_ip)
+        values
+          (#{part_doc_file_rel_id},
+           #{file_origin_name},
+           #{file_save_name},
+           #{file_save_path},
+           #{part_amunt},
+           #{list_order},
+           #{create_user_pkid},
+           #{create_user_ip})
+    </insert>
+
+    <!-- 保存訂單主表數據 -->
+    <insert id="save_BILL" parameterType="com.foxconn.bidding.model.BILL_bean">
+        insert into BILL
+          (pkid,
+           bill_no,
+           bill_status,
+           send_user_pkid,
+           pd_type,
+           deliver_date,
+           deliver_address,
+           tel,
+           f_show_tel,
+           total_price,
+           money_type,
+           amount,
+           bid_range,
+           bid_start_date,
+           bid_end_date,
+           deliver_way,
+           make_requ,
+           f_open_hide,
+           part_doc_file_rel_id,
+           pd_type_no,
+           bid_range_value)
+        values
+          (#{pkid},
+           #{bill_no},
+           #{bill_status},
+           #{send_user_pkid},
+           #{pd_type},
+           to_date(#{deliver_date}, 'yyyy-mm-dd hh24:mi:ss'),
+           #{deliver_address},
+           #{tel},
+           #{f_show_tel},
+           #{total_price},
+           #{money_type},
+           #{amount},
+           #{bid_range},
+           to_date(#{bid_start_date}, 'yyyy-mm-dd hh24:mi:ss'),
+           to_date(#{bid_end_date}, 'yyyy-mm-dd hh24:mi:ss'),
+           #{deliver_way},
+           #{make_requ},
+           #{f_open_hide},
+           #{part_doc_file_rel_id},
+           #{pd_type_no},
+           #{bid_range_value})
+    </insert>
+
+    <!-- 查詢訂單單號關聯表中的訂單單號 -->
+    <select id="query_bill_no_from_rel" parameterType="String" resultType="String">
+        select t.bill_no from MAIN_BILL_NO_REL t where t.bill_pkid = #{bill_pkid}
+    </select>
+
+    <!-- 更新訂單單號 -->
+    <update id="update_bill_no">
+        update BILL set bill_no = #{bill_no} where pkid = #{bill_pkid}
+    </update>
+
+    <!-- 查詢訂單是否存在 -->
+    <select id="query_bill_is_exist" parameterType="String" resultType="Integer">
+        select count(*) from BILL t where t.pkid = #{bill_pkid}
+    </select>
+
+    <!-- 刪除零件圖檔文件list -->
+    <delete id="delete_PART_DOC_FILE_list" parameterType="String">
+        delete from PART_DOC_FILE t where t.part_doc_file_rel_id = #{part_doc_file_rel_id}
+    </delete>
+
+    <!-- 更新訂單主表數據 -->
+    <update id="update_BILL" parameterType="com.foxconn.bidding.model.BILL_bean">
+        update BILL
+           set pd_type         = #{pd_type},
+               deliver_date    = to_date(#{deliver_date}, 'yyyy-mm-dd hh24:mi:ss'),
+               deliver_address = #{deliver_address},
+               tel             = #{tel},
+               f_show_tel      = #{f_show_tel},
+               total_price     = #{total_price},
+               money_type      = #{money_type},
+               amount          = #{amount},
+               bid_range       = #{bid_range},
+               bid_start_date  = to_date(#{bid_start_date}, 'yyyy-mm-dd hh24:mi:ss'),
+               bid_end_date    = to_date(#{bid_end_date}, 'yyyy-mm-dd hh24:mi:ss'),
+               deliver_way     = #{deliver_way},
+               make_requ       = #{make_requ},
+               f_open_hide     = #{f_open_hide},
+               pd_type_no      = #{pd_type_no},
+               bid_range_value = #{bid_range_value}
+         where pkid = #{pkid}
+    </update>
+
+    <!-- 更新訂單主表的狀態 -->
+    <update id="update_BILL_status">
+        update BILL
+           set bill_status = #{bill_status}
+         where pkid = #{bill_pkid}
+    </update>
+
+    <!-- 發佈時更新主表的狀態和單號標誌 -->
+    <update id="update_bill_publish" parameterType="com.foxconn.bidding.model.BILL_bean">
+        update BILL
+           set bill_status = #{bill_status},
+               f_bill_no = #{f_bill_no},
+               publish_date = sysdate
+         where pkid = #{pkid}
+    </update>
+
+    <!-- 根據訂單id查詢接單用戶id的list -->
+    <select id="listGiveRecvUserIdByBillId" parameterType="String" resultType="String">
+        select t.recv_user_pkid
+          from GIVE_PRICE_MSTR t
+         where t.bill_pkid = #{bill_pkid}
+         order by t.create_date desc
+    </select>
+
+    <!-- 根據接單人個數類型查詢訂單id的list -->
+    <select id="listBillPkidByRecvNumType" parameterType="String" resultType="String">
+        select bill_pkid
+          from
+        (select t.bill_pkid, count(t.bill_pkid) recv_num
+          from GIVE_PRICE_MSTR t
+         group by t.bill_pkid
+         order by count(t.bill_pkid) desc)
+        <if test="recv_num_type == 'single'">
+            where recv_num = 1
+        </if>
+        <if test="recv_num_type == 'multiple'">
+            where recv_num > 1
+        </if>
+    </select>
+
+    <!-- 未登錄查詢訂單list(分頁查詢) -->
+    <select id="query_bill_list_not_login" parameterType="com.foxconn.bidding.model.BILL_bean" resultType="com.foxconn.bidding.model.BILL_bean">
+        select t2.*
+          from (select t1.*, rownum row_num
+                  from (select t.*, count(*) over() row_total
+                          from BILL t
+                         where t.bill_status &lt;&gt; 0
+                         <if test="send_user_pkid_list != null and send_user_pkid_list.size() > 0">
+                            and t.send_user_pkid in
+                            <foreach collection="send_user_pkid_list" index="index" item="send_user_pkid" open="(" separator="," close=")">
+                                #{send_user_pkid, jdbcType=VARCHAR}
+                            </foreach>
+                         </if>
+                         <if test="recv_user_pkid_list != null and recv_user_pkid_list.size() > 0">
+                            and recv_user_pkid in
+                            <foreach collection="recv_user_pkid_list" index="index" item="recv_user_pkid" open="(" separator="," close=")">
+                                #{recv_user_pkid, jdbcType=VARCHAR}
+                            </foreach>
+                         </if>
+                         <if test="bill_pkid_list != null and bill_pkid_list.size() > 0">
+                             and t.pkid in
+                             <foreach collection="bill_pkid_list" index="index" item="bill_pkid" open="(" separator="," close=")">
+                                 #{bill_pkid, jdbcType=VARCHAR}
+                             </foreach>
+                         </if>
+                         <if test='bill_no != null and bill_no != ""'>
+                             <bind name="b_bill_no" value="'%' + bill_no + '%'"/>
+                             and t.bill_no like #{b_bill_no}
+                         </if>
+                         <if test='bid_range != "集團"'>
+                             and t.bid_range = #{bid_range}
+                         </if>
+                         <if test='bill_status != "all" and bill_status == "ing"'>
+                             and t.bill_status = '1' and sysdate &lt; t.bid_end_date
+                         </if>
+                         <if test='bill_status != "all" and bill_status == "end"'>
+                            and (t.bill_status = '2' or t.bill_status = '3' or t.bill_status = '4'
+                             or  t.bill_status = '5' or t.bill_status = '6')
+                         </if>
+                         <if test='bill_status != "all" and bill_status != "ing" and bill_status != "end"'>
+                            and t.bill_status = #{bill_status}
+                         </if>
+                         <if test='deliver_address != "all"'>
+                            <bind name="p_deliver_address" value="'%' + deliver_address + '%'"/>
+                             and t.deliver_address like #{p_deliver_address}
+                         </if>
+                         <if test='deliver_date != "all" and deliver_date == "0_5"'>
+                             and t.deliver_date &lt;= (sysdate + 5)
+                         </if>
+                         <if test='deliver_date != "all" and deliver_date == "5_10"'>
+                             and t.deliver_date &gt; (sysdate + 5)
+                             and t.deliver_date &lt;= (sysdate + 10)
+                         </if>
+                         <if test='deliver_date != "all" and deliver_date == "10more"'>
+                             and t.deliver_date &gt; (sysdate + 10)
+                         </if>
+                         <if test='pd_type != "all"'>
+                             and t.pd_type = #{pd_type}
+                         </if>
+                         order by t.create_date desc) t1) t2
+         where t2.row_num between (#{pageIndex} - 1) * #{pageSize} + 1 and #{pageIndex} * #{pageSize}
+    </select>
+
+    <!-- 接單用戶登錄個人中心的查詢訂單list(分頁查詢) -->
+    <select id="query_bill_list_recv_user" parameterType="com.foxconn.bidding.model.BILL_bean" resultType="com.foxconn.bidding.model.BILL_bean">
+        select t2.*
+        from (select t1.*, rownum row_num
+        from (select t.*, count(*) over() row_total
+        from BILL t
+        where ((t.bid_range = '集團' and t.bid_range_value = 'all')
+        or (t.bid_range = '次集團' and t.bid_range_value = #{recv_user.secn_cmpy})
+        or (t.bid_range = '廠區' and t.bid_range_value = #{recv_user.fctry_zone})
+        or (t.bid_range = '事業群' and t.bid_range_value = #{recv_user.entrps_group})
+        or (t.bid_range = '產品處' and t.bid_range_value = #{recv_user.pd_office}))
+        and t.pd_type in
+        <foreach collection="recv_range_list" index="index" item="item" open="(" separator="," close=")">
+            #{item.name, jdbcType=VARCHAR}
+        </foreach>
+        <if test='bill_status == "1"'>
+            and t.bill_status = '1'
+            and t.pkid in (select g.bill_pkid
+            from GIVE_PRICE_MSTR g
+            where g.recv_user_pkid = #{recv_user_pkid})
+        </if>
+        <if test='bill_status != "1" and bill_status != "no_recv_eval" and bill_status != "all"'>
+            and (
+            t.recv_user_pkid = #{recv_user_pkid}
+            and t.bill_status = #{bill_status}
+            )
+            or (
+            t.bill_status = #{bill_status}
+            and t.recv_user_pkid &lt;&gt; #{recv_user_pkid}
+            and t.pkid in (
+                select g.bill_pkid
+                from GIVE_PRICE_MSTR g
+                where g.recv_user_pkid = #{recv_user_pkid}
+                )
+            )
+            or (
+                t.bill_status = #{bill_status}
+                and t.recv_user_pkid is null
+                and t.pkid in (
+                    select g.bill_pkid
+                    from GIVE_PRICE_MSTR g
+                    where g.recv_user_pkid = #{recv_user_pkid}
+                )
+            )
+        </if>
+        <if test='bill_status == "no_recv_eval"'>
+            and t.recv_user_pkid = #{recv_user_pkid}
+            and t.bill_status = '6'
+            and t.f_recv_eval = 'N'
+        </if>
+        <if test='bill_status == "all"'>
+            and (
+            (t.bill_status = '1'
+            and t.pkid in (select g.bill_pkid
+            from GIVE_PRICE_MSTR g
+            where g.recv_user_pkid = #{recv_user_pkid}
+            )
+            )
+            or t.recv_user_pkid = #{recv_user_pkid}
+            or (
+            t.bill_status &lt;&gt; '1'
+            and t.bill_status &lt;&gt; '0'
+            and t.recv_user_pkid &lt;&gt; #{recv_user_pkid}
+            and t.pkid in (
+            select g.bill_pkid
+            from GIVE_PRICE_MSTR g
+            where g.recv_user_pkid = #{recv_user_pkid}
+            )
+            )
+            )
+        </if>
+        order by t.create_date desc, t.pd_type asc
+        ) t1) t2
+        where t2.row_num between (#{pageIndex} - 1) * #{pageSize} + 1 and #{pageIndex} * #{pageSize}
+    </select>
+
+    <!-- 發單用戶登錄個人中心的查詢訂單list(分頁查詢) -->
+    <select id="query_bill_list_send_user" parameterType="com.foxconn.bidding.model.BILL_bean" resultType="com.foxconn.bidding.model.BILL_bean">
+        select t2.*
+          from (select t1.*, rownum row_num
+                  from (select t.*, count(*) over() row_total
+                          from BILL t
+                         where t.send_user_pkid = #{send_user_pkid}
+                         <if test='bill_status != "all" and bill_status != "no_send_eval" and bill_status != "1" and bill_status != "1.5"'>
+                             and t.bill_status = #{bill_status}
+                         </if>
+                         <if test='bill_status == "1"'>
+                             and t.bill_status = '1' and sysdate &lt; (t.bid_end_date)
+                         </if>
+                         <if test='bill_status == "1.5"'>
+                             and t.bill_status = '1' and sysdate &gt;= (t.bid_end_date)
+                         </if>
+                         <if test='bill_status == "no_send_eval"'>
+                             and t.bill_status = '6'
+                             and t.f_send_eval = 'N'
+                         </if>
+                         order by t.create_date desc) t1) t2
+         where t2.row_num between (#{pageIndex} - 1) * #{pageSize} + 1 and #{pageIndex} * #{pageSize}
+    </select>
+
+    <!-- 接單用戶登錄查詢個狀態訂單list個數 -->
+    <select id="query_status_num_recv_user" parameterType="com.foxconn.bidding.model.BILL_bean" resultType="Integer">
+        select count(*)
+          from BILL t
+         where ((t.bid_range = '集團' and t.bid_range_value = 'all')
+        or (t.bid_range = '次集團' and t.bid_range_value = #{recv_user.secn_cmpy})
+        or (t.bid_range = '廠區' and t.bid_range_value = #{recv_user.fctry_zone})
+        or (t.bid_range = '事業群' and t.bid_range_value = #{recv_user.entrps_group})
+        or (t.bid_range = '產品處' and t.bid_range_value = #{recv_user.pd_office}))
+        and t.pd_type in
+        <foreach collection="recv_range_list" index="index" item="item" open="(" separator="," close=")">
+            #{item.name, jdbcType=VARCHAR}
+        </foreach>
+        <if test='bill_status == "1"'>
+            and t.bill_status = '1'
+            and t.pkid in (select g.bill_pkid
+            from GIVE_PRICE_MSTR g
+            where g.recv_user_pkid = #{recv_user_pkid})
+        </if>
+        <if test='bill_status != "1" and bill_status != "no_recv_eval" and bill_status != "all"'>
+            and (
+                t.recv_user_pkid = #{recv_user_pkid}
+                and t.bill_status = #{bill_status}
+            )
+            or (
+                t.bill_status = #{bill_status}
+                and t.recv_user_pkid &lt;&gt; #{recv_user_pkid}
+                and t.pkid in (
+                                select g.bill_pkid
+                                from GIVE_PRICE_MSTR g
+                                where g.recv_user_pkid = #{recv_user_pkid}
+                              )
+            )
+            or (
+                t.bill_status = #{bill_status}
+                and t.recv_user_pkid is null
+                and t.pkid in (
+                select g.bill_pkid
+                from GIVE_PRICE_MSTR g
+                where g.recv_user_pkid = #{recv_user_pkid}
+                )
+            )
+        </if>
+        <if test='bill_status == "no_recv_eval"'>
+            and t.recv_user_pkid = #{recv_user_pkid}
+            and t.bill_status = '6'
+            and t.f_recv_eval = 'N'
+        </if>
+        <if test='bill_status == "all"'>
+            and (
+            (t.bill_status = '1'
+            and t.pkid in (select g.bill_pkid
+            from GIVE_PRICE_MSTR g
+            where g.recv_user_pkid = #{recv_user_pkid}
+            )
+            )
+            or t.recv_user_pkid = #{recv_user_pkid}
+            or (
+                t.bill_status &lt;&gt; '1'
+                and t.bill_status &lt;&gt; '0'
+                and t.recv_user_pkid &lt;&gt; #{recv_user_pkid}
+                and t.pkid in (
+                        select g.bill_pkid
+                        from GIVE_PRICE_MSTR g
+                        where g.recv_user_pkid = #{recv_user_pkid}
+                )
+            )
+            )
+        </if>
+    </select>
+
+    <!-- 接單用戶登錄主頁查詢訂單list(分頁查詢) -->
+    <select id="query_bill_list_recv_main" parameterType="com.foxconn.bidding.model.BILL_bean" resultType="com.foxconn.bidding.model.BILL_bean">
+        select t2.*
+        from (select t1.*, rownum row_num
+        from (select t.*, count(*) over() row_total
+        from BILL t
+        where ((t.bid_range = '集團' and t.bid_range_value = 'all')
+        or (t.bid_range = '次集團' and t.bid_range_value = #{recv_user.secn_cmpy})
+        or (t.bid_range = '廠區' and t.bid_range_value = #{recv_user.fctry_zone})
+        or (t.bid_range = '事業群' and t.bid_range_value = #{recv_user.entrps_group})
+        or (t.bid_range = '產品處' and t.bid_range_value = #{recv_user.pd_office}))
+        and t.pd_type in
+        <foreach collection="recv_range_list" index="index" item="item" open="(" separator="," close=")">
+            #{item.name, jdbcType=VARCHAR}
+        </foreach>
+        <if test='bid_range != "集團"'>
+            and t.bid_range = #{bid_range}
+        </if>
+        <if test='bill_status != "all" and bill_status == "ing"'>
+            and t.bill_status = '1' and sysdate &lt; t.bid_end_date
+            and t.pkid not in
+            (select g.bill_pkid
+            from GIVE_PRICE_MSTR g
+            where g.recv_user_pkid = #{recv_user_pkid})
+        </if>
+        <if test='bill_status != "all" and bill_status == "end"'>
+            and (t.bill_status = '2' or t.bill_status = '3' or t.bill_status = '4'
+            or  t.bill_status = '5' or t.bill_status = '6')
+        </if>
+        <if test='deliver_address != "all"'>
+            <bind name="p_deliver_address" value="'%' + deliver_address + '%'"/>
+            and t.deliver_address like #{p_deliver_address}
+        </if>
+        <if test='deliver_date != "all" and deliver_date == "0_5"'>
+            and t.deliver_date &lt;= (sysdate + 5)
+        </if>
+        <if test='deliver_date != "all" and deliver_date == "5_10"'>
+            and t.deliver_date &gt; (sysdate + 5)
+            and t.deliver_date &lt;= (sysdate + 10)
+        </if>
+        <if test='deliver_date != "all" and deliver_date == "10more"'>
+            and t.deliver_date &gt; (sysdate + 10)
+        </if>
+        <if test='pd_type != "all"'>
+            and t.pd_type = #{pd_type}
+        </if>
+        <if test='bill_status == "all"'>
+            and t.bill_status &lt;&gt; '0'
+        </if>
+
+        order by t.create_date desc) t1) t2
+        where t2.row_num between (#{pageIndex} - 1) * #{pageSize} + 1 and #{pageIndex} * #{pageSize}
+    </select>
+
+    <!-- 根據狀態查詢相應狀態的訂單個數 -->
+    <select id="query_bill_num_by_status" resultType="Integer">
+        select count(*)
+          from BILL t
+         where t.send_user_pkid = #{send_user_pkid}
+         <if test='bill_status != "all" and bill_status != "1" and bill_status != "1.5"'>
+             and t.bill_status = #{bill_status}
+         </if>
+         <if test='bill_status == "1"'>
+             and t.bill_status = '1' and sysdate &lt; (t.bid_end_date)
+         </if>
+         <if test='bill_status == "1.5"'>
+             and t.bill_status = '1' and sysdate &gt;= (t.bid_end_date)
+         </if>
+    </select>
+
+    <!-- 查詢發單方待評價的訂單個數 -->
+    <select id="query_bill_num_of_no_send_eval" parameterType="String" resultType="Integer">
+        select count(*)
+          from BILL t
+         where t.send_user_pkid = #{send_user_pkid}
+           and t.bill_status = '6'
+           and t.f_send_eval = 'N'
+    </select>
+
+    <!-- 查詢訂單的接單用戶個數 -->
+    <select id="query_bill_recv_user_num" parameterType="String" resultType="Integer">
+        select count(*) from GIVE_PRICE_MSTR t where t.bill_pkid = #{bill_pkid}
+    </select>
+
+    <!-- 查詢訂單參與報價的接單用戶list -->
+    <select id="query_bill_give_recv_user_list" parameterType="String" resultType="com.foxconn.bidding.model.USER_INFO_bean">
+        select u.*, t.f_win_bid
+          from GIVE_PRICE_MSTR t, USER_INFO u
+         where t.recv_user_pkid = u.pkid
+           and t.bill_pkid = #{bill_pkid}
+    </select>
+
+    <!-- 查詢訂單發單方評價 -->
+    <select id="query_bill_send_eval" parameterType="String" resultType="com.foxconn.bidding.model.SEND_EVAL_bean">
+        select t.* from SEND_EVAL t where t.bill_pkid = #{bill_pkid}
+    </select>
+
+    <!-- 查詢訂單接單方評價 -->
+    <select id="query_bill_recv_eval" parameterType="String" resultType="com.foxconn.bidding.model.RECV_EVAL_bean">
+        select t.* from RECV_EVAL t where t.bill_pkid = #{bill_pkid}
+    </select>
+
+    <!-- 保存報價從表（清單明細）數據 -->
+    <insert id="save_GIVE_PRICE_SLAV" parameterType="com.foxconn.bidding.model.GIVE_PRICE_SLAV_bean">
+         insert into GIVE_PRICE_SLAV
+          (give_price_slav_rel_id,
+           part_name,
+           part_amunt,
+           part_unit_price,
+           part_price_sum,
+           list_order,
+           part_doc_file_pkid)
+        values
+          (#{give_price_slav_rel_id},
+           #{part_name},
+           #{part_amunt},
+           #{part_unit_price},
+           #{part_price_sum},
+           #{list_order},
+           #{part_doc_file_pkid})
+    </insert>
+
+    <!-- 保存報價主表數據 -->
+    <insert id="save_GIVE_PRICE_MSTR" parameterType="com.foxconn.bidding.model.GIVE_PRICE_MSTR_bean">
+        insert into GIVE_PRICE_MSTR
+          (bill_pkid,
+           recv_user_pkid,
+           give_price_slav_rel_id,
+           total_price,
+           deliver_date,
+           descp)
+        values
+          (#{bill_pkid},
+           #{recv_user_pkid},
+           #{give_price_slav_rel_id},
+           #{total_price},
+           to_date(#{deliver_date}, 'yyyy-mm-dd hh24:mi:ss'),
+           #{descp})
+    </insert>
+
+    <!-- 根據pkid查詢訂單 -->
+    <select id="query_bill_by_pkid" parameterType="String" resultType="com.foxconn.bidding.model.BILL_bean">
+        select t.* from BILL t where t.pkid = #{bill_pkid}
+    </select>
+
+    <!-- 查詢訂單零件圖檔文件list -->
+    <select id="query_bill_file_list" parameterType="String" resultType="com.foxconn.bidding.model.PART_DOC_FILE_bean">
+        select t.*
+          from PART_DOC_FILE t
+         where t.part_doc_file_rel_id = #{part_doc_file_rel_id}
+         order by t.list_order asc
+    </select>
+
+    <!-- 根據零件圖檔文件id查詢零件圖檔文件信息 -->
+    <select id="query_part_doc_file" parameterType="String" resultType="com.foxconn.bidding.model.PART_DOC_FILE_bean">
+        select t.* from PART_DOC_FILE t where t.pkid = #{part_doc_file_pkid}
+    </select>
+
+    <!-- 根據單個文件pkid刪除訂單零件圖檔文件 -->
+    <delete id="delete_part_doc_file_by_pkid" parameterType="String">
+        delete from PART_DOC_FILE where pkid = #{pkid}
+    </delete>
+
+    <!-- 保存發單方評價 -->
+    <insert id="save_send_eval" parameterType="com.foxconn.bidding.model.SEND_EVAL_bean">
+        insert into SEND_EVAL
+          (bill_pkid,
+           send_user_pkid,
+           recv_user_pkid,
+           summary_score,
+           out_rate_score,
+           out_qual_score,
+           svc_atitu_score,
+           summary_text,
+           f_anomus)
+        values
+          (#{bill_pkid},
+           #{send_user_pkid},
+           #{recv_user_pkid},
+           #{summary_score},
+           #{out_rate_score},
+           #{out_qual_score},
+           #{svc_atitu_score},
+           #{summary_text},
+           #{f_anomus})
+    </insert>
+
+    <!-- 保存接單方評價 -->
+    <insert id="save_recv_eval" parameterType="com.foxconn.bidding.model.RECV_EVAL_bean">
+        insert into RECV_EVAL
+          (bill_pkid,
+           recv_user_pkid,
+           send_user_pkid,
+           summary_score,
+           pay_rate_score,
+           svc_atitu_score,
+           summary_text,
+           f_anomus)
+        values
+          (#{bill_pkid},
+           #{recv_user_pkid},
+           #{send_user_pkid},
+           #{summary_score},
+           #{pay_rate_score},
+           #{svc_atitu_score},
+           #{summary_text},
+           #{f_anomus})
+    </insert>
+
+    <!-- 更新訂單接單方評價狀態為已評價 -->
+    <update id="update_f_send_eval_y" parameterType="String">
+        update BILL set f_send_eval = 'Y' where pkid = #{bill_pkid}
+    </update>
+
+    <!-- 更新訂單接單方評價狀態為已評價 -->
+    <update id="update_f_recv_eval_y" parameterType="String">
+        update BILL set f_recv_eval = 'Y' where pkid = #{bill_pkid}
+    </update>
+
+    <!-- 測試時間格式轉換 -->
+    <insert id="save_TEST_TIME_PARSE" parameterType="com.foxconn.bidding.model.TEST_TIME_PARSE_bean">
+        insert into TEST_TIME_PARSE (pkid, test_time) values (#{pkid}, to_date(#{test_time}, 'yyyy-mm-dd hh24:mi:ss'))
+    </insert>
+
+    <!-- 測試查詢時間 -->
+    <select id="query_TEST_TIME_PARSE_bean" parameterType="String" resultType="com.foxconn.bidding.model.TEST_TIME_PARSE_bean">
+        select t.* from TEST_TIME_PARSE t where t.pkid = #{pkid}
+    </select>
+
+    <!-- 根據訂單id和接單用戶id查詢報價信息 -->
+    <select id="query_give_price_mstr" resultType="com.foxconn.bidding.model.GIVE_PRICE_MSTR_bean">
+        select t.*
+          from GIVE_PRICE_MSTR t
+         where t.bill_pkid = #{bill_pkid}
+           and t.recv_user_pkid = #{recv_user_pkid}
+    </select>
+
+    <!-- 根據報價從表關聯id查詢報價從表list(報價明細) -->
+    <select id="query_give_price_slav_list" parameterType="String" resultType="com.foxconn.bidding.model.GIVE_PRICE_SLAV_bean">
+        select t.*
+          from GIVE_PRICE_SLAV t
+         where t.give_price_slav_rel_id = #{give_price_slav_rel_id}
+         order by t.list_order asc
+    </select>
+
+    <!-- 查詢發單方收到的評價list(分頁查詢) -->
+    <select id="query_send_get_eval_list" parameterType="com.foxconn.bidding.model.RequestParam" resultType="com.foxconn.bidding.model.RECV_EVAL_bean">
+        select t2.* from(select t1.*,rownum row_num from(
+                select t.*, count(*) over() row_total
+                  from RECV_EVAL t
+                 where t.send_user_pkid = #{send_user_pkid}
+                 order by t.create_date desc
+                 ) t1) t2
+             where t2.row_num between (#{pageIndex} - 1) * #{pageSize} + 1
+             and #{pageIndex} * #{pageSize}
+    </select>
+
+    <!-- 查詢發單方做出的評價list(分頁查詢) -->
+    <select id="query_send_make_eval_list" parameterType="com.foxconn.bidding.model.RequestParam" resultType="com.foxconn.bidding.model.SEND_EVAL_bean">
+        select t2.* from(select t1.*,rownum row_num from(
+		select t.*, count(*) over() row_total
+          from SEND_EVAL t
+         where t.send_user_pkid = #{send_user_pkid}
+         order by t.create_date desc
+		 ) t1) t2
+	 where t2.row_num between (#{pageIndex} - 1) * #{pageSize} + 1
+	 and #{pageIndex} * #{pageSize}
+    </select>
+
+    <!-- 查詢接單方收到的評價list(分頁查詢) -->
+    <select id="query_recv_get_eval_list" parameterType="com.foxconn.bidding.model.RequestParam" resultType="com.foxconn.bidding.model.SEND_EVAL_bean">
+        select t2.* from(select t1.*,rownum row_num from(
+                select t.*, count(*) over() row_total
+                  from SEND_EVAL t
+                 where t.recv_user_pkid = #{recv_user_pkid}
+                 order by t.create_date desc
+                 ) t1) t2
+             where t2.row_num between (#{pageIndex} - 1) * #{pageSize} + 1
+             and #{pageIndex} * #{pageSize}
+    </select>
+
+    <!-- 查詢接單方做出的評價list(分頁查詢) -->
+    <select id="query_recv_make_eval_list" parameterType="com.foxconn.bidding.model.RequestParam" resultType="com.foxconn.bidding.model.RECV_EVAL_bean">
+        select t2.* from(select t1.*,rownum row_num from(
+                select t.*, count(*) over() row_total
+                  from RECV_EVAL t
+                 where t.recv_user_pkid = #{recv_user_pkid}
+                 order by t.create_date desc
+                 ) t1) t2
+             where t2.row_num between (#{pageIndex} - 1) * #{pageSize} + 1
+             and #{pageIndex} * #{pageSize}
+    </select>
+
+    <!-- 查詢發單方收到的評價平均分 -->
+    <select id="query_send_get_eval_avg" parameterType="String" resultType="com.foxconn.bidding.model.RECV_EVAL_bean">
+        select round(avg(t.pay_rate_score), 1) pay_rate_avg,
+               round(avg(t.svc_atitu_score), 1) svc_atitu_avg
+          from RECV_EVAL t
+         where t.send_user_pkid = #{send_user_pkid}
+    </select>
+
+    <!-- 查詢接單方收到的評價平均分 -->
+    <select id="query_recv_get_eval_avg" parameterType="String" resultType="com.foxconn.bidding.model.SEND_EVAL_bean">
+        select round(avg(t.out_rate_score)) out_rate_svg,
+               round(avg(t.out_qual_score)) out_qual_svg,
+               round(avg(t.svc_atitu_score)) svc_atitu_svg
+          from SEND_EVAL t
+         where t.recv_user_pkid = #{recv_user_pkid}
+    </select>
+
+    <!-- 根據訂單id查詢報價list（分頁查詢） -->
+    <select id="query_give_price_list_pagi" parameterType="com.foxconn.bidding.model.GIVE_PRICE_MSTR_bean" resultType="com.foxconn.bidding.model.GIVE_PRICE_MSTR_bean">
+        select t2.* from(select t1.*,rownum row_num from(
+                select t.*, count(*) over() row_total
+                  from GIVE_PRICE_MSTR t
+                 where t.bill_pkid = #{bill_pkid}
+                 <if test='sort_way == "price"'>
+                     order by t.total_price asc
+                 </if>
+                 <if test='sort_way == "date"'>
+                     order by t.deliver_date asc
+                 </if>
+                 ) t1) t2
+             where t2.row_num between (#{pageIndex} - 1) * #{pageSize} + 1
+             and #{pageIndex} * #{pageSize}
+    </select>
+
+    <!-- 根據訂單id查詢報價list -->
+    <select id="query_give_price_list" parameterType="String" resultType="com.foxconn.bidding.model.GIVE_PRICE_MSTR_bean">
+        select t.*
+          from GIVE_PRICE_MSTR t
+         where t.bill_pkid = #{bill_pkid}
+         order by t.total_price asc, t.deliver_date asc, t.create_date asc
+    </select>
+
+    <!-- 根據報價id查詢標價信息 -->
+    <select id="query_give_price_by_pkid" parameterType="String" resultType="com.foxconn.bidding.model.GIVE_PRICE_MSTR_bean">
+        select t.* from GIVE_PRICE_MSTR t where t.pkid = #{pkid}
+    </select>
+
+    <!-- 更新該報價數據為中標 -->
+    <update id="update_give_price_win_bid" parameterType="String">
+        update GIVE_PRICE_MSTR set f_win_bid = 'Y' where pkid = #{pkid}
+    </update>
+
+    <!-- 更新訂單表為中標後狀態，更新中標接單用戶 -->
+    <update id="update_bill_win_bid">
+        update BILL set bill_status = '2', recv_user_pkid = #{recv_user_pkid} where pkid = #{bill_pkid}
+    </update>
+
+    <!-- 查詢發單方收到的評價list(不分頁) -->
+    <select id="query_send_get_eval_list_nopagi" parameterType="String" resultType="com.foxconn.bidding.model.RECV_EVAL_bean">
+        select t.*
+          from RECV_EVAL t
+         where t.send_user_pkid = #{send_user_pkid}
+         order by t.create_date desc
+    </select>
+
+    <!-- 查詢接單方收到的評價list(不分頁) -->
+    <select id="query_recv_get_eval_list_nopagi" parameterType="String" resultType="com.foxconn.bidding.model.SEND_EVAL_bean">
+        select t.*
+          from SEND_EVAL t
+         where t.recv_user_pkid = #{recv_user_pkid}
+         order by t.create_date desc
+    </select>
+
+    <!-- 查詢昨天發單的總筆數和總金額【昨天：sysdate - 1，前一周：sysdate - 7】 -->
+    <select id="query_last_day_send_statistics" resultType="com.foxconn.bidding.model.StatisticsContent">
+        select count(*) total_num, sum(t.total_price) total_money
+        from BILL t
+        where t.create_date &lt; trunc(sysdate)
+        and t.create_date &gt; trunc(sysdate - 7)
+        order by t.create_date desc
+    </select>
+
+    <!-- 查詢截止昨天累計發單的總筆數和總金額 -->
+    <select id="query_total_send_statistics" resultType="com.foxconn.bidding.model.StatisticsContent">
+        select count(*) total_num, sum(t.total_price) total_money
+        from BILL t
+        where t.create_date &lt; trunc(sysdate)
+        order by t.create_date desc
+    </select>
+
+    <!-- 查詢昨天中標的總筆數和總金額【昨天：sysdate - 1，前一周：sysdate - 7】 -->
+    <select id="query_last_day_win_bid_statistics" resultType="com.foxconn.bidding.model.StatisticsContent">
+        select count(*) total_num, sum(t.total_price) total_money
+        from GIVE_PRICE_MSTR t
+        where t.f_win_bid = 'Y'
+        and t.create_date &lt; trunc(sysdate)
+        and t.create_date &gt; trunc(sysdate - 7)
+        order by t.create_date desc
+    </select>
+
+    <!-- 查詢截止昨天累計中標的總筆數和總金額 -->
+    <select id="query_total_win_bid_statistics" resultType="com.foxconn.bidding.model.StatisticsContent">
+        select count(*) total_num, sum(t.total_price) total_money
+        from GIVE_PRICE_MSTR t
+        where t.f_win_bid = 'Y'
+        and t.create_date &lt; trunc(sysdate)
+        order by t.create_date desc
+    </select>
+
+    <!-- 查詢老闆郵箱地址list -->
+    <select id="query_boss_email_list" resultType="com.foxconn.bidding.model.BOSS_EMAIL_ADDRESS_bean">
+        select t.* from BOSS_EMAIL_ADDRESS t order by t.list_order asc
+    </select>
+
+    <!-- 查詢此單是否達到競價結束時間 -->
+    <select id="query_is_reach_bid_end_date" parameterType="String" resultType="Integer">
+        select count(*) from BILL t
+        where t.pkid = #{bill_pkid}
+        and t.bill_status = '1'
+        and t.recv_user_pkid is null
+        and t.give_price_mstr_pkid is null
+        and t.bid_end_date &lt;= sysdate
+    </select>
+
+    <!-- 查詢需要選標或棄標的訂單，用來通知發單用戶進行操作 -->
+    <select id="query_need_pick_bid_bill" resultType="com.foxconn.bidding.model.BILL_bean">
+        select t.*
+        from BILL t
+        where t.bid_end_date &lt;= sysdate
+        and t.bill_status = '1'
+        and t.recv_user_pkid is null
+        and t.give_price_mstr_pkid is null
+        and t.pkid in (select g.bill_pkid from GIVE_PRICE_MSTR g)
+    </select>
+
+    <!-- 查詢需要流標的訂單，用來定時器查詢後自動設置流標 -->
+    <select id="query_need_flow_bid_bill" resultType="com.foxconn.bidding.model.BILL_bean">
+        select t.*
+        from BILL t
+        where t.bid_end_date &lt;= sysdate
+        and t.bill_status = '1'
+        and t.recv_user_pkid is null
+        and t.give_price_mstr_pkid is null
+        and t.pkid not in (select g.bill_pkid from GIVE_PRICE_MSTR g)
+    </select>
+
+    <!-- 注釋模板，放在最後一行 -->
+</mapper>

@@ -1,0 +1,71 @@
+
+// 頂部
+#top {
+  .top-nav {
+    justify-content: space-between;
+    >a {
+      height: 30px;
+      line-height: 30px;
+      color: #333333;
+    }
+  }
+}
+
+// 內容
+#content {
+  background-image: url(../../imgs/contract/banner.jpg);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-color: #12222f;
+  text-align: center;
+  >.main {
+    padding-top: 18%;
+    position: relative;
+  }
+  // 內容區域
+  .wrapper {
+    position: absolute;
+    top: 22%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    height: 75%;
+  }
+  // 按鈕樣式
+  .btn {
+    position: relative;
+    // 按鈕內的文字
+    span {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 24px;
+      color: #fff;
+    }
+  }
+  // 合同內容
+  .details {
+    font-size: 16px;
+    color: #12222e;
+    text-align: left;
+    >p {
+      margin: 0;
+      line-height: 28px;
+    }
+  }
+  // 簽字人
+  .signer {
+    margin-top: 60px;
+    p {
+      height: 50px;
+    }
+  }
+  // 簽字信息
+  .sign {
+    margin-top: 50px;
+    width: 55%;
+    display: flex;
+    justify-content: space-between;
+  }
+}

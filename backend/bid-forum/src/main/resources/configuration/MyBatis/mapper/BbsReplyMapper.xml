@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xplorist.bidforum.mapper.BbsReplyMapper">
+    <!-- BbsReply【01】根据帖子ID查询根回复list -->
+    <select id="listRootReplyByPostId" parameterType="String" resultType="com.xplorist.bidforum.model.dto.BbsReplyDTO">
+        select t.*
+        from BBS_REPLY t
+        where t.DELETE_FLAG = 0
+          and t.bbs_post_id = #{postId}
+          and t.parent_id is null
+        order by t.CREATE_TIME asc
+    </select>
+
+    <!-- BbsReply【02】 根据某个父回复Id查询子回复list -->
+    <select id="listChildrenReplyByParentId" resultType="com.xplorist.bidforum.model.dto.BbsReplyDTO">
+        select t.*
+        from BBS_REPLY t
+        where t.DELETE_FLAG = 0
+          and t.bbs_post_id = #{postId}
+          and t.parent_id = #{parentId}
+        order by t.CREATE_TIME asc
+    </select>
+
+    <!-- 模板 -->
+</mapper>

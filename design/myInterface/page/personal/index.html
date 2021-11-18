@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Personal</title>
+  <link rel="stylesheet" href="../../lib/normalize.css">
+  <link rel="stylesheet" href="../../css/common.css">
+  <!-- 引入样式 -->
+  <link rel="stylesheet" href="../../lib/element/index.css">
+  <!-- 適配不支持H5的瀏覽器 -->
+  <script src="../../lib/html5shiv.min.js"></script>
+  <link rel="stylesheet" href="../../css/personal/index.css">
+</head>
+
+<body>
+  <div id="app" class="container">
+    <section class="top">
+      <div class="type-area top-nav">
+        <ul>
+          <li>
+            <a href="#">
+              歡迎您：Mac(I)製造處
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              個人中心
+            </a>
+          </li>
+          <li>
+            <a href="../merchant/enter.html">
+              商家入駐
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              規則中心
+            </a>
+          </li>
+        </ul>
+      </div>
+    </section>
+    <section class="logo">
+      <div class="type-area logo-content">
+        <a href="../../index.html">
+        </a>
+        <div class="search-box">
+          <input type="text" class="search-text" placeholder="請輸入信息">
+          <input type="submit" class="search-btn" value="搜索">
+        </div>
+      </div>
+    </section>
+    <section class="content">
+        <!-- 主體內容 -->
+        <div class="main type-area">
+          <div class="warpper">
+            <div class="sideBar">
+              <div class="portrait">
+                <div class="porImg"></div>
+              </div>
+              <div class="department">
+                <span class="depIcon"></span>
+                <span>Mac(I)製造一處</span>
+              </div>
+              <div class="navigate">
+                <a href="#" class="active">
+                  <div>
+                    訂單管理
+                  </div>
+                </a>
+                <a href="./information.html">
+                  <div>
+                    個人資料
+                  </div>
+                </a>
+                <a href="./evaluation.html">
+                  <div>
+                    評價管理
+                  </div>
+                </a>
+                <a href="#">
+                  <div>
+                    消息
+                    <span>(2)</span>
+                  </div>
+                </a>
+                <a href="#">
+                  <div>
+                    收藏
+                  </div>
+                </a>
+                <a href="#">
+                  <div>
+                    設置
+                  </div>
+                </a>
+              </div>
+            </div>
+            <div class="mainPart">
+              <div class="income">
+                <div class="title">我的收入</div>
+                <div class="details">
+                  <div class="single">
+                    <div class="singleTil">累計收益</div>
+                    <div class="singleCon">5,264,800</div>
+                  </div>
+                  <div class="single">
+                    <div class="singleTil">製作中資產(元)</div>
+                    <div class="singleCon">193,500</div>
+                  </div>
+                  <div class="single">
+                    <div class="singleTil">參與項目</div>
+                    <div class="singleCon">185<span>個</span></div>
+                  </div>
+                  <div class="single">
+                    <div class="singleTil">累計收益</div>
+                    <div class="singleCon">27<span>個</span></div>
+                  </div>
+                  <div class="single">
+                    <el-progress type="circle" :percentage="18" :stroke-width="progress.strokeWidth" :width="progress.width" :color="progress.color"></el-progress>
+                  </div>
+                </div>
+              </div>
+              <div class="splitLine"></div>
+              <div class="manage">
+                <div class="title">
+                  <div class="manageIcon"></div>
+                  <div>接單管理</div>
+                </div>
+                <div class="classify">
+                  <div class="active">全部(59)</div>
+                  <span class="line"></span>
+                  <div>進行中(2)</div>
+                  <span class="line"></span>
+                  <div>中標(5)</div>
+                  <span class="line"></span>
+                  <div>待收款(1)</div>
+                  <span class="line"></span>
+                  <div>待評價(0)</div>
+                  <span class="line"></span>
+                  <div>已結束(53)</div>
+                </div>
+                <div class="list">
+                  <!-- list1 -->
+                  <div class="list-single">
+                    <div class="single-left">
+                      <div class="scope">
+                        檢
+                      </div>
+                      <div class="single-info">
+                        <div class="info-top">
+                          <div class="formNum">需求單號A30000028</div>
+                          <div class="state">
+                            <div>成都D23</div>
+                            <div>產品處</div>
+                          </div>
+                        </div>
+                        <div class="info-bottom">
+                          <div class="price">
+                            <div class="kind">￥</div>
+                            <div class="num">50000</div>
+                          </div>
+                          <div class="unitNum">16個單位已參與</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="single-right">
+                      <div class="left">
+                        <div class="time">
+                          <div>投标剩余15天17小时5分39秒</div>
+                        </div>
+                      </div>
+                      <div class="right progress">
+                        <div class="status">
+                          進行中
+                        </div>
+                        <div class="btn">
+                          <a href="./details.html">
+                            詳情
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- list2 -->
+                  <div class="list-single winBidding">
+                    <div class="single-left">
+                      <div class="scope">
+                        檢
+                      </div>
+                      <div class="single-info">
+                        <div class="info-top">
+                          <div class="formNum">需求單號A30000028</div>
+                          <div class="state">
+                            <div>成都D23</div>
+                            <div>產品處</div>
+                          </div>
+                        </div>
+                        <div class="info-bottom">
+                          <div class="price">
+                            <div class="kind">￥</div>
+                            <div class="num">50000</div>
+                          </div>
+                          <div class="unitNum">26個單位已參與</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="single-right">
+                      <div class="left">
+                        <div class="time">
+                          <div>交期剩余15天17小时5分39秒</div>
+                        </div>
+                      </div>
+                      <div class="right win">
+                        <div class="status">
+                          中标
+                        </div>
+                        <div class="btn">
+                          <a href="../contract/index.html">
+                            簽核協議
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- list3 -->
+                  <div class="list-single winBidding">
+                    <div class="single-left">
+                      <div class="scope">
+                        檢
+                      </div>
+                      <div class="single-info">
+                        <div class="info-top">
+                          <div class="formNum">需求單號A30000028</div>
+                          <div class="state">
+                            <div>成都D23</div>
+                            <div>產品處</div>
+                          </div>
+                        </div>
+                        <div class="info-bottom">
+                          <div class="price">
+                            <div class="kind">￥</div>
+                            <div class="num">50000</div>
+                          </div>
+                          <div class="unitNum">26個單位已參與</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="single-right">
+                      <div class="left">
+                        <div class="time">
+                          <div>交期剩余15天17小时5分39秒</div>
+                        </div>
+                      </div>
+                      <div class="right production">
+                        <div class="status">
+                          製作中
+                        </div>
+                        <div class="btn">
+                          <a href="#">
+                            交貨
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- list4 -->
+                  <div class="list-single winBidding">
+                    <div class="single-left">
+                      <div class="scope">
+                        檢
+                      </div>
+                      <div class="single-info">
+                        <div class="info-top">
+                          <div class="formNum">需求單號A30000028</div>
+                          <div class="state">
+                            <div>成都D23</div>
+                            <div>產品處</div>
+                          </div>
+                        </div>
+                        <div class="info-bottom">
+                          <div class="price">
+                            <div class="kind">￥</div>
+                            <div class="num">50000</div>
+                          </div>
+                          <div class="unitNum">31個單位已參與</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="single-right">
+                      <div class="left">
+                        <div class="time">
+                          <div></div>
+                        </div>
+                      </div>
+                      <div class="right account">
+                        <div class="status">
+                          待收款
+                        </div>
+                        <div class="btn">
+                          <a href="#">
+                            確認收款
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- list5 -->
+                  <div class="list-single winBidding">
+                    <div class="single-left">
+                      <div class="scope">
+                        檢
+                      </div>
+                      <div class="single-info">
+                        <div class="info-top">
+                          <div class="formNum">需求單號A30000028</div>
+                          <div class="state">
+                            <div>成都D23</div>
+                            <div>產品處</div>
+                          </div>
+                        </div>
+                        <div class="info-bottom">
+                          <div class="price">
+                            <div class="kind">￥</div>
+                            <div class="num">50000</div>
+                          </div>
+                          <div class="unitNum">25個單位已參與</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="single-right">
+                      <div class="left">
+                        <div class="time">
+                          <div></div>
+                        </div>
+                      </div>
+                      <div class="right evaluated">
+                        <div class="status">
+                          待評價
+                        </div>
+                        <div class="btn">
+                          <a href="../personal/postEvaluation.html">
+                            評價
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- list6 -->
+                  <div class="list-single failBidding">
+                    <div class="single-left">
+                      <div class="scope">
+                        檢
+                      </div>
+                      <div class="single-info">
+                        <div class="info-top">
+                          <div class="formNum">需求單號A30000028</div>
+                          <div class="state">
+                            <div>成都D23</div>
+                            <div>產品處</div>
+                          </div>
+                        </div>
+                        <div class="info-bottom">
+                          <div class="price">
+                            <div class="kind">￥</div>
+                            <div class="num">50000</div>
+                          </div>
+                          <div class="unitNum">31個單位已參與</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="single-right">
+                      <div class="left">
+                        <div class="time fail">
+                          <div>競標失敗</div>
+                        </div>
+                      </div>
+                      <div class="right finished">
+                        <div class="status">
+                          已結束
+                        </div>
+                        <div class="btn">
+                          <a href="./page/pa剩余15天17小rticulars.html">
+                            詳情
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!--  -->
+                  <!-- 分頁 -->
+                  <div class="panel-page">
+                    <el-pagination background layout="prev, pager, next" :total="100" prev-text="上一頁" next-text="下一頁">
+                    </el-pagination>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+    </section>
+    <section class="footer">
+      <div class="foo-content type-area">
+        <div class="foo-warpper">
+          <div class="technical">
+            <div class="m-logo"></div>
+            <div class="text">技術服務: 只能雲網絡開發成都分部</div>
+          </div>
+          <div class="customer">
+            客戶服務: 5073-66811
+          </div>
+          <div class="blogroll">
+            <div>友情鏈接: </div>
+            <div>
+              <a href="">
+                MAC(I)智能雲網平台
+              </a>
+            </div>
+            <div class="line"></div>
+            <div>
+              <a href="">
+                MAC(I)人事點名系統
+              </a>
+            </div>
+            <div class="line"></div>
+            <div>
+              <a href="">
+                MAC(I)金流系統
+              </a>
+            </div>
+            <div class="line"></div>
+            <div>
+              <a href="">
+                智能刀具管理
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  <!-- 先引入 Vue -->
+  <script src="../../lib/vue.js"></script>
+  <!-- 引入组件库 -->
+  <script src="../../lib/element/index.js"></script>
+
+  <script src="../../js/personal/index.js"></script>
+</body>
+
+</html>

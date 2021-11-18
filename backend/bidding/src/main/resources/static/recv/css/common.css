@@ -1,0 +1,32 @@
+html,body{
+	margin: 0;
+	padding: 0;
+	cursor: default;
+	min-width: 1200px;
+}
+
+ul{
+	list-style: none;
+	margin: 0;
+}
+
+a{
+	text-decoration: none;
+	color: #fff;
+}
+
+.dis_none {
+	display: none;
+}
+
+/*版心*/
+.type-area {
+  width: 1200px;
+  margin: 0 auto;
+}
+
+/*主體*/
+.container {
+  height: 100%;
+  position: relative;
+}

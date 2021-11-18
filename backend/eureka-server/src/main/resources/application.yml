@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: eureka-server
+server:
+  port: 7000
+eureka:
+  instance:
+    #hostname: localhost
+    prefer-ip-address: true
+    ip-address: 10.244.231.103
+    instance-id: ${eureka.instance.ip-address}:${spring.application.name}:${server.port}
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    service-url:
+      #defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+      #defaultZone: http://${eureka.instance.ip-address}:${server.port}/eureka/
+      #defaultZone: http://${eureka.instance.instance-id}/eureka/
+      defaultZone: http://${eureka.instance.ip-address}:${server.port}/eureka/

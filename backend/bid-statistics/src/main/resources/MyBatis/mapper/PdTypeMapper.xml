@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.foxconn.bidstatistics.dao.PdTypeDAO">
+
+    <!-- 查詢訂單類型list -->
+    <select id="listPdType" resultType="com.foxconn.bidstatistics.model.PdTypeDO">
+        select t.* from PD_TYPE t order by t.list_order asc
+    </select>
+
+    <!-- 注釋模板，放在最後一行 -->
+</mapper>

@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: api-gateway
+server:
+  port: 14000
+eureka:
+  instance:
+    prefer-ip-address: true
+    ip-address: 10.244.231.103
+    instance-id: ${eureka.instance.ip-address}:${spring.application.name}:${server.port}
+  client:
+    service-url:
+      defaultZone: http://10.244.231.103:7000/eureka/
+ribbon: 
+  ReadTimeout: 120000  #请求处理的超时时间  
+  ConnectTimeout: 30000  #请求连接的超时时间 
+zuul:
+  sensitiveHeaders:

@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: bidsso
+  cloud:
+    config:
+      name: bidsso
+      profile: allowedServices,allowedDomains,allowedProjects
+      label: master
+      discovery:
+        enabled: true
+        service-id: config-server
+server:
+  port: 10000
+eureka:
+  instance:
+    prefer-ip-address: true
+    ip-address: 10.244.231.103
+    instance-id: ${eureka.instance.ip-address}:${spring.application.name}:${server.port}
+  client:
+    service-url:
+      defaultZone: http://10.244.231.103:7000/eureka/

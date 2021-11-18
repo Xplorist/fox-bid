@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.foxconn.bidstatistics.dao.BillDAO">
+
+    <!-- 根據產品類型查詢訂單數量 -->
+    <select id="queryNumByPdType" parameterType="String" resultType="Integer">
+        select count(*)
+        from BILL t
+        where t.bill_status &lt;&gt; '0'
+          and t.pd_type = #{pdType}
+    </select>
+
+    <!-- 根據訂單流程類型查詢訂單數量 -->
+    <select id="queryNumByFlowType" parameterType="String" resultType="Integer">
+        select count(*) from BILL t
+        where t.bill_status &lt;&gt; '0'
+        <if test="flowType == 'wait'">
+            and t.bill_status = '1'
+        </if>
+        <if test="flowType == 'win'">
+            and t.bill_status &gt; '1'
+        </if>
+        <if test="flowType == 'flow'">
+            and t.bill_status = '-1'
+        </if>
+        <if test="flowType == 'abandon'">
+            and t.bill_status = '-2'
+        </if>
+    </select>
+
+    <!-- 根據廠區和訂單流程類型查詢訂單數 -->
+    <select id="queryNumByFactoryAndFlowType" resultType="Integer">
+        select count(*)
+        from BILL t, USER_INFO u
+        where t.send_user_pkid = u.pkid
+        <if test="factory == '成都'">
+            and u.fctry_zone = '成都'
+        </if>
+        <if test="factory == '深圳'">
+            and (u.fctry_zone = '深圳' or u.fctry_zone = '龍華')
+        </if>
+        <if test="flowType == 'wait'">
+            and t.bill_status = '1'
+        </if>
+        <if test="flowType == 'win'">
+            and t.bill_status &gt; '1'
+        </if>
+        <if test="flowType == 'flow'">
+            and t.bill_status = '-1'
+        </if>
+        <if test="flowType == 'abandon'">
+            and t.bill_status = '-2'
+        </if>
+    </select>
+
+    <!-- 根據廠區查詢訂單發單金額總數 -->
+    <select id="queryTotalPriceByFactory" parameterType="String" resultType="Integer">
+        select sum(t.total_price)
+        from BILL t, USER_INFO u
+        where t.send_user_pkid = u.pkid
+          <if test="factory == '成都'">
+              and u.fctry_zone = '成都'
+          </if>
+          <if test="factory == '深圳'">
+              and (u.fctry_zone = '深圳' or u.fctry_zone = '龍華')
+          </if>
+
+    </select>
+
+    <!-- 按照發單量來進行排倒序，按照時間範圍來查詢發單的用戶id的前20個，並查出此發單用戶的總發單量 -->
+    <select id="listSendUserIdAndSendNumByTimeLimit" resultType="com.foxconn.bidstatistics.model.dto.SendUserRankDTO">
+        select user_id, send_num from
+        (select user_id, send_num, rownum row_num
+        from
+        (select t.send_user_pkid user_id, count(t.send_user_pkid) send_num
+        from BILL t
+        where t.bill_status &lt;&gt; '0'
+        and trunc(t.publish_date) &gt; to_date(#{firstDay}, 'yyyy-mm-dd')
+        and trunc(t.publish_date) &lt; (to_date(#{lastDay}, 'yyyy-mm-dd') + 1)
+        group by t.send_user_pkid
+        order by count(t.send_user_pkid) desc))
+        where row_num between 1 and 20
+    </select>
+
+    <!-- 按照指定時間範圍來查詢指定用戶的發單金額 -->
+    <select id="querySendPriceByTimeLimit" resultType="Integer">
+        select sum(t.total_price) send_price
+        from BILL t
+        where t.send_user_pkid = #{userId}
+        and trunc(t.publish_date) &gt; to_date(#{firstDay}, 'yyyy-mm-dd')
+        and trunc(t.publish_date) &lt; (to_date(#{lastDay}, 'yyyy-mm-dd') + 1)
+    </select>
+
+    <!-- 按照指定時間範圍來查詢指定用戶的流標數量 -->
+    <select id="querySendFlowNumByTimeLimit" resultType="Integer">
+        select count(*) flow_num
+        from BILL t
+        where t.bill_status = '-1'
+        and t.send_user_pkid = #{userId}
+        and trunc(t.publish_date) &gt; to_date(#{firstDay}, 'yyyy-mm-dd')
+        and trunc(t.publish_date) &lt; (to_date(#{lastDay}, 'yyyy-mm-dd') + 1)
+    </select>
+
+    <!-- 注釋模板，放在最後一行 -->
+</mapper>

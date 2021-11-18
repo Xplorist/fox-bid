@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: http://10.244.168.131:9091/xiangboren/bid-config.git # 配置git仓库的地址
+          search-paths: config-repo,config-repo/bidsso # git仓库地址下的相对地址，可以配置多个，用,分割。
+          username: xiangboren
+          password: xiangboren.1234
+server:
+  port: 12000
+eureka:
+  instance:
+    prefer-ip-address: true
+    ip-address: 10.244.231.103
+    instance-id: ${eureka.instance.ip-address}:${spring.application.name}:${server.port}
+  client:
+    service-url:
+      defaultZone: http://10.244.231.103:7000/eureka/

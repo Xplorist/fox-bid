@@ -1,0 +1,10 @@
+USER_INFO --用戶註冊信息表
+USER_PIC_FILE --用戶頭像文件表
+
+
+-- 基本信息表
+FCTRY_ZONE --廠區
+SECN_CMPY --次集團
+ENTRPS_GROUP --事業群
+PD_OFFICE --產品處
+

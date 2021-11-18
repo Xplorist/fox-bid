@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.foxconn.bidsso.mapper.SsoMapper">
+    <!-- 根據用戶名查詢用戶id和密碼 -->
+    <select id="queryUserIdPswByUsername" parameterType="String" resultType="com.foxconn.bidsso.model.UserInfoDO">
+        select t.pkid, t.password from USER_INFO t where t.username = #{username} and t.F_VALID = 'Y'
+    </select>
+
+    <!-- 通過用戶id查詢密碼 -->
+    <select id="queryUserPswById" parameterType="String" resultType="com.foxconn.bidsso.model.UserInfoDO">
+        select t.password from USER_INFO t where t.pkid = #{userId} and t.F_VALID = 'Y'
+    </select>
+
+    <!-- 注釋模板，放在最後一行 -->
+</mapper>

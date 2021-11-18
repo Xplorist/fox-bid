@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>模治檢具訂單管理平台</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!-- css lib -->
+    <link rel="stylesheet" href="home/css_lib/bootstrap.min.css">
+    <link rel="stylesheet" href="home/css_lib/font-awesome.min.css">
+    <!-- custom css -->
+    <link rel="stylesheet" href="home/css_code/login.css">
+</head>
+<body>
+<div id="app" class="container" style="height: 100vh;">
+    <div class="row" style="height: 100vh;">
+        <div class="col-sm-9 col-md-7 col-lg-5 mx-auto" style="margin-top: auto !important; margin-bottom: auto !important;">
+            <div class="card card-signin my-5">
+                <div class="card-body">
+                    <h5 class="card-title text-center">模治檢具訂單管理平台</h5>
+                    <div class="form-label-group">
+                        <input type="text" name="username" id="inputUsername" v-model="username"
+                               class="form-control" placeholder="Email address" required autofocus>
+                        <label for="inputUsername">用戶名</label>
+                    </div>
+
+                    <div class="form-label-group">
+                        <input type="password" name="password" id="inputPassword" v-model="password"
+                               class="form-control" placeholder="Password" required>
+                        <label for="inputPassword">密碼</label>
+                    </div>
+
+                    <div class="custom-control custom-checkbox mb-3">
+                        <input type="checkbox" class="custom-control-input" id="customCheck1">
+                        <label class="custom-control-label" for="customCheck1">記住密碼</label>
+                    </div>
+                    <button class="btn btn-lg btn-primary btn-block text-uppercase" @click="login">登錄</button>
+                    <button class="btn btn-lg btn-primary btn-block text-uppercase" @click="goto_register">暫無賬號，前去註冊</button>
+                    <button class="btn btn-lg btn-primary btn-block text-uppercase" @click="test_token">測試token</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<!-- JS library -->
+<script type="text/javascript" src="home/js_lib/jquery.min.js"></script>
+<script type="text/javascript" src="home/js_lib/vue.mini.js"></script>
+<script type="text/javascript" src="home/js_lib/bootstrap.bundle.js"></script>
+<script type="text/javascript" src="home/js_lib/axios.min.js"></script>
+<script type="text/javascript" src="home/js_lib/md5.min.js"></script>
+<!-- custom JS -->
+<script type="text/javascript" src="home/js_code/login.js"></script>
+</html>

@@ -1,0 +1,244 @@
+// 主體內容
+#content {
+  background: #12222E url(../../imgs/particulars/contentBG.png) no-repeat top center / contain;
+  padding-top: 24px;
+  >.main {
+    background: rgba(13, 28, 42, 0.2);
+    box-sizing: border-box;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+  }
+  // 左側導航
+  .sideBar {
+    // height: 50px;
+    background-color: #D3DFE7;
+    width: 240px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  // 頭像
+  .side_portrait {
+    margin-top: 55px;
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    background-color: #EEF4F7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .porImg {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: url(../../imgs/personal/portrait.png) no-repeat center / cover;
+    }
+  }
+  // 所屬部門
+  .side_department {
+    margin-top: 18px;
+    font-size: 18px;
+    color: #212F3A;
+    display: flex;
+    align-items: center;
+    >.depIcon {
+      display: inline-block;
+      width: 14px;
+      height: 23px;
+      background: url(../../imgs/personal/depIcon.png) no-repeat;
+      margin-right: 6px;
+    }
+  }
+  // 導航條目
+  .side_navigate {
+    margin-top: 26px;
+    width: 100%;
+    >a {
+      display: block;
+      width: 100%;
+      height: 60px;
+      border-top: 1px solid #C0C8CF;
+      // background-color: #2E6E9E;
+      &.active,
+      &:hover {
+        background-color: #2E6E9E;
+        >div {
+          color: #fff;
+        }
+      }
+    }
+    div {
+      width: 60%;
+      height: 60px;
+      margin: 0 auto;
+      line-height: 60px;
+      font-size: 16px;
+      color: #12222E;
+      >span {
+        color: #E51313;
+      }
+    }
+  }
+
+  // 右側主體
+  .mainPart {
+    width: 910px;
+    background-color: #D3DFE7;
+    padding: 30px;
+    box-sizing: border-box;
+  }
+
+  // <!-- 頂部信息 -->
+  .main_headline {
+  }
+  // 返回區域
+  .main_head_back {
+    display: flex;
+    align-items: center;
+  }
+  // 返回按鈕
+  .head_back_backBtn {
+    >a {
+      color: #626F7F;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+    }
+    // 返回圖標
+    span {
+      display: block;
+      width: 17px;
+      height: 12px;
+      background: url(../../imgs/personal/back.png) no-repeat;
+      margin-right: 6px;
+    }
+  }
+  // 當前狀態
+  .head_back_status {
+    color: #0096FF;
+    font-size: 18px;
+    margin-left: 28px;
+  }
+  // 主內容標題
+  .main_head_title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .head_tit_text {
+    color: #212F3A;
+    font-size: 18px;
+  }
+  .head_tit_time {
+    color: #0096FF;
+    font-size: 16px;
+    margin-top: 15px;
+  }
+
+  // <!-- 基本信息 -->
+  .main_baseInfo {
+  }
+  .main_base_title {
+    color: #485463;
+    font-size: 16px;
+    border-bottom: 1px solid #C0C8CF;
+    margin-top: 20px;
+    padding: 10px 0;
+  }
+  .main_base_content {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+    width: 80%;
+    td {
+      height: 24px;
+      color: #212F3A;
+      font-size: 16px;
+      &:nth-child(1) {
+        color: #626F7F;
+        // 文本居中
+        // text-align:center;
+        text-align: justify;
+        // text-justify:distribute-all-lines;
+        text-align-last: justify
+      }
+      &:nth-child(2) {
+        width: 20px;
+        color: #626F7F;
+      }
+      &:nth-child(3) {}
+    }
+  }
+
+  // <!-- 時間 -->
+  .main_timeRemaining {
+    margin-top: 140px;
+    background-color: #384752;
+    text-align: center;
+    font-size: 16px;
+    padding: 4px 0;
+    position: relative;
+    >p:nth-child(1) {
+      color: #748089;
+    }
+    >p:nth-child(2) {
+      color: #D3DFE7;
+      font-size: 30px;
+      margin: 0 0 30px 0;
+      >span {
+        font-size: 16px;
+      }
+    }
+    >p:nth-child(3) {
+      color: #748089;
+    }
+    >div {
+      width: 100px;
+      height: 26px;
+      position: absolute;
+      top: 70px;
+      right: 30px;
+      background-color: #203443;
+      color: #5D6E79;
+      font-size: 14px;
+      line-height: 26px;
+      text-align: center;
+    }
+  }
+
+  // <!-- 確認交貨按鈕 -->
+  .main_confirm {
+    text-align: center;
+    margin: 120px 0 220px;
+  }
+  .main_con_upload {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #0096FF;
+    font-size: 14px;
+    >span {
+      display: block;
+      width: 16px;
+      height: 16px;
+      background: url(../../imgs/personal/upload.png) no-repeat;
+      margin-right: 10px;
+    }
+  }
+  .main_con_conBtn {
+    color: #fff;
+    font-size: 18px;
+    position: relative;
+    >svg {
+      cursor: pointer;
+    }
+    >span {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      cursor: pointer;
+    }
+  }
+}

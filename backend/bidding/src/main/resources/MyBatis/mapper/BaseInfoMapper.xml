@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.foxconn.bidding.mapper.BaseInfoMapper">
+
+    <!-- 查詢廠區list -->
+    <select id="query_factory_list" resultType="com.foxconn.bidding.model.FCTRY_ZONE_bean">
+        select t.* from FCTRY_ZONE t order by t.list_order asc
+    </select>
+
+    <!-- 查詢次集團list -->
+    <select id="query_SECN_CMPY_list" parameterType="String" resultType="com.foxconn.bidding.model.SECN_CMPY_bean">
+        select t.*
+          from SECN_CMPY t
+         order by t.order_in_fctry asc
+    </select>
+
+    <!-- 查詢事業群list -->
+    <select id="query_ENTRPS_GROUP_list" parameterType="String" resultType="com.foxconn.bidding.model.ENTRPS_GROUP_bean">
+        select t.*
+          from ENTRPS_GROUP t
+         where t.secn_cmpy_pkid = #{secn_cmpy_pkid}
+         order by t.order_in_cmpy asc
+    </select>
+
+    <!-- 查詢產品處list -->
+    <select id="query_PD_OFFICE_list" parameterType="String" resultType="com.foxconn.bidding.model.PD_OFFICE_bean">
+        select t.*
+          from PD_OFFICE t
+         where t.entrps_group_pkid = #{entrps_group_pkid}
+         order by t.order_in_group asc
+    </select>
+
+    <!-- 查詢交貨地點list -->
+    <select id="query_deliver_address_list" resultType="com.foxconn.bidding.model.BaseInfoParam">
+        select t.* from DELIVER_ADDRESS t order by t.list_order asc
+    </select>
+
+    <!-- 查詢開標範圍list -->
+    <select id="query_bid_range_list" resultType="com.foxconn.bidding.model.BaseInfoParam">
+        select t.* from BID_RANGE t order by t.list_order asc
+    </select>
+
+    <!-- 查詢產品類型list -->
+    <select id="query_pd_type_list" resultType="com.foxconn.bidding.model.BaseInfoParam">
+        select t.*, t.rowid from PD_TYPE t order by t.list_order asc
+    </select>
+
+    <!-- 根據單位代碼查詢單位名稱 -->
+    <select id="query_dept_name_by_dept_no" parameterType="String" resultType="com.foxconn.bidding.model.B_DEPT_bean">
+        select t.* from B_DEPT t where t.dept_no = #{dept_no}
+    </select>
+
+    <!-- 模糊搜索法人 -->
+    <select id="query_legal_person" parameterType="String" resultType="com.foxconn.bidding.model.BaseInfoParam">
+        <bind name="b_legal_person" value="legal_person + '%'"/>
+        select t.* from LEGAL_PERSON t where t.legal_person like #{b_legal_person}
+    </select>
+
+    <!-- 查詢廠區條件子項 -->
+    <select id="listFactorySub" resultType="com.foxconn.bidding.model.QueryConditionSub">
+        select txt, val, id
+        from (select '全部' txt, '全部' val, 1 id
+              from dual
+              union
+              select txt, val, rownum + 1 id
+              from (select t.fctry_zone txt, t.fctry_zone val
+                    from USER_INFO t
+                    where t.f_valid = 'Y'
+                      and t.fctry_zone is not null
+                    group by t.fctry_zone
+                    order by t.fctry_zone asc))
+        order by id
+    </select>
+
+    <!-- 查詢事業群條件子項 -->
+    <select id="listBusinessSub" resultType="com.foxconn.bidding.model.QueryConditionSub">
+        select txt, val, id
+        from (select '全部' txt, '全部' val, 1 id
+              from dual
+              union
+              select txt, val, rownum + 1 id
+              from (select t.entrps_group txt, t.entrps_group val
+                    from USER_INFO t
+                    where t.f_valid = 'Y'
+                      and t.entrps_group is not null
+                    group by t.entrps_group
+                    order by t.entrps_group asc))
+        order by id
+    </select>
+
+    <!-- 查詢產品處條件子項 -->
+    <select id="listProductSub" resultType="com.foxconn.bidding.model.QueryConditionSub">
+        select txt, val, id
+        from ((select '全部' txt, '全部' val, 1 id from dual) union select txt, val,
+                                                                       rownum + 1 id from (select t.pd_office txt, t.pd_office val
+                                                                                           from USER_INFO t
+                                                                                           where t.f_valid = 'Y'
+                                                                                             and t.pd_office is not null
+                                                                                           group by t.pd_office
+                                                                                           order by t.pd_office asc) b)
+        order by id
+    </select>
+
+    <!-- 查詢類型條件子項 -->
+    <select id="listTypeSub" resultType="com.foxconn.bidding.model.QueryConditionSub">
+        select txt, val, id
+        from (select '全部' txt, '全部' val, 1 id
+        from dual a
+        union
+        select txt, val, rownum + 1 id
+        from (select decode(t.send_recv_type,
+        'send',
+        '發單方',
+        'recv',
+        '接單方') txt,
+        decode(t.send_recv_type,
+        'send',
+        '發單方',
+        'recv',
+        '接單方') val
+        from USER_INFO t
+        where t.f_valid = 'Y'
+        and t.send_recv_type is not null
+        and t.send_recv_type &lt;&gt; 'system'
+        group by t.send_recv_type
+        order by t.send_recv_type desc) b)
+        order by id
+    </select>
+
+    <!-- 查詢訂單狀態list -->
+    <select id="listBillStatus" resultType="com.foxconn.bidding.model.BillStatusDO">
+        select id, name, list_order
+        from (select 'all' id, '全部' name, 0 list_order
+        from dual
+        union (select t.id, t.name, t.list_order
+        from BILL_STATUS t
+        where t.id &lt;&gt; '0'))
+        order by list_order asc
+    </select>
+
+    <!-- 注釋模板，放在最後一行 -->
+</mapper>

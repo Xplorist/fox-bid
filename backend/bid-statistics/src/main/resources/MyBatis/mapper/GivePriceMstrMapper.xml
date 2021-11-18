@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.foxconn.bidstatistics.dao.GivePriceMstrDAO">
+
+    <!-- 累計中標報價求和綜合查詢 -->
+    <select id="querySumComplex" parameterType="com.foxconn.bidstatistics.model.query.GivePriceMstrQuery" resultType="Integer">
+        select sum(t.total_price)
+        from GIVE_PRICE_MSTR t, USER_INFO u
+        where t.recv_user_pkid = u.pkid
+          and t.f_win_bid = 'Y'
+          <if test="queryType == 'XDateSum'">
+              and trunc(t.create_date) = to_date(#{xDate}, 'yyyy-mm-dd')
+          </if>
+          <if test="queryType == 'UntilXDateSum'">
+              and trunc(t.create_date) &lt; (to_date(#{xDate}, 'yyyy-mm-dd') + 1)
+          </if>
+          <if test="queryType == 'BetweenXAndYDateSum'">
+              and trunc(t.create_date) &gt; to_date(#{xDate}, 'yyyy-mm-dd')
+              and trunc(t.create_date) &lt; (to_date(#{yDate}, 'yyyy-mm-dd') + 1)
+          </if>
+          <if test='factory == "深圳"'>
+              and (u.fctry_zone = '深圳' or u.fctry_zone = '龍華')
+          </if>
+          <if test='factory == "成都"'>
+              and u.fctry_zone = '成都'
+          </if>
+    </select>
+
+    <!-- 根據廠區查詢報價數量 -->
+    <select id="queryNumByFactory" parameterType="String" resultType="Integer">
+        select count(*)
+        from GIVE_PRICE_MSTR t, USER_INFO u
+        where t.recv_user_pkid = u.pkid
+        <if test="factory == '成都'">
+            and u.fctry_zone = '成都'
+        </if>
+        <if test="factory == '深圳'">
+            and (u.fctry_zone = '深圳' or u.fctry_zone = '龍華')
+        </if>
+    </select>
+
+    <!-- 按照接單量來進行排倒序，按照時間範圍來查詢接單的用戶id的前20個，並查出此接單用戶的總接單量 -->
+    <select id="listReceiveUserIdByTimeLimit" resultType="com.foxconn.bidstatistics.model.dto.ReceiveUserRankDTO">
+        select user_id, receive_num
+        from
+        (select user_id, receive_num, rownum row_num
+        from
+        (select t.recv_user_pkid user_id, count(t.recv_user_pkid) receive_num
+        from GIVE_PRICE_MSTR t
+        where trunc(t.create_date) &gt; to_date(#{firstDay}, 'yyyy-mm-dd')
+        and trunc(t.create_date) &lt; (to_date(#{lastDay}, 'yyyy-mm-dd') + 1)
+        group by t.recv_user_pkid
+        order by count(t.recv_user_pkid) desc))
+        where row_num between 1 and 20
+    </select>
+
+    <!-- 按照指定時間範圍來查詢指定用戶的接單中標數和中標金額 -->
+    <select id="queryWinNumAndWinPriceByTimeLimit" resultType="com.foxconn.bidstatistics.model.dto.ReceiveUserRankDTO">
+        select count(*) win_num, sum(t.total_price) win_price
+        from GIVE_PRICE_MSTR t
+        where t.f_win_bid = 'Y'
+        and t.recv_user_pkid = #{userId}
+        and trunc(t.create_date) &gt; to_date(#{firstDay}, 'yyyy-mm-dd')
+        and trunc(t.create_date) &lt; (to_date(#{lastDay}, 'yyyy-mm-dd') + 1)
+    </select>
+
+    <!-- 注釋模板，放在最後一行 -->
+</mapper>
